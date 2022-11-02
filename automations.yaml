@@ -1,0 +1,13 @@
+- id: '1667296339228'
+  alias: clean at midday
+  description: ''
+  trigger:
+  - platform: time
+    at: '12:00:00'
+  condition: []
+  action:
+  - device_id: f478943f796733863aa36fdb83f1bae7
+    domain: vacuum
+    entity_id: vacuum.rockrobo_vacuum_v1
+    type: clean
+  mode: single

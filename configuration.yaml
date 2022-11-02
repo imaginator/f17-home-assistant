@@ -1,0 +1,49 @@
+# Configure a default setup of Home Assistant (frontend, api, etc)
+default_config:
+
+# Uncomment this if you are using SSL/TLS, running in Docker container, etc.
+http:
+#   base_url: example.duckdns.org:8123
+
+# Text to speech
+tts:
+  - platform: google_translate
+
+group: !include groups.yaml
+automation: !include automations.yaml
+script: !include scripts.yaml
+
+homeassistant:
+  name: F17
+  latitude: 32.87336
+  longitude: 117.22743
+  elevation: 430
+  unit_system: metric
+  
+  
+# homeassistant:
+#   packages: !include_dir_named packages/ # use this, if you use single files
+#   packages: !include_dir_merge_named packages/ # use this, if you use subfolders with files
+
+# The first one is for a structure like this:
+
+# packages/
+#   climate_package.yaml
+#   kitchen_package.yaml
+
+# Single files inside the packages folder.
+
+# The other way is with subfolders:
+
+# packages/
+#   kitchen/
+#     kitchen_package.yaml
+#     kitchen_lights_package.yaml
+#   lights/
+#     bathroom_lights_package.yaml
+#     outside_package.yaml
+
+  packages: !include_dir_named packages/
+
+#knx: test.yaml
+#!include packages/knx/lights.yaml
