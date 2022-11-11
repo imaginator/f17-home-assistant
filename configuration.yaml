@@ -1,49 +1,328 @@
-# Configure a default setup of Home Assistant (frontend, api, etc)
+# nice config reference: https://github.com/maxl67/home_assistant/blob/main/configuration.yaml
+# Loads default set of integrations. Do not remove.
+
+# https://www.home-assistant.io/integrations/default_config/
 default_config:
-
-# Uncomment this if you are using SSL/TLS, running in Docker container, etc.
-http:
-#   base_url: example.duckdns.org:8123
-
-# Text to speech
-tts:
-  - platform: google_translate
-
-group: !include groups.yaml
-automation: !include automations.yaml
-script: !include scripts.yaml
 
 homeassistant:
   name: F17
-  latitude: 32.87336
-  longitude: 117.22743
-  elevation: 430
-  unit_system: metric
-  
-  
-# homeassistant:
-#   packages: !include_dir_named packages/ # use this, if you use single files
-#   packages: !include_dir_merge_named packages/ # use this, if you use subfolders with files
+  latitude: !secret latitude
+  longitude: !secret longitude
+  elevation: !secret elevation
+  internal_url: !secret internal_url
+  currency: EUR
+  auth_providers:
+    - type: homeassistant
+    - type: trusted_networks
+      trusted_networks:
+        - 127.0.0.1
+        - 10.0.2.100
+        - 10.7.9.0/24
+        - 10.7.11.0/24
+        - ::1
+        - ::ffff:127.0.0.1
+        - fd00::/8
+      allow_bypass_login: true
+      
+  packages: !include_dir_named ./config/packages
 
-# The first one is for a structure like this:
+# include history
+history:
 
-# packages/
-#   climate_package.yaml
-#   kitchen_package.yaml
+http:
+  server_port: 8123
+  # For extra security set this to only accept connections on localhost if NGINX is on the same machine
+  # Uncommenting this will mean that you can only reach Home Assistant using the proxy, not directly via IP from other clients.
+  # server_host: 127.0.0.1
+  use_x_forwarded_for: true
+  # You must set the trusted proxy IP address so that Home Assistant will properly accept connections
+  # Set this to your NGINX machine IP, or localhost if hosted on the same machine.
+  trusted_proxies:
+    - 10.7.11.10 #NGINX reverse proxy server
+    - 127.0.0.1
 
-# Single files inside the packages folder.
+# !include filename.yaml is the statement that tells Home Assistant to insert the contents of filename.yaml at that point
+# !include_dir_list will return the content of a directory as a list with each file content being an entry in the list.
+# !include_dir_named will return the content of a directory as a dictionary which maps filename => content of file.
+# !include_dir_merge_list will return the content of a directory as a list by merging all files (which should contain a list) into 1 big list.
+# !include_dir_merge_named will return the content of a directory as a dictionary by loading each file and merging it into 1 big dictionary.
 
-# The other way is with subfolders:
+# Things that live outside of packages
+#automation:     !include_dir_merge_list ./config/automation
+#blueprint:      !include_dir_merge_named  ./config/blueprint
+# device_tracker: !include_dir_merge_named ./config/device_tracker
+# group:          !include_dir_merge_named ./config/group
+# input_boolean:  !include_dir_merge_named ./config/input_boolean
+# logger:         !include_dir_merge_named ./config/logger
+# lovelace:       !include_dir_merge_named ./config/lovelace
+# scene:          !include_dir_merge_named ./config/scene
+# script:         !include_dir_merge_named ./config/script
+# shell_command:  !include_dir_merge_named ./config/shell_command
+# switch:         !include_dir_merge_named ./config/switch
+# template:       !include_dir_merge_named ./config/template
 
-# packages/
-#   kitchen/
-#     kitchen_package.yaml
-#     kitchen_lights_package.yaml
-#   lights/
-#     bathroom_lights_package.yaml
-#     outside_package.yaml
+# My own handmade automations
+automation manual: !include_dir_merge_list ./config/automation
 
-  packages: !include_dir_named packages/
+# Automations I create in the UI
+automation ui: !include automations.yaml
 
-#knx: test.yaml
-#!include packages/knx/lights.yaml
+knx:
+  cover:
+    - name: kitchen left
+      move_long_address: 5/7/11
+      stop_address: 5/7/12
+      position_state_address: 5/7/13 # read position
+      position_address: 5/7/14 # set position
+      travelling_time_down: 33
+      travelling_time_up: 33
+      device_class: blind
+  light:
+    - name: kitchen sink light
+      address: 5/1/68
+      state_address: 5/1/73
+      brightness_address: 5/1/70
+      brightness_state_address: 5/1/74
+      rgbw_address: 5/1/78
+      rgbw_state_address: 5/1/79
+  binary_sensor:
+    - name: lounge
+      state_address: 4/4/1
+      device_class: motion
+    - name: kitchen
+      state_address: 5/4/1
+      device_class: motion
+    - name: study
+      state_address: 6/4/1
+      device_class: motion
+    - name: bathroommain
+      state_address: 7/4/1
+      device_class: motion
+    - name: bathroomguest
+      state_address: 8/4/1
+    - name: hallwaylarge
+      state_address: 9/4/1
+      device_class: motion
+    - name: hallwaysmall
+      state_address: 10/4/1
+      device_class: motion
+    - name: bedroom1
+      state_address: 11/4/1
+      device_class: motion
+    - name: bedroom2
+      state_address: 12/4/1
+      device_class: motion
+    - name: bedroom3
+      state_address: 13/4/1
+      device_class: motion
+  climate:
+    - name: lounge
+      temperature_address: 4/2/1
+      target_temperature_state_address: 4/6/7
+    - name: kitchen
+      temperature_address: 5/2/1
+      target_temperature_state_address: 5/6/7
+    - name: study
+      temperature_address: 6/2/1
+      target_temperature_state_address: 6/6/7
+    - name: bathroommain
+      temperature_address: 7/2/1
+      target_temperature_state_address: 7/6/7
+    - name: bathroomguest
+      temperature_address: 8/2/1
+      target_temperature_state_address: 8/6/7
+    - name: hallwaylarge
+      temperature_address: 9/2/1
+      target_temperature_state_address: 9/6/7
+    - name: hallwaysmall
+      temperature_address: 10/2/1
+      target_temperature_state_address: 10/6/7
+    - name: bedroom1
+      temperature_address: 11/2/1
+      target_temperature_state_address: 11/6/7
+    - name: bedroom2
+      temperature_address: 12/2/1
+      target_temperature_state_address: 12/6/7
+    - name: bedroom3
+      temperature_address: 13/2/1
+      target_temperature_state_address: 13/6/7
+  sensor:
+    # heating valve positions
+    - name: lounge heating valve
+      state_address: 4/6/3
+      type: percent
+    - name: kitchen heating valve
+      state_address: 5/6/3
+      type: percent
+    - name: study heating valve
+      state_address: 6/6/3
+      type: percent
+    - name: bathroommain heating valve
+      state_address: 7/6/3
+      type: percent
+    - name: bathroomguest heating valve
+      state_address: 8/6/3
+      type: percent
+    - name: hallwaylarge heating valve
+      state_address: 9/6/3
+      type: percent
+    - name: hallwaysmall heating valve
+      state_address: 10/6/3
+      type: percent
+    - name: bedroom1 heating valve
+      state_address: 11/6/3
+      type: percent
+    - name: bedroom2 heating valve
+      state_address: 12/6/3
+      type: percent
+    - name: bedroom3 heating valve
+      state_address: 13/6/3
+      type: percent
+
+    # room brightness
+    - name: lounge illuminance
+      state_address: 4/2/2
+      type: illuminance
+    - name: kitchen illuminance
+      state_address: 5/2/2
+      type: illuminance
+    - name: study illuminance
+      state_address: 6/2/2
+      type: illuminance
+    - name: bathroommain illuminance
+      state_address: 7/2/2
+      type: illuminance
+    - name: bathroomguest illuminance
+      state_address: 8/2/2
+      type: illuminance
+    - name: hallwaylarge illuminance
+      state_address: 9/2/2
+      type: illuminance
+    - name: hallwaysmall illuminance
+      state_address: 10/2/2
+      type: illuminance
+    - name: bedroom1 illuminance
+      state_address: 11/2/2
+      type: illuminance
+    - name: bedroom2 illuminance
+      state_address: 12/2/2
+      type: illuminance
+    - name: bedroom3 illuminance
+      state_address: 13/2/2
+      type: illuminance
+
+    # energy consumption (cumulative)
+    # power (flow rate)
+    - name: home energy
+      state_address: 1/2/11
+      type: active_energy
+    - name: heating energy
+      state_address: 1/2/21
+      type: active_energy
+    - name: home power
+      state_address: 1/2/12
+      type: power
+    - name: heating power
+      state_address: 1/2/22
+      type: power
+    - name: KNX bus milliamps
+      state_address: 1/2/2
+      type: current
+    - name: KNX bus volts
+      state_address: 1/2/1
+      type: electric_potential
+
+    # - name: lounge
+    #   - state_address: 4/4/1
+    # - name: kitchen
+    # - name: study
+    # - name: nathroomMain
+    # - name: bathroomGuest
+    # - name: hallwaylarge
+    # - name: hallwaysmall
+    # - name: bedroom1
+    # - name: bedroom2
+    # - name: bedroom3
+
+#     Type rollershutter : bedroom1                       "Bedroom1"                    [ upDown="11/7/11", stopMove="11/7/12",  position="11/7/13+<11/7/14" ]
+#     Type rollershutter : hallwaylarge1                  "Hallway Large 1 North"       [ upDown="9/7/11",  stopMove="9/7/12",   position="9/7/13+<9/7/14" ]
+#     Type rollershutter : hallwaylarge2                  "Hallway Large 2"             [ upDown="9/7/21",  stopMove="9/7/22",   position="9/7/23+<9/7/24" ]
+#     Type rollershutter : hallwaylarge3                  "Hallway Large 3"             [ upDown="9/7/31",  stopMove="9/7/32",   position="9/7/33+<9/7/34" ]
+#     Type rollershutter : hallwaylarge4                  "Hallway Large 4"             [ upDown="9/7/41",  stopMove="9/7/42",   position="9/7/43+<9/7/44" ]
+#     Type rollershutter : hallwaylarge5                  "Hallway Large 5"             [ upDown="9/7/51",  stopMove="9/7/52",   position="9/7/53+<9/7/54" ]
+#     Type rollershutter : hallwaylarge6                  "Hallway Large 6 South"       [ upDown="9/7/61",  stopMove="9/7/62",   position="9/7/63+<9/7/64" ]
+#     Type rollershutter : hallwaylargewindownorth        "Hallway Large Window North"  [ upDown="9/7/91",  stopMove="9/7/92",   position="9/7/93+<9/7/94" ]
+#     Type rollershutter : hallwaylargewindowsouth        "Hallway Large Window South"  [ upDown="9/7/81",  stopMove="9/7/82",   position="9/7/83+<9/7/84" ]
+#     Type rollershutter : kitchenleft                    "Kitchen Left"                [ upDown="5/7/11",  stopMove="5/7/12",   position="5/7/13+<5/7/14" ]
+#     Type rollershutter : kitchenmiddle                  "Kitchen Middle"              [ upDown="5/7/21",  stopMove="5/7/22",   position="5/7/23+<5/7/24" ]
+#     Type rollershutter : kitchenright                   "Kitchen Right"               [ upDown="5/7/31",  stopMove="5/7/32",   position="5/7/33+<5/7/34" ]
+#     Type rollershutter-control : bathroommainoutside    "bathroom main outside"       [ upDown="7/7/11",  stopMove="7/7/12",   position="7/7/13+<7/7/14" ]
+#     Type rollershutter-control : bathroommainwindow     "bathroom main window"        [ upDown="7/7/21",  stopMove="7/7/22",   position="7/7/23+<7/7/24" ]
+#     Type rollershutter-control : bedroom2inside         "bedroom2 Inside"             [ upDown="12/7/21", stopMove="12/7/22",  position="12/7/23+<12/7/24" ]
+#     Type rollershutter-control : bedroom2outside        "bedroom2 outside"            [ upDown="12/7/11", stopMrove="12/7/12", position="12/7/13+<12/7/14" ]
+#     Type rollershutter-control : bedroom3inside         "bedroom3 Inside"             [ upDown="13/7/21", stopMove="13/7/22",  position="13/7/23+<13/7/24" ]
+#     Type rollershutter-control : bedroom3outside        "bedroom3 outside"            [ upDown="13/7/11", stopMove="13/7/12",  position="13/7/13+<13/7/14" ]
+#     Type rollershutter-control : hallwaysmallwindow     "hallway small window"        [ upDown="10/7/11", stopMove="10/7/12",  position="10/7/13+<10/7/14" ]
+#     Type rollershutter-control : hallwaysmallwindow     "hallway small window"        [ upDown="10/7/11", stopMove="10/7/12",  position="10/7/13+<10/7/14" ]
+#     Type rollershutter-control : loungeinside           "Lounge Inside"               [ upDown="4/7/21",  stopMove="4/7/22",   position="4/7/23+<4/7/24" ]
+#     Type rollershutter-control : loungeoutside          "Lounge Outside"              [ upDown="4/7/11",  stopMove="4/7/12",   position="4/7/13+<4/7/14" ]
+#     Type rollershutter-control : studyinside            "Study Inside"                [ upDown="6/7/21",  stopMove="6/7/22",   position="6/7/23+<6/7/24" ]
+#     Type rollershutter-control : studyoutside           "Study Outside"               [ upDown="6/7/11",  stopMove="6/7/12",   position="6/7/13+<6/7/14" ]
+
+mqtt:
+  binary_sensor:
+    - state_topic: "wallpanel/kitchen/connection"
+      name: "WallPanel - Connection (kitchen)"
+      payload_on: "online"
+      payload_off: "offline"
+    - state_topic: "wallpanel/study/connection"
+      name: "WallPanel - Connection (study)"
+      payload_on: "online"
+      payload_off: "offline"
+    - state_topic: "wallpanel/hallwaylarge/connection"
+      name: "WallPanel - Connection (hallwaylarge)"
+      payload_on: "online"
+      payload_off: "offline"
+
+doorbird:
+  devices:
+    - host: !secret doorbird_ip
+      username: !secret doorbird_user
+      password: !secret doorbird_password
+      name: F17 doorbell
+      events:
+        - button
+
+input_number:
+  normal_electricity_price:
+    name: normal electric price
+    initial: 0.45
+    min: 0.00
+    max: 1.00
+    step: 0.01
+    mode: box
+    unit_of_measurement: 'EUR per kWh'
+  heating_electricity_price:
+    name: heating electricity price
+    initial: 0.45
+    min: 0.00
+    max: 1.00
+    step: 0.01
+    mode: box
+    unit_of_measurement: 'EUR per kWh'
+  cold_water_price:
+    name: cold water price
+    initial: 3.90
+    min: 0.00
+    max: 10.00
+    step: 0.01
+    mode: box
+    unit_of_measurement: 'EUR per m3'
+  hot_water_price:
+    name: hot water price
+    initial: 40.00
+    min: 0.00
+    max: 99.00
+    step: 0.01
+    mode: box
+    unit_of_measurement: 'EUR per m3'
