@@ -1,0 +1,27 @@
+- id: '1667754496998'
+  alias: Turn off WLED light
+  description: ''
+  trigger:
+  - platform: time
+    at: '23:30:00'
+  condition: []
+  action:
+  - type: turn_off
+    device_id: 47d2314dcd81c0ce164e208dd469b874
+    entity_id: light.wled_soundreactive
+    domain: light 
+  mode: single
+- id: '1667754551373'
+  alias: New Automation
+  description: ''
+  trigger:
+  - platform: sun
+    event: sunset
+    offset: 0
+  condition: []
+  action:
+  - type: turn_on
+    device_id: 47d2314dcd81c0ce164e208dd469b874
+    entity_id: light.wled_soundreactive
+    domain: light
+  mode: single

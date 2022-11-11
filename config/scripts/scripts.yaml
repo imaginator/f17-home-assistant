@@ -1,0 +1,25 @@
+vacuum_empty_bin:
+  alias: Vacuum Empty Bin
+  sequence:
+  - service: xiaomi_miio.vacuum_goto
+    data:
+      x_coord: '32707'
+      y_coord: '29464'
+    target:
+      entity_id: vacuum.rockrobo_vacuum_v1
+  mode: single
+  icon: mdi:trash-can-outline
+vacuum_clean_cat_toilet:
+  alias: Vacuum Clean Cat Toilet
+  sequence:
+  - service: xiaomi_miio.vacuum_clean_zone
+    data:
+      zone:
+      - - 1
+        - 2
+        - 3
+        - 4
+    target:
+      entity_id: vacuum.rockrobo_vacuum_v1
+  mode: single
+  icon: mdi:paw
