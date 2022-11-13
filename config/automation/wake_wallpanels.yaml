@@ -1,31 +1,25 @@
-- id: 'motion_wallpanel_study'
-  alias: Turn on Screen
+# wake the sleeping tablets
+- id: "motion_wallpanel"
+  alias: Turn on tablet screens
   description: turn on wallpanel screen when motion detected
   trigger:
-  - platform: state
-    entity_id:
-    - binary_sensor.study
+    - platform: state
+      entity_id:
+        - binary_sensor.bathroomguest
+        - binary_sensor.bathroommain
+        - binary_sensor.bedroom1
+        - binary_sensor.bedroom2
+        - binary_sensor.bedroom3
+        - binary_sensor.hallwaylarge
+        - binary_sensor.hallwaysmall
+        - binary_sensor.kitchen
+        - binary_sensor.lounge
+        - binary_sensor.study
+      to: "on"
   condition: []
   action:
-  - service: mqtt.publish
-    data:
-      topic: wallpanel/study/command
-      payload: '{"wake": true, "wakeTime": 10}'
-  mode: single
-
-- id: 'motion_wallpanel_kitchen'
-  alias: Turn on Screen
-  description: turn on wallpanel screen when motion detected
-  trigger:
-  - platform: state
-    entity_id:
-    - binary_sensor.kitchen
-  condition: []
-  action:
-  - service: mqtt.publish
-    data:
-      topic: wallpanel/kitchen/command
-      payload: '{"wake": true}' 
-       # we don't send a wakeTime since this is set with 
-       # adb shell settings put system screen_off_timeout 30000
+    - service: mqtt.publish
+      data:
+        topic_template: "wallpanel/{{ trigger.to_state.object_id }}/command"
+        payload: '{"wake": true}'
   mode: single
