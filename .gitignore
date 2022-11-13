@@ -46,4 +46,3 @@ www/community
 
 # Temporary ignores
 .old_config
-secrets.yaml
