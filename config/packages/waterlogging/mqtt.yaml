@@ -1,26 +1,137 @@
 mqtt:
+  binary_sensor:
+    - state_topic: "wallpanel/kitchen/connection"
+      name: "wallpanel - connection (kitchen)"
+      payload_on: "online"
+      payload_off: "offline"
+    - state_topic: "wallpanel/study/connection"
+      name: "wallpanel - connection (study)"
+      payload_on: "online"
+      payload_off: "offline"
+    - state_topic: "wallpanel/hallwaylarge/connection"
+      name: "wallpanel - connection (hallwaylarge)"
+      payload_on: "online"
+      payload_off: "offline"
   sensor:
-    - name: cold water sensor - manual
+    - name: waterlogger cold
       icon: mdi:water
-      unique_id: test_mqtt_entry
       state_topic: tele/waterlogger/SENSOR
       state_class: total_increasing
       unit_of_measurement: l
       value_template: "{{ (( value_json.COUNTER.C1 ) | float / 400 ) | round(0) }}"
+    - name: waterlogger hot
+      icon: mdi:water
+      state_topic: tele/waterlogger/SENSOR
+      state_class: total_increasing
+      unit_of_measurement: l
+      value_template: "{{ (( value_json.COUNTER.C2 ) | float / 400 ) | round(0) }}"
+
+      # Fridge
+    - name: fridge energy total
+      state_topic: "tele/tasmota_232CEA/SENSOR"
+      value_template: '{{ value_json["ENERGY"]["Total"] }}'
+      unit_of_measurement: kWh
+      state_class: total_increasing
+      device_class: energy
+      force_update: true
+    - name: fridge power
+      state_topic: "tele/tasmota_232CEA/SENSOR"
+      value_template: '{{ value_json["ENERGY"]["Power"] }}'
+      unit_of_measurement: W
+      state_class: measurement
+      device_class: power
+      force_update: true
+
+      # hifi
+    - name: hifi energy total
+      state_topic: "tele/tasmota_232A8E/SENSOR"
+      value_template: '{{ value_json["ENERGY"]["Total"] }}'
+      unit_of_measurement: kWh
+      state_class: total_increasing
+      device_class: energy
+      force_update: true
+    - name: hifi power
+      state_topic: "tele/tasmota_232A8E/SENSOR"
+      value_template: '{{ value_json["ENERGY"]["Power"] }}'
+      unit_of_measurement: W
+      state_class: measurement
+      device_class: power
+      force_update: true      
+
+     # switch01
+    - name: switch01 energy total
+      state_topic: "tele/tasmota_37493A/SENSOR"
+      value_template: '{{ value_json["ENERGY"]["Total"] }}'
+      unit_of_measurement: kWh
+      state_class: total_increasing
+      device_class: energy
+      force_update: true
+    - name: switch01 power
+      state_topic: "tele/tasmota_37493A/SENSOR"
+      value_template: '{{ value_json["ENERGY"]["Power"] }}'
+      unit_of_measurement: W
+      state_class: measurement
+      device_class: power
+      force_update: true
+
+     # bunker
+    - name: bunker energy total
+      state_topic: "tele/tasmota_232C8F/SENSOR"
+      value_template: '{{ value_json["ENERGY"]["Total"] }}'
+      unit_of_measurement: kWh
+      state_class: total_increasing
+      device_class: energy
+      force_update: true
+    - name: bunker power
+      state_topic: "tele/tasmota_232C8F/SENSOR"
+      value_template: '{{ value_json["ENERGY"]["Power"] }}'
+      unit_of_measurement: W
+      state_class: measurement
+      device_class: power
+      force_update: true      
+
+  switch:
+    - name: fridge
+      state_topic: "stat/tasmota_232CEA/POWER"
+      command_topic: "cmnd/tasmota_232CEA/POWER"
+      payload_on: "ON"
+      payload_off: "OFF"
+      retain: false
+
+    - name: hifi
+      state_topic: "stat/tasmota_232A8E/POWER"
+      command_topic: "cmnd/tasmota_232A8E/POWER"
+      payload_on: "ON"
+      payload_off: "OFF"
+      retain: false
+
+    # - name: switch01
+    #   state_topic: "stat/tasmota_37493A/POWER"
+    #   command_topic: "cmnd/tasmota_37493A/POWER"
+    #   payload_on: "ON"
+    #   payload_off: "OFF"
+    #   retain: false
+
+    # - name: bunker
+    #   state_topic: "stat/tasmota_232C8F/POWER"
+    #   command_topic: "cmnd/tasmota_232C8F/POWER"
+    #   payload_on: "ON"
+    #   payload_off: "OFF"
+    #   retain: false
 
 template:
   - sensor:
-    - name: cold
+    - name: cold water
       icon: mdi:water
-      unique_id: cold_water_m3
+      unique_id: cold_water_consumption_m3
       unit_of_measurement: m³
       device_class: water
       state_class: total_increasing
-      state: "{{ (states('sensor.waterlogger_counter_c1') | float / 400 / 1000 ) | round(3) }}"
-    - name: hot
+      state: "{{ (states('sensor.waterlogger_cold') | float / 400 / 1000 ) | round(3) }}"
+    - name: hot water
       icon: mdi:water-thermometer
-      unique_id: hot_water_m3
-      state: "{{ ( states('sensor.waterlogger_counter_c2' ) | float / 400 / 1000 ) | round(3) }}"
+      unique_id: hot_water_consumption_m3
+      state: "{{ ( states('sensor.waterlogger_hot' ) | float / 400 / 1000 ) | round(3) }}"
       unit_of_measurement: m³
       device_class: water
       state_class: total_increasing
