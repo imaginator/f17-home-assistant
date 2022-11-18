@@ -22,8 +22,6 @@ homeassistant:
       trusted_users:
         10.7.9.0/24: 
         - 7dfaf87f809044188ef0fdbe177006c6
-        10.7.11.0/24: 
-        - 7dfaf87f809044188ef0fdbe177006c6
       allow_bypass_login: true
 
 http:
