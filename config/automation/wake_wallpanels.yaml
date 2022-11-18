@@ -1,6 +1,6 @@
 # wake the sleeping tablets
-- id: "motion_wallpanel"
-  alias: Turn on tablet screens
+- id: "wake wallpanel and set url"
+  alias: Turn on tablet screens and set URL
   description: turn on wallpanel screen when motion detected
   trigger:
     - platform: state
@@ -15,11 +15,15 @@
         - binary_sensor.kitchen
         - binary_sensor.lounge
         - binary_sensor.study
-      to: "on"
+      to: "on" 
   condition: []
   action:
     - service: mqtt.publish
       data:
         topic_template: "wallpanel/{{ trigger.to_state.object_id }}/command"
         payload: '{"wake": true}'
+    # - service: mqtt.publish
+    #   data:
+    #     topic_template: "wallpanel/{{ trigger.to_state.object_id }}/command"
+    #     payload: '{"url": "http://ha.imagilan/rooms-dashboard/{{ trigger.to_state.object_id }}"}'
   mode: single
