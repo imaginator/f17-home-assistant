@@ -132,14 +132,13 @@ template:
       icon: mdi:water
       unique_id: cold_water_consumption_m3
       unit_of_measurement: m³
-      device_class: water
       state_class: total_increasing
-      state: "{{ (states('sensor.waterlogger_counter_c1') | float / 400 / 1000 ) | round(3) }}"
+      state: "{{ (states('sensor.waterlogger_counter_c1' ) | float / ( states('input_number.water_counter_pulses_per_liter') | float ) / 1000 ) | round(3) }}"
+
       # hot water
     - name: hot water
       icon: mdi:water-thermometer
       unique_id: hot_water_consumption_m3
-      state: "{{ ( states('sensor.waterlogger_counter_c2' ) | float / 400 / 1000 ) | round(3) }}"
+      state: "{{ ( states('sensor.waterlogger_counter_c2' ) | float / ( states('input_number.water_counter_pulses_per_liter') | float )  / 1000 ) | round(3) }}"
       unit_of_measurement: m³
-      device_class: water
       state_class: total_increasing

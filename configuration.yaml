@@ -93,6 +93,13 @@ input_number:
     step: 0.01
     mode: box
     unit_of_measurement: EUR/m³
+  water_counter_pulses_per_liter:
+    name: water counter pulses per liter
+    initial: 400 # approx
+    min: 300
+    max: 500
+    step: 1
+    mode: box
 
 binary_sensor:
   - platform: group
