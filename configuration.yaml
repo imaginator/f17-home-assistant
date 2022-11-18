@@ -18,12 +18,11 @@ homeassistant:
     - type: homeassistant
     - type: trusted_networks
       trusted_networks:
-      - 10.7.11.0/24
       - 10.7.9.0/24
       trusted_users:
         10.7.9.0/24: 
         - 7dfaf87f809044188ef0fdbe177006c6
-        10.7.9.11/24: 
+        10.7.11.0/24: 
         - 7dfaf87f809044188ef0fdbe177006c6
       allow_bypass_login: true
 
@@ -142,6 +141,12 @@ lovelace:
       icon: mdi:heat-pump
       show_in_sidebar: true
       filename: config/dashboards/hvac.yaml
+    music-dashboard:
+      mode: yaml
+      title: Music
+      icon: mdi:music
+      show_in_sidebar: true
+      filename: config/dashboards/music.yaml
     vacuum-dashboard:
       mode: yaml
       title: Vacuum
