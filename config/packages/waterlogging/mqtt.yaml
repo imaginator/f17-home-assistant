@@ -13,12 +13,15 @@ mqtt:
       payload_on: "online"
       payload_off: "offline"
   sensor:
+      # cold water
     - name: waterlogger cold
       icon: mdi:water
       state_topic: tele/waterlogger/SENSOR
       state_class: total_increasing
       unit_of_measurement: l
       value_template: "{{ (( value_json.COUNTER.C1 ) | float / 400 ) | round(0) }}"
+
+      # hot water
     - name: waterlogger hot
       icon: mdi:water
       state_topic: tele/waterlogger/SENSOR
@@ -91,6 +94,7 @@ mqtt:
       force_update: true      
 
   switch:
+      # fridge
     - name: fridge
       state_topic: "stat/tasmota_232CEA/POWER"
       command_topic: "cmnd/tasmota_232CEA/POWER"
@@ -98,6 +102,7 @@ mqtt:
       payload_off: "OFF"
       retain: false
 
+      # hifi
     - name: hifi
       state_topic: "stat/tasmota_232A8E/POWER"
       command_topic: "cmnd/tasmota_232A8E/POWER"
@@ -105,6 +110,7 @@ mqtt:
       payload_off: "OFF"
       retain: false
 
+    # too dngerous to leave enabled
     # - name: switch01
     #   state_topic: "stat/tasmota_37493A/POWER"
     #   command_topic: "cmnd/tasmota_37493A/POWER"
@@ -121,17 +127,19 @@ mqtt:
 
 template:
   - sensor:
+      # cold water
     - name: cold water
       icon: mdi:water
       unique_id: cold_water_consumption_m3
       unit_of_measurement: m³
       device_class: water
       state_class: total_increasing
-      state: "{{ (states('sensor.waterlogger_cold') | float / 400 / 1000 ) | round(3) }}"
+      state: "{{ (states('sensor.waterlogger_counter_c1') | float / 400 / 1000 ) | round(3) }}"
+      # hot water
     - name: hot water
       icon: mdi:water-thermometer
       unique_id: hot_water_consumption_m3
-      state: "{{ ( states('sensor.waterlogger_hot' ) | float / 400 / 1000 ) | round(3) }}"
+      state: "{{ ( states('sensor.waterlogger_counter_c2' ) | float / 400 / 1000 ) | round(3) }}"
       unit_of_measurement: m³
       device_class: water
       state_class: total_increasing
