@@ -1,0 +1,11 @@
+views:
+  - theme: Backend-selected
+    type: panel
+    title: Music
+    path: simon-spotify
+    icon: mdi:music
+    badges: []
+    cards:
+      - type: media-control
+        entity: media_player.spotify_simon_tennant
+title: Music
