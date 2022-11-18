@@ -1,3 +1,0 @@
-views:
-  - !include config/lovelace/views/room_view.yaml
-  - !include config/lovelace/views/vacuum_view.yaml
