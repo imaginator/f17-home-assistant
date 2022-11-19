@@ -1,0 +1,13 @@
+- id: '1668512384071'
+  alias: Daily Vacuum
+  description: ''
+  trigger:
+  - platform: time
+    at: '15:00:00'
+  condition: []
+  action:
+  - device_id: 7c57a30e58ce37aaad64824c5b4733ba
+    domain: vacuum
+    entity_id: vacuum.rockrobo_vacuum_v1
+    type: clean
+  mode: single

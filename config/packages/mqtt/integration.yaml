@@ -1,0 +1,130 @@
+mqtt:
+  binary_sensor:
+    - state_topic: "wallpanel/kitchen/connection"
+      name: "wallpanel - connection (kitchen)"
+      payload_on: "online"
+      payload_off: "offline"
+    - state_topic: "wallpanel/study/connection"
+      name: "wallpanel - connection (study)"
+      payload_on: "online"
+      payload_off: "offline"
+    - state_topic: "wallpanel/hallwaylarge/connection"
+      name: "wallpanel - connection (hallwaylarge)"
+      payload_on: "online"
+      payload_off: "offline"
+  sensor:
+      # hot water
+    - name: cold water
+      unique_id: cold_water
+      icon: mdi:water
+      state_topic: tele/waterlogger/SENSOR
+      unit_of_measurement: m³
+      state_class: total_increasing
+      value_template: '{{ (value_json.COUNTER.C1) / states("input_number.water_counter_pulses_per_liter") | float / 1000  }}'
+      availability_mode: latest
+
+      # hot water
+    - name: hot water
+      unique_id: hot_water
+      icon: mdi:water-thermometer
+      state_topic: tele/waterlogger/SENSOR
+      unit_of_measurement: m³
+      state_class: total_increasing
+      value_template: '{{ (value_json.COUNTER.C2) / states("input_number.water_counter_pulses_per_liter") | float / 1000  }}'
+      availability_mode: latest
+
+      # Fridge
+    - name: fridge energy total
+      state_topic: tele/tasmota_232CEA/SENSOR
+      value_template: '{{ value_json["ENERGY"]["Total"] }}'
+      unit_of_measurement: kWh
+      state_class: total_increasing
+      device_class: energy
+      force_update: true
+    - name: fridge power
+      state_topic: "tele/tasmota_232CEA/SENSOR" 
+      value_template: '{{ value_json["ENERGY"]["Power"] }}'
+      unit_of_measurement: W
+      state_class: measurement
+      device_class: power
+      force_update: true
+
+      # hifi
+    - name: hifi energy total
+      state_topic: "tele/tasmota_232A8E/SENSOR"
+      value_template: '{{ value_json["ENERGY"]["Total"] }}'
+      unit_of_measurement: kWh
+      state_class: total_increasing
+      device_class: energy
+      force_update: true
+    - name: hifi power
+      state_topic: "tele/tasmota_232A8E/SENSOR"
+      value_template: '{{ value_json["ENERGY"]["Power"] }}'
+      unit_of_measurement: W
+      state_class: measurement
+      device_class: power
+      force_update: true      
+
+     # switch01
+    - name: switch01 energy total
+      state_topic: "tele/tasmota_37493A/SENSOR"
+      value_template: '{{ value_json["ENERGY"]["Total"] }}'
+      unit_of_measurement: kWh
+      state_class: total_increasing
+      device_class: energy
+      force_update: true
+    - name: switch01 power
+      state_topic: "tele/tasmota_37493A/SENSOR"
+      value_template: '{{ value_json["ENERGY"]["Power"] }}'
+      unit_of_measurement: W
+      state_class: measurement
+      device_class: power
+      force_update: true
+
+     # bunker
+    - name: bunker energy total
+      state_topic: "tele/tasmota_232C8F/SENSOR"
+      value_template: '{{ value_json["ENERGY"]["Total"] }}'
+      unit_of_measurement: kWh
+      state_class: total_increasing
+      device_class: energy
+      force_update: true
+    - name: bunker power
+      state_topic: "tele/tasmota_232C8F/SENSOR"
+      value_template: '{{ value_json["ENERGY"]["Power"] }}'
+      unit_of_measurement: W
+      state_class: measurement
+      device_class: power
+      force_update: true      
+
+  switch:
+      # fridge
+    - name: fridge
+      state_topic: "stat/tasmota_232CEA/POWER"
+      command_topic: "cmnd/tasmota_232CEA/POWER"
+      payload_on: "ON"
+      payload_off: "OFF"
+      retain: false
+
+      # hifi
+    - name: hifi
+      state_topic: "stat/tasmota_232A8E/POWER"
+      command_topic: "cmnd/tasmota_232A8E/POWER"
+      payload_on: "ON"
+      payload_off: "OFF"
+      retain: false
+
+    # too dngerous to leave enabled
+    # - name: switch01
+    #   state_topic: "stat/tasmota_37493A/POWER"
+    #   command_topic: "cmnd/tasmota_37493A/POWER"
+    #   payload_on: "ON"
+    #   payload_off: "OFF"
+    #   retain: false
+
+    # - name: bunker
+    #   state_topic: "stat/tasmota_232C8F/POWER"
+    #   command_topic: "cmnd/tasmota_232C8F/POWER"
+    #   payload_on: "ON"
+    #   payload_off: "OFF"
+    #   retain: false

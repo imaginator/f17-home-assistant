@@ -1,0 +1,47 @@
+views:
+  - title: Overview
+    path: rooms
+    badges: []
+    cards:
+    - type: history-graph
+      entities:
+        - entity: binary_sensor.lounge_motion
+        - entity: binary_sensor.study
+        - entity: binary_sensor.kitchen
+        - entity: binary_sensor.hallwaylarge_motion
+        - entity: binary_sensor.bathroomguest_motion
+        - entity: binary_sensor.bathroommain_motion
+        - entity: binary_sensor.bedroom1_motion
+        - entity: binary_sensor.bedroom2_motion
+        - entity: binary_sensor.bedroom3_motion
+  - title: Study
+    path: study
+    icon: mdi:desk
+    badges: []
+    cards:
+    - type: history-graph
+      entities:
+        - entity: binary_sensor.study
+      title: occupancy
+    - type: media-control
+      entity: media_player.study
+    - type: thermostat
+      entity: climate.study
+  - title: Kitchen
+    path: kitchen
+    icon: mdi:faucet-variant
+    badges: []
+    cards:
+    - type: media-control
+      entity: media_player.kitchen
+    - type: thermostat
+      entity: climate.kitchen
+    - type: entities
+      entities:
+        - sensor.fridge_power
+    - type: light
+      entity: light.kitchen_sink
+      name: Kitchen Sink
+    - type: light
+      entity: light.wled_soundreactive
+      name: Light Chain
