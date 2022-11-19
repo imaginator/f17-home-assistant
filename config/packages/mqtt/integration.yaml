@@ -13,32 +13,36 @@ mqtt:
       payload_on: "online"
       payload_off: "offline"
   sensor:
-      # cold water
-    - name: waterlogger cold
+      # hot water
+    - name: cold water
+      unique_id: cold_water
       icon: mdi:water
       state_topic: tele/waterlogger/SENSOR
+      unit_of_measurement: m³
       state_class: total_increasing
-      unit_of_measurement: l
-      value_template: "{{ (( value_json.COUNTER.C1 ) | float / 400 ) | round(0) }}"
+      value_template: '{{ (value_json.COUNTER.C1) / states("input_number.water_counter_pulses_per_liter") | float / 1000  }}'
+      availability_mode: latest
 
       # hot water
-    - name: waterlogger hot
-      icon: mdi:water
+    - name: hot water
+      unique_id: hot_water
+      icon: mdi:water-thermometer
       state_topic: tele/waterlogger/SENSOR
+      unit_of_measurement: m³
       state_class: total_increasing
-      unit_of_measurement: l
-      value_template: "{{ (( value_json.COUNTER.C2 ) | float / 400 ) | round(0) }}"
+      value_template: '{{ (value_json.COUNTER.C2) / states("input_number.water_counter_pulses_per_liter") | float / 1000  }}'
+      availability_mode: latest
 
       # Fridge
     - name: fridge energy total
-      state_topic: "tele/tasmota_232CEA/SENSOR"
+      state_topic: tele/tasmota_232CEA/SENSOR
       value_template: '{{ value_json["ENERGY"]["Total"] }}'
       unit_of_measurement: kWh
       state_class: total_increasing
       device_class: energy
       force_update: true
     - name: fridge power
-      state_topic: "tele/tasmota_232CEA/SENSOR"
+      state_topic: "tele/tasmota_232CEA/SENSOR" 
       value_template: '{{ value_json["ENERGY"]["Power"] }}'
       unit_of_measurement: W
       state_class: measurement
@@ -124,21 +128,3 @@ mqtt:
     #   payload_on: "ON"
     #   payload_off: "OFF"
     #   retain: false
-
-template:
-  - sensor:
-      # cold water
-    - name: cold water
-      icon: mdi:water
-      unique_id: cold_water_consumption_m3
-      unit_of_measurement: m³
-      state_class: total_increasing
-      state: "{{ (states('sensor.waterlogger_counter_c1' ) | float / ( states('input_number.water_counter_pulses_per_liter') | float ) / 1000 ) | round(3) }}"
-
-      # hot water
-    - name: hot water
-      icon: mdi:water-thermometer
-      unique_id: hot_water_consumption_m3
-      state: "{{ ( states('sensor.waterlogger_counter_c2' ) | float / ( states('input_number.water_counter_pulses_per_liter') | float )  / 1000 ) | round(3) }}"
-      unit_of_measurement: m³
-      state_class: total_increasing
