@@ -1,15 +1,15 @@
-- id: '1668112515377'
-  alias: Empty the vacuum bin
-  description: ''
-  trigger:
-  - platform: time
-    at: '12:00:00'
-  condition: []
-  action:
-  - service: xiaomi_miio.vacuum_goto
-    data:
-      x_coord: '1'
-      y_coord: '2'
-    target:
-      entity_id: vacuum.rockrobo_vacuum_v1
-  mode: single
+# - id: '1668112515377'
+#   alias: Empty the vacuum bin
+#   description: ''
+#   trigger:
+#   - platform: time
+#     at: '12:00:00'
+#   condition: []
+#   action:
+#   - service: xiaomi_miio.vacuum_goto
+#     data:
+#       x_coord: '1'
+#       y_coord: '2'
+#     target:
+#       entity_id: vacuum.rockrobo_vacuum_v1
+#   mode: single
