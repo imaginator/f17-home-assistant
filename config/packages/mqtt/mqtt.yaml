@@ -20,6 +20,7 @@ mqtt:
       state_topic: tele/waterlogger/SENSOR
       unit_of_measurement: m³
       state_class: total_increasing
+      device_class: water
       value_template: '{{ (value_json.COUNTER.C1) / states("input_number.water_counter_pulses_per_liter") | float / 1000  }}'
       availability_mode: latest
 
@@ -30,6 +31,7 @@ mqtt:
       state_topic: tele/waterlogger/SENSOR
       unit_of_measurement: m³
       state_class: total_increasing
+      device_class: water
       value_template: '{{ (value_json.COUNTER.C2) / states("input_number.water_counter_pulses_per_liter") | float / 1000  }}'
       availability_mode: latest
 

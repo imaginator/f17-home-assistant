@@ -14,6 +14,24 @@ knx:
       rgbw_address: 5/1/78
       rgbw_state_address: 5/1/79
 
+    - name: lounge overhead
+      address: 4/1/11
+      state_address: 4/1/12
+      brightness_address: 4/1/13
+      brightness_state_address: 4/1/15
+      color_temperature_address: 4/1/16
+      color_temperature_state_address: 4/1/18
+      color_temperature_mode: absolute # using Kelvin / not percent
+
+    - name: lounge LED strip
+      address: 4/1/31
+      state_address: 4/1/32
+      brightness_address: 4/1/33
+      brightness_state_address: 4/1/35
+      color_temperature_address: 4/1/36
+      color_temperature_state_address: 4/1/38
+      color_temperature_mode: absolute # using Kelvin / not percent
+
   binary_sensor:
     - name: lounge
       state_address: 4/4/1
@@ -61,6 +79,7 @@ knx:
       min_temp:                         14
       max_temp:                         23
       temperature_step:                 0.5
+      
 
     - name: kitchen
       temperature_address:              5/2/1   # from sensors
@@ -201,6 +220,7 @@ knx:
       state_address: 13/6/3
       type: percent
 
+
     # room brightness
     - name: lounge brightness
       state_address: 4/2/2
@@ -232,6 +252,38 @@ knx:
     - name: bedroom3 brightness
       state_address: 13/2/2
       type: illuminance
+
+    # room temperature
+    - name: lounge temperature
+      state_address: 4/2/1
+      type: temperature
+    - name: kitchen temperature
+      state_address: 5/2/1
+      type: temperature
+    - name: study temperature
+      state_address: 6/2/1
+      type: temperature
+    - name: bathroommain temperature
+      state_address: 7/2/1
+      type: temperature
+    - name: bathroomguest temperature
+      state_address: 8/2/1
+      type: temperature
+    - name: hallwaylarge temperature
+      state_address: 9/2/1
+      type: temperature
+    - name: hallwaysmall temperature
+      state_address: 10/2/1
+      type: temperature
+    - name: bedroom1 temperature
+      state_address: 11/2/1
+      type: temperature
+    - name: bedroom2 temperature
+      state_address: 12/2/1
+      type: temperature
+    - name: bedroom3 temperature
+      state_address: 13/2/1
+      type: temperature
 
     # energy consumption (cumulative)
     # power (flow rate)
@@ -292,30 +344,3 @@ knx:
 # #     Type rollershutter-control : studyoutside           "Study Outside"               [ upDown="6/7/11",  stopMove="6/7/12",   position="6/7/13+<6/7/14" ]
 
 
-input_select:
-  hvac_mode:
-    name: zone mode
-    options:
-      - "auto"
-      - "comfort"
-      - "economy"
-      - "off"
-    icon: mdi:target
-
-sensor:
-  - platform: template
-    sensors:
-      hvac_set_mode:
-        value_template: >
-         {% set value = states('input_select.ac_mode') %}
-          {% if value == "heat" %}
-            {{ 1 | int }}
-          {% elif value == "cool" %}
-            {{ 3 | int }}
-          {% elif value == "fan" %}
-            {{ 9 | int }}
-          {% elif value == "dry" %}
-            {{ 14 | int }}
-          {% else %}
-            {{ 0 | int }}
-          {% endif %}
