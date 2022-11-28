@@ -5,8 +5,14 @@ views:
     cards:
     - type: grid
       square: false
-      columns: 4
+      columns: 2
       cards:
+        - type: thermostat
+          entity: climate.lounge
+        - type: thermostat
+          entity: climate.kitchen
+        - type: thermostat
+          entity: climate.study
         - type: thermostat
           entity: climate.bathroomguest
         - type: thermostat
@@ -17,23 +23,17 @@ views:
           entity: climate.bedroom2
         - type: thermostat
           entity: climate.bedroom3
-        - type: thermostat
-          entity: climate.kitchen
-        - type: thermostat
-          entity: climate.study
-        - type: thermostat
-          entity: climate.lounge
     - type: history-graph
       name: Heating Valve Positions
       entities:
+      - sensor.lounge_heating_valve
+      - sensor.kitchen_heating_valve
+      - sensor.study_heating_valve
       - sensor.bathroomguest_heating_valve
       - sensor.bathroommain_heating_valve
       - sensor.bedroom1_heating_valve
       - sensor.bedroom2_heating_valve
       - sensor.bedroom3_heating_valve
-      - sensor.kitchen_heating_valve
-      - sensor.lounge_heating_valve
-      - sensor.study_heating_valve
 
 
       # vallox tab
