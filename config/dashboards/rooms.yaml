@@ -14,6 +14,7 @@ views:
         - entity: binary_sensor.bedroom1_motion
         - entity: binary_sensor.bedroom2_motion
         - entity: binary_sensor.bedroom3_motion
+
   - title: Study
     path: study
     icon: mdi:desk
@@ -27,6 +28,7 @@ views:
       entity: media_player.study
     - type: thermostat
       entity: climate.study
+
   - title: Kitchen
     path: kitchen
     icon: mdi:faucet-variant
@@ -40,7 +42,7 @@ views:
       entities:
         - sensor.fridge_power
     - type: light
-      entity: light.kitchen_sink
+      entity: light.kitchen_sink_3
       name: Kitchen Sink
     - type: light
       entity: light.wled_soundreactive
