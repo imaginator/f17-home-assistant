@@ -47,3 +47,4 @@ secrets.yaml
 
 # Temporary ignores
 
+.HA_VERSION
