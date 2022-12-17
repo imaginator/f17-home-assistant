@@ -1,0 +1,13 @@
+- id: 1221111212121222222121221
+  alias: Switch Vallox to Home Mode
+  description: based on away/home
+  trigger:
+    - platform: state
+      entity_id:
+        - input_boolean.away_mode
+      to: "on"
+  condition: []
+  action:
+    - type: turn_on
+      service: vallox.set_profile_fan_speed_home
+  mode: single

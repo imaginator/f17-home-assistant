@@ -1,11 +1,29 @@
 # just shared spaces (no bedrooms)
 
-- id: '1669640825770'
-  alias: Turn down heating before bed
-  description: ''
+- id: 'heating-on'
+  alias: heating morning switch on comfort mode
+  description: 'sleep > comfort'
   trigger:
-  - platform: time
-    at: '20:30:00'
+    platform: time
+    at: 05:15:00
+  action:
+  - service: climate.set_preset_mode
+    target:
+      - climate.study
+      - climate.lounge
+      - climate.bathroommain
+      - climate.bathroomguest
+      - climate.lounge
+      - climate.study
+    data:
+      preset_mode: comfort
+
+- id: 'heating-off'
+  alias: Turn down heating before bed
+  description: 'comfort > sleep'
+  trigger:
+    platform: time
+    at: '21:00:00'
   action:
   - service: climate.set_preset_mode
     data:
@@ -18,21 +36,3 @@
       - climate.bathroomguest
       - climate.lounge
       - climate.study
-
-- id: '1669641292099'
-  alias: heating morning switch on comfort mode
-  description: ''
-  trigger:
-    platform: time
-    at: 06:15:00
-  action:
-  - service: climate.set_preset_mode
-    target:
-      - climate.study
-      - climate.lounge
-      - climate.bathroommain
-      - climate.bathroomguest
-      - climate.lounge
-      - climate.study
-    data:
-      preset_mode: comfort

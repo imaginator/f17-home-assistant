@@ -1,14 +1,55 @@
-
----
-# This file is used by the automations editor
-# in the Home Assistant frontend.
-#
-# I personally do not use it, mainly because I like doing this in YAML.
-# However, from time to time, it is helpful to click a bit and see
-# what the frontend makes of it.
-#
-# This file must exist for the frontend Automation editor to work.
-# Hence, it is here, empty.
-#
-# If you are looking for my automations: See automations folder.
-[]
+- id: '1669822480931'
+  alias: Auto Away Mode
+  description: Set Away Mode
+  trigger:
+  - platform: state
+    entity_id:
+    - person.simon
+    - person.frieda
+    to: not_home
+  condition:
+  - condition: state
+    entity_id: person.simon
+    state: not_home
+  - condition: state
+    entity_id: person.frieda
+    state: not_home
+  action:
+  - service: input_boolean.turn_on
+    data: {}
+    target:
+      entity_id: input_boolean.away_mode
+  mode: single
+- id: '1669823881405'
+  alias: Toggle Vallox Fan Speeds
+  description: based on away/home
+  trigger:
+  - platform: state
+    entity_id:
+    - input_boolean.away_mode
+    to: 'on'
+  condition: []
+  action:
+  - type: turn_off
+    device_id: 876f56c448cd0842970e0f41e900af55
+    entity_id: fan.vallox
+    domain: fan
+  mode: single
+- id: '1671284181167'
+  alias: Turn up heating in the morning
+  description: sleep > comfort
+  trigger:
+  - platform: time
+    at: 06:00:00
+  action:
+  - service: climate.set_preset_mode
+    data:
+      preset_mode: comfort
+    target:
+      entity_id:
+      - climate.study
+      - climate.lounge
+      - climate.bathroommain
+      - climate.bathroomguest
+      - climate.lounge
+      - climate.study
