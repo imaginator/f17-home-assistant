@@ -24,7 +24,18 @@ views:
         - type: thermostat
           entity: climate.bedroom3
     - type: history-graph
-      name: Heating Valve Positions
+      name: Temperatures
+      entities:
+      - sensor.lounge_temperature
+      - sensor.kitchen_temperature
+      - sensor.study_temperature
+      - sensor.bathroomguest_temperature
+      - sensor.bathroommain_temperature
+      - sensor.bedroom1_temperature
+      - sensor.bedroom2_temperature
+      - sensor.bedroom3_temperature
+    - type: history-graph
+      name: Heating Valves
       entities:
       - sensor.lounge_heating_valve
       - sensor.kitchen_heating_valve
@@ -34,6 +45,7 @@ views:
       - sensor.bedroom1_heating_valve
       - sensor.bedroom2_heating_valve
       - sensor.bedroom3_heating_valve
+
 
 
       # vallox tab
