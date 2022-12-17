@@ -10,6 +10,7 @@ homeassistant:
   longitude: !secret longitude
   elevation: !secret elevation
   internal_url: !secret internal_url
+  country: DE
   currency: EUR
   packages: !include_dir_named ./config/packages
   auth_providers:
@@ -61,7 +62,7 @@ automation ui: !include automations.yaml
 input_number:
   normal_electricity_price:
     name: normal electric price
-    initial: 0.45
+    initial: 0.26
     min: 0.00
     max: 1.00
     step: 0.01
@@ -69,7 +70,7 @@ input_number:
     unit_of_measurement: EUR/kWh
   heating_electricity_price:
     name: heating electricity price
-    initial: 0.45
+    initial: 0.47
     min: 0.00
     max: 1.00
     step: 0.01
@@ -98,6 +99,11 @@ input_number:
     max: 500
     step: 1
     mode: box
+
+# for ventilation amongst other things
+input_boolean:
+  away_mode:
+    name: Away Mode
 
 binary_sensor:
   - platform: group
