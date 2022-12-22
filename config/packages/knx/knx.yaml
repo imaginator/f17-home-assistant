@@ -24,6 +24,15 @@ knx:
       color_temperature_state_address: 4/1/38
       color_temperature_mode: absolute # using Kelvin / not percent
 
+    - name: study ceiling
+      address: 6/1/41
+      state_address: 6/1/45
+      brightness_address: 6/1/43
+      brightness_state_address: 6/1/46
+      color_temperature_address: 6/1/50
+      color_temperature_state_address: 6/1/53
+      color_temperature_mode: absolute # using Kelvin / not percent
+
     - name: kitchen north 1
       address: 5/1/21
       state_address: 5/1/25
@@ -47,6 +56,33 @@ knx:
       brightness_state_address: 5/1/74
       rgbw_address: 5/1/78
       rgbw_state_address: 5/1/79
+
+    - name: bedroom1 ceiling
+      address: 11/1/21
+      state_address: 11/1/25
+      brightness_address: 11/1/23
+      brightness_state_address: 11/1/26
+      color_temperature_address: 11/1/30
+      color_temperature_state_address: 11/1/33
+      color_temperature_mode: absolute # using Kelvin / not percent
+
+    - name: bedroom1 bed left
+      address: 11/1/61
+      state_address: 11/1/65
+      brightness_address: 11/1/63
+      brightness_state_address: 11/1/66
+      color_temperature_address: 11/1/70
+      color_temperature_state_address: 11/1/73
+      color_temperature_mode: absolute # using Kelvin / not percent
+
+    - name: bedroom1 bed right
+      address: 11/1/81
+      state_address: 11/1/85
+      brightness_address: 11/1/83
+      brightness_state_address: 11/1/86
+      color_temperature_address: 11/1/90
+      color_temperature_state_address: 11/1/93
+      color_temperature_mode: absolute # using Kelvin / not percent
 
   binary_sensor:
     - name: lounge_motion
