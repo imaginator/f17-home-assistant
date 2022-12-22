@@ -49,33 +49,33 @@ knx:
       rgbw_state_address: 5/1/79
 
   binary_sensor:
-    - name: lounge
+    - name: lounge_motion
       state_address: 4/4/1
       device_class: motion
-    - name: kitchen
+    - name: kitchen_motion
       state_address: 5/4/1
       device_class: motion
-    - name: study
+    - name: study_motion
       state_address: 6/4/1
       device_class: motion
-    - name: bathroommain
+    - name: bathroommain_motion
       state_address: 7/4/1
       device_class: motion
-    - name: bathroomguest
+    - name: bathroomguest_motion
       state_address: 8/4/1
-    - name: hallwaylarge
+    - name: hallwaylarge_motion
       state_address: 9/4/1
       device_class: motion
-    - name: hallwaysmall
+    - name: hallwaysmall_motion
       state_address: 10/4/1
       device_class: motion
-    - name: bedroom1
+    - name: bedroom1_motion
       state_address: 11/4/1
       device_class: motion
-    - name: bedroom2
+    - name: bedroom2_motion
       state_address: 12/4/1
       device_class: motion
-    - name: bedroom3
+    - name: bedroom3_motion
       state_address: 13/4/1
       device_class: motion
 
