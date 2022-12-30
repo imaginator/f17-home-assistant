@@ -53,3 +53,31 @@
       - climate.bathroomguest
       - climate.lounge
       - climate.study
+- id: '1671787400393'
+  alias: Turn on tablet screens and set URL - new
+  description: turn on wallpanel screen when motion detected
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.bathroomguest
+    - binary_sensor.bathroommain
+    - binary_sensor.bedroom1
+    - binary_sensor.bedroom2
+    - binary_sensor.bedroom3
+    - binary_sensor.hallwaylarge
+    - binary_sensor.hallwaysmall
+    - binary_sensor.kitchen
+    - binary_sensor.lounge
+    - binary_sensor.study
+    from: 'off'
+    to: 'on'
+  condition: []
+  action:
+  - variables:
+      light_sensor: sensor.{{ trigger.to_state.object_id }}_illuminance
+      is_bright: '{{ states(light_sensor) | int(0) >= 5 }}'
+  - service: mqtt.publish
+    data:
+      topic_template: wallpanel/{{ trigger.to_state.object_id }}/command
+      payload: '{"wake": {{ is_bright }} }'
+  mode: single

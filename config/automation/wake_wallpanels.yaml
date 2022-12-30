@@ -5,17 +5,17 @@
   trigger:
     - platform: state
       entity_id:
-        - binary_sensor.bathroomguest_motion
-        - binary_sensor.bathroommain_motion
-        - binary_sensor.bedroom1_motion
-        - binary_sensor.bedroom2_motion
-        - binary_sensor.bedroom3_motion
-        - binary_sensor.hallwaylarge_motion
-        - binary_sensor.hallwaysmall_motion
-        - binary_sensor.kitchen_motion
-        - binary_sensor.lounge_motion
-        - binary_sensor.study_motion
-      to: "on" 
+        - binary_sensor.bathroomguest
+        - binary_sensor.bathroommain
+        - binary_sensor.bedroom1
+        - binary_sensor.bedroom2
+        - binary_sensor.bedroom3
+        - binary_sensor.hallwaylarge
+        - binary_sensor.hallwaysmall
+        - binary_sensor.kitchen
+        - binary_sensor.lounge
+        - binary_sensor.study
+      to: "on"
   condition: []
   action:
     - service: mqtt.publish

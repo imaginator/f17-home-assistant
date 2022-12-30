@@ -1,6 +1,7 @@
+title: Music
 views:
   - theme: Backend-selected
-    type: panel
+    type: 
     title: Music
     path: simon-spotify
     icon: mdi:music
@@ -8,4 +9,3 @@ views:
     cards:
       - type: media-control
         entity: media_player.spotify_simon_tennant
-title: Music

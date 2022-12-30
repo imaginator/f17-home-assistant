@@ -1,21 +1,49 @@
 views:
   - title: Overview
+    type: panel
     path: rooms
     badges: []
     cards:
     - type: history-graph
       entities:
-        - entity: binary_sensor.lounge_motion
+        - entity: binary_sensor.lounge
         - entity: binary_sensor.study
         - entity: binary_sensor.kitchen
-        - entity: binary_sensor.hallwaylarge_motion
-        - entity: binary_sensor.bathroomguest_motion
-        - entity: binary_sensor.bathroommain_motion
-        - entity: binary_sensor.bedroom1_motion
-        - entity: binary_sensor.bedroom2_motion
-        - entity: binary_sensor.bedroom3_motion
+        - entity: binary_sensor.hallwaylarge
+        - entity: binary_sensor.bathroomguest
+        - entity: binary_sensor.bathroommain
+        - entity: binary_sensor.bedroom1
+        - entity: binary_sensor.bedroom2
+        - entity: binary_sensor.bedroom3
+
+  - title: Lounge
+    type: sidebar
+    path: lounge
+    icon: mdi:sofa
+    badges: []
+    cards:
+    - type: light
+      entity: light.lounge_overhead
+      name: lounge ceiling
+    - type: entities
+      entities:
+        - cover.lounge_left_inside
+        - cover.lounge_middle_inside
+        - cover.lounge_right_inside
+        - cover.lounge_left_outside
+        - cover.lounge_middle_outside
+    - type: history-graph
+      entities:
+        - entity: binary_sensor.lounge
+      title: occupancy
+    - type: media-control
+      entity: media_player.lounge
+    - type: thermostat
+      entity: climate.lounge
+
 
   - title: Study
+    type: sidebar
     path: study
     icon: mdi:desk
     badges: []
@@ -31,9 +59,49 @@ views:
 
   - title: Kitchen
     path: kitchen
+    type: sidebar
     icon: mdi:faucet-variant
     badges: []
     cards:
+    - type: horizontal-stack
+      cards:
+        - show_name: true
+          show_icon: true
+          type: button
+          entity: light.kitchen_north_1
+          icon: mdi:countertop
+          name: island spotlight
+          show_state: false
+        - show_name: true
+          show_icon: true
+          type: button
+          entity: light.kitchen_north_2
+          name: island indirect
+          icon: mdi:countertop-outline
+        - show_name: true
+          show_icon: true
+          type: button
+          tap_action:
+            action: toggle
+          entity: light.lounge_overhead
+          name: table spot
+          icon: mdi:table-furniture
+        - show_name: true
+          show_icon: true
+          type: button
+          tap_action:
+            action: toggle
+          entity: light.kitchen_south_1
+          name: table indirect
+          icon: mdi:table-furniture
+          show_state: false
+        - type: light
+          entity: light.kitchen_sink_3
+          name: sink area
+          icon: mdi:faucet-variant
+        - type: light
+          entity: light.wled_soundreactive
+          name: light chain
     - type: media-control
       entity: media_player.kitchen
     - type: thermostat
@@ -41,9 +109,18 @@ views:
     - type: entities
       entities:
         - sensor.fridge_power
-    - type: light
-      entity: light.kitchen_sink_3
-      name: Kitchen Sink
-    - type: light
-      entity: light.wled_soundreactive
-      name: Light Chain
+
+  - title: Bedroom 1
+    path: bedroom1
+    icon: mdi:bed-outline
+    type: sidebar
+    badges: []
+    cards:
+      - type: horizontal-stack
+        cards:
+          - type: light
+            entity: light.bedroom1_bed_left
+          - type: light
+            entity: light.bedroom1_bed_right
+          - type: light
+            entity: light.bedroom1_ceiling

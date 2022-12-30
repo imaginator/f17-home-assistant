@@ -104,21 +104,65 @@ input_number:
 input_boolean:
   away_mode:
     name: Away Mode
+    
+# tablets to keep off at night  
+  lounge_dont_turn_on:
+    name: dim when dark lounge
+    initial: false
+  study_dont_turn_on:
+    name: dim when dark study
+    initial: false
+  kitchen_dont_turn_on:
+    name: dim when dark kitchen
+    initial: false
+  hallwaylarge_dont_turn_on:
+    name: dim when dark hallwaylarge
+    initial: false
+  bathroomguest_dont_turn_on:
+    name: dim when dark bathroomguest
+    initial: false
+  bathroommain_dont_turn_on:
+    name: dim when dark bathroommain
+    initial: false
+  bedroom1_dont_turn_on:
+    name: dim when dark bedroom1
+    initial: true
+  bedroom2_dont_turn_on:
+    name: dim when dark bedroom2
+    initial: true
+  bedroom3_dont_turn_on:
+    name: dim when dark bedroom3
+    initial: true
 
 binary_sensor:
   - platform: group
     name: motion sensors
     entities:
-      - binary_sensor.lounge_motion
-      - binary_sensor.kitchen_motion
-      - binary_sensor.study_motion
-      - binary_sensor.hallwaylarge_motion
-      - binary_sensor.hallwaysmall_motion
-      - binary_sensor.bathroommain_motion
-      - binary_sensor.bathroomguest_motion
-      - binary_sensor.bedroom1_motion
-      - binary_sensor.bedroom2_motion
-      - binary_sensor.bedroom3_motion
+      - binary_sensor.lounge
+      - binary_sensor.kitchen
+      - binary_sensor.study
+      - binary_sensor.hallwaylarge
+      - binary_sensor.hallwaysmall
+      - binary_sensor.bathroommain
+      - binary_sensor.bathroomguest
+      - binary_sensor.bedroom1
+      - binary_sensor.bedroom2
+      - binary_sensor.bedroom3
+
+input_select:
+  vacuum_room_select:
+    name: Choose a room to clean
+    options:
+      - Kitchen
+      - Study
+      - Hallway
+      - Cat Toilet Area
+      - Bathroom Guest
+      - Bathroom Main
+      - Bedroom 1
+      - Bedroom 2
+      - Bedroom 3
+
 
 logger:
   default: info #critical,fatal,error,warning,warn,info,debug,notset
