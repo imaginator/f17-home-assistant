@@ -1,13 +1,284 @@
 ---
-# This file is used by the scripts editor
-# in the Home Assistant frontend.
-#
-# I personally do not use it, mainly because I like doing this in YAML.
-# However, from time to time, it is helpful to click a bit and see
-# what the frontend makes of it.
-#
-# This file must exist for the frontend scripts editor to work.
-# Hence, it is here, empty.
-#
-# If you are looking for my scripts: See scripts folder.
-{}
+
+# Bedroom1=23950,25336,26264,23121,1	
+# Bedroom2=27261,32594,23350,36928,1		
+# Bedroom3=30972,32594,27294,36783,1	
+# Study=33306,32483,30983,36828,1	
+# MainHallway=38217,30706,23483,32594,1	
+# SmallHallway=25050,24950,24021,32579,1
+# CatToiletArea=24150,24707,25221,26479,1
+# MainBathroom=25193,28850,28207,26364,1
+# GuestBathroom=26493,28850,28264,30936,1
+# Kitchen=32007,30936,34679,27321,1
+# Dining=33321,32564,38293,27221,1
+# EmptyBin=32707,29464
+
+# input_select:
+#   vacuum_room:
+#     name: Choose an area to clean
+#     options:
+#     - Select Input
+#     - Cat Toilet
+#     - Bedroom 1
+#     - Bedroom 2
+#     - Bedroom 3
+#     - Kitchen
+#     - Study
+#     - Dining Area
+#     - Main Bathroom
+#     - Guest Bathroom
+#     initial: Select Input
+
+vacuum_dispatch:
+  alias: "Vacuum Dispatch"
+  sequence:
+    - service: script.turn_on
+      data_template:
+        entity_id: >-
+            {% if room|lower in ("cat toiletarea") %}
+              script.vacuum_cat_toilet
+            {% if room|lower in ("bedroom1", "main bedroom") %}
+              script.vacuum_bedroom1
+            {% elif room|lower in ("bedroom2") %}
+              script.vacuum_bedroom2
+            {% elif room|lower in ("bedroom3") %}
+              script.vacuum_bedroom3
+            {% elif room|lower in ("study") %}
+              script.vacuum_study
+            {% elif room|lower in ("mainhallway") %}
+              script.vacuum_hallwaymain
+            {% elif room|lower in ("smallhallway") %}
+              script.vacuum_hallwaysmall
+            {% elif room|lower in ("mainbathroom") %}
+              script.vacuum_bathroommain
+            {% elif room|lower in ("guest bathroom", "the guest bathroom") %}
+              script.vacuum_bathroomguest
+            {% elif room|lower in ("kitchen") %}
+              script.vacuum_kitchen
+            {% elif room|lower in ("dining", "the dining area") %}
+              script.vacuum_dining
+            {% elif room|lower in ("empty bin", "empty the dustbin", "empty the vacuum") %}
+              script.empty_vacuum
+            {% endif %}
+
+vacuum_cat_toilet:
+  alias: vacuum cat toilet area
+  mode: single
+  icon: mdi:cat
+  sequence:
+  - service: vacuum.send_command
+    target:
+      entity_id: vacuum.rockrobo_vacuum_v1
+    data:
+      command: app_zoned_clean
+      params:
+        params:
+        - - 24150
+          - 24707
+          - 25221
+          - 26479
+          - 1
+
+vacuum_bedroom1:
+  alias: vacuum bedroom1
+  mode: single
+  icon: mdi:bed
+  sequence:
+  - service: vacuum.send_command
+    target:
+      entity_id: vacuum.rockrobo_vacuum_v1
+    data:
+      command: app_zoned_clean
+      params:
+        params:
+        - - 23950
+          - 25336
+          - 26264
+          - 23121
+          - 1
+
+vacuum_bedroom2:
+  alias: vacuum bedroom2
+  mode: single
+  icon: mdi:bed
+  sequence:
+  - service: vacuum.send_command
+    target:
+      entity_id: vacuum.rockrobo_vacuum_v1
+    data:
+      command: app_zoned_clean
+      params:
+        params:
+        - - 27261
+          - 32594
+          - 23350
+          - 36928
+          - 1
+
+vacuum_bedroom3:
+  alias: vacuum bedroom3
+  mode: single
+  icon: mdi:bed
+  sequence:
+  - service: vacuum.send_command
+    target:
+      entity_id: vacuum.rockrobo_vacuum_v1
+    data:
+      command: app_zoned_clean
+      params:
+        params:
+        - - 30972
+          - 32594
+          - 27294
+          - 36783
+          - 1
+
+vacuum_study:
+  alias: vacuum study
+  mode: single
+  icon: mdi:desk
+  sequence:
+  - service: vacuum.send_command
+    target:
+      entity_id: vacuum.rockrobo_vacuum_v1
+    data:
+      command: app_zoned_clean
+      params:
+        params:
+        - - 33306
+          - 32483
+          - 30983
+          - 36828
+          - 1
+
+vacuum_hallwaylarge:
+  alias: vacuum large hallway
+  mode: single
+  icon: mdi:room
+  sequence:
+  - service: vacuum.send_command
+    target:
+      entity_id: vacuum.rockrobo_vacuum_v1
+    data:
+      command: app_zoned_clean
+      params:
+        params:
+        - - 38217
+          - 30706
+          - 23483
+          - 32594
+          - 1
+
+vacuum_hallwaysmall:
+  alias: vacuum small hallway
+  mode: single
+  icon: mdi:room
+  sequence:
+  - service: vacuum.send_command
+    target:
+      entity_id: vacuum.rockrobo_vacuum_v1
+    data:
+      command: app_zoned_clean
+      params:
+        params:
+        - - 25050
+          - 24950
+          - 24021
+          - 32579
+          - 1
+
+vacuum_bathroommain:
+  alias: vacuum main bathroom
+  mode: single
+  icon: mdi:bath
+  sequence:
+  - service: vacuum.send_command
+    target:
+      entity_id: vacuum.rockrobo_vacuum_v1
+    data:
+      command: app_zoned_clean
+      params:
+        params:
+        - - 25193
+          - 28850
+          - 28207
+          - 26364
+          - 1
+
+vacuum_bathroomguest:
+  alias: vacuum guest bathroom
+  mode: single
+  icon: mdi:shower
+  sequence:
+  - service: vacuum.send_command
+    target:
+      entity_id: vacuum.rockrobo_vacuum_v1
+    data:
+      command: app_zoned_clean
+      params:
+        params:
+        - - 26493
+          - 28850
+          - 28264
+          - 30936
+          - 1
+
+vacuum_kitchen:
+  alias: vacuum kitchen
+  mode: single
+  icon: mdi:kitchen
+  sequence:
+  - service: vacuum.send_command
+    target:
+      entity_id: vacuum.rockrobo_vacuum_v1
+    data:
+      command: app_zoned_clean
+      params:
+        params:
+        - - 32007
+          - 30936
+          - 34679
+          - 27321
+          - 1
+
+vacuum_dining:
+  alias: vacuum dining area
+  mode: single
+  icon: mdi:table
+  sequence:
+  - service: vacuum.send_command
+    target:
+      entity_id: vacuum.rockrobo_vacuum_v1
+    data:
+      command: app_zoned_clean
+      params:
+        params:
+        - - 33321
+          - 32564
+          - 38293
+          - 27221
+          - 1
+
+empty_vacuum:
+  alias: empty vacuum
+  mode: single
+  icon: mdi:vacuum
+  sequence:
+  - service: vacuum.send_command
+    target:
+      entity_id: vacuum.rockrobo_vacuum_v1
+    data:
+      command: app_goto_target
+      params:
+        params:
+        - - 32707
+          - 29464
+
+new_script:
+  alias: New Script
+  sequence:
+  - device_id: 7c57a30e58ce37aaad64824c5b4733ba
+    domain: vacuum
+    entity_id: vacuum.rockrobo_vacuum_v1
+    type: clean
+  mode: single

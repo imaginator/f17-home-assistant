@@ -4,6 +4,9 @@ views:
     icon: vacuu
     badges: []
     cards:
+      - type: entities
+        entities:
+          - input_select.vacuum_room
       - title: imagiSuck
         type: custom:xiaomi-vacuum-map-card
         map_source:

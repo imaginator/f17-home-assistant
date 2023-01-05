@@ -134,6 +134,22 @@ input_boolean:
     name: dim when dark bedroom3
     initial: true
 
+input_select:
+  vacuum_room:
+    name: Choose a room to clean
+    options:
+      - Select Input
+      - Cat Toilet Area
+      - Bedroom 1
+      - Bedroom 2
+      - Bedroom 3
+      - Kitchen
+      - Study
+      - Dining Area
+      - Main Bathroom
+      - Guest Bathroom
+    initial: Select Input
+
 binary_sensor:
   - platform: group
     name: motion sensors
@@ -148,21 +164,6 @@ binary_sensor:
       - binary_sensor.bedroom1
       - binary_sensor.bedroom2
       - binary_sensor.bedroom3
-
-input_select:
-  vacuum_room_select:
-    name: Choose a room to clean
-    options:
-      - Kitchen
-      - Study
-      - Hallway
-      - Cat Toilet Area
-      - Bathroom Guest
-      - Bathroom Main
-      - Bedroom 1
-      - Bedroom 2
-      - Bedroom 3
-
 
 logger:
   default: info #critical,fatal,error,warning,warn,info,debug,notset
@@ -206,6 +207,8 @@ lovelace:
       show_in_sidebar: true
       filename: config/dashboards/vacuum.yaml
 
-vacuum:
-  - platform: xiaomi_miio
-    name: imagiSuck
+#vacuum:
+  # - platform: xiaomi_miio
+  #   name: imagiSuck
+#  host: !secret xiaomi_vacuum_host
+#  token: !secret xiaomi_vacuum_token
