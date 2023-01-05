@@ -1,0 +1,7 @@
+---
+# E: This handles the loading of my automations (YAML and UI)
+#
+# https://www.home-assistant.io/docs/automation/
+#
+automation: !include ../automations.yaml
+automation split: !include_dir_merge_list ../automations

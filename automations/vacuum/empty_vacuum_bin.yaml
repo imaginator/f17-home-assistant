@@ -1,0 +1,17 @@
+---
+- alias: Empty the vacuum bin
+  description: ''
+  trigger:
+  - platform: time
+    at: '12:00:00'
+  condition: []
+  action:
+    - service: vacuum.send_command
+      target:
+        entity_id: vacuum.rockrobo_vacuum_v1
+      data:
+        command: app_goto_target
+        params:
+        - - 32707
+          - 29464
+  mode: single

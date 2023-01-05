@@ -1,0 +1,15 @@
+- id: '1669823881405'
+  alias: Toggle Vallox Fan Speeds
+  description: based on away/home
+  trigger:
+  - platform: state
+    entity_id:
+    - input_boolean.away_mode
+    to: 'on'
+  condition: []
+  action:
+  - type: turn_off
+    device_id: 876f56c448cd0842970e0f41e900af55
+    entity_id: fan.vallox
+    domain: fan
+  mode: single

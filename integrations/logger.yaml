@@ -1,0 +1,21 @@
+---
+# Logger to help debug
+#
+# https://www.home-assistant.io/components/logger/
+#
+
+#critical,fatal,error,warning,warn,info,debug,notset
+
+logger:
+  default: warning 
+  logs:
+    homeassistant.components.vacuum.xiaomi_miio: info
+    miio: info
+    custom_components.xiaomi_cloud_map_extractor: error
+    # For most debugging needs `xnx.log` and one of `xknx.knx` or `xknx.telegram` are a good choice.
+    xknx: info  # sets the level of all loggers
+    xknx.log: info  # provides general information (connection, etc.)
+    xknx.raw_socket: info  # logs incoming UDP frames in raw hex format
+    xknx.knx: info  # logs incoming and outgoing KNX/IP frames at socket level
+    xknx.telegram: info  # logs telegrams before they are being processed at device level or sent to an interface
+    xknx.state_updater: info  # provides information about the state updater

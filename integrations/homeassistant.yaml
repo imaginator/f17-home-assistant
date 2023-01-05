@@ -1,0 +1,29 @@
+---
+# E: Sets up Home Assistant.
+# E Basically, everything that doesn't have to be in the
+# main configuration.yaml. Most of the data are now set in the UI
+#
+# F: Paramétrage de Home Assistant.
+# Maintenant la plus part des infos sont configurées dans l'interface.
+#
+homeassistant:
+  name: F17
+  latitude: !secret latitude
+  longitude: !secret longitude
+  elevation: !secret elevation
+  internal_url: !secret internal_url
+  country: DE
+  currency: EUR
+  auth_providers:
+    - type: homeassistant
+    - type: trusted_networks
+      trusted_networks:
+      - 10.7.9.0/24
+      trusted_users:
+        10.7.9.0/24: 
+        - 7dfaf87f809044188ef0fdbe177006c6
+      allow_bypass_login: true
+
+
+  # E: Lets me customize individual entities in the UI
+  customize: !include ../customise.yaml

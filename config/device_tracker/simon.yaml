@@ -1,5 +1,0 @@
-- platform: ping
-  interval_seconds: 300
-  consider_home: 600
-  hosts:
-    simon_phone: 10.7.11.21

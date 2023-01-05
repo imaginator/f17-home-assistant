@@ -1,0 +1,7 @@
+water_counter_pulses_per_liter:
+  name: water counter pulses per liter
+  initial: 400 # approx
+  min: 300
+  max: 500
+  step: 1
+  mode: box

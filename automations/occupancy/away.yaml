@@ -1,0 +1,21 @@
+alias: Auto Away Mode
+description: Set Away Mode
+trigger:
+  - platform: state
+    entity_id:
+      - person.simon
+      - person.frieda
+    to: not_home
+condition:
+  - condition: state
+    entity_id: person.simon
+    state: not_home
+  - condition: state
+    entity_id: person.frieda
+    state: not_home
+action:
+  - service: input_boolean.turn_on
+    data: {}
+    target:
+      entity_id: input_boolean.away_mode
+mode: single

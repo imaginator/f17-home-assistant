@@ -1,0 +1,17 @@
+cold_water_price:
+  name: cold water price
+  initial: 3.90
+  min: 0.00
+  max: 10.00
+  step: 0.01
+  mode: box
+  unit_of_measurement: EUR/m³
+
+hot_water_price:
+  name: hot water price
+  initial: 15.00 # approx
+  min: 0.00
+  max: 99.00
+  step: 0.01
+  mode: box
+  unit_of_measurement: EUR/m³

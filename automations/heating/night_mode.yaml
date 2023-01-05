@@ -1,0 +1,18 @@
+- id: 'heating-off'
+  alias: Turn down heating before bed
+  description: 'comfort > sleep'
+  trigger:
+    platform: time
+    at: '21:00:00'
+  action:
+  - service: climate.set_preset_mode
+    data:
+      preset_mode: sleep
+    target:
+      entity_id:
+      - climate.study
+      - climate.lounge
+      - climate.bathroommain
+      - climate.bathroomguest
+      - climate.lounge
+      - climate.study

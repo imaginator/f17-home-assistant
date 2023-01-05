@@ -1,0 +1,6 @@
+lovelace:
+  # This is the default storage mode. My main Lovelace dashboard is UI managed.
+  mode: storage
+
+  # Additional YAML-based Lovelace dashboards
+  dashboards: !include ../lovelace/dashboards.yaml

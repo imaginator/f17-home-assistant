@@ -1,0 +1,28 @@
+# tablets to keep off at night
+lounge_dont_turn_on:
+  name: dim when dark lounge
+  initial: false
+study_dont_turn_on:
+  name: dim when dark study
+  initial: false
+kitchen_dont_turn_on:
+  name: dim when dark kitchen
+  initial: false
+hallwaylarge_dont_turn_on:
+  name: dim when dark hallwaylarge
+  initial: false
+bathroomguest_dont_turn_on:
+  name: dim when dark bathroomguest
+  initial: false
+bathroommain_dont_turn_on:
+  name: dim when dark bathroommain
+  initial: false
+bedroom1_dont_turn_on:
+  name: dim when dark bedroom1
+  initial: true
+bedroom2_dont_turn_on:
+  name: dim when dark bedroom2
+  initial: true
+bedroom3_dont_turn_on:
+  name: dim when dark bedroom3
+  initial: true

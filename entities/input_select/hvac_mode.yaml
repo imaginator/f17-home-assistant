@@ -1,0 +1,8 @@
+hvac_mode:
+  name: HVAC mode
+  options:
+    - "auto"
+    - "comfort"
+    - "economy"
+    - "off"
+  icon: mdi:target

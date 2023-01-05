@@ -1,0 +1,16 @@
+normal_electricity_price:
+  name: normal electric price
+  initial: 0.26
+  min: 0.00
+  max: 1.00
+  step: 0.01
+  mode: box
+  unit_of_measurement: EUR/kWh
+heating_electricity_price:
+  name: heating electricity price
+  initial: 0.47
+  min: 0.00
+  max: 1.00
+  step: 0.01
+  mode: box
+  unit_of_measurement: EUR/kWh
