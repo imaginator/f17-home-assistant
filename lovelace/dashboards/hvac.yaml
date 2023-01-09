@@ -3,6 +3,9 @@ views:
     type: sidebar
     path: heating
     cards:
+    - type: entities
+      entities:
+        - input_select.zone_mode
     - type: grid
       square: false
       columns: 2
@@ -47,13 +50,7 @@ views:
       - sensor.bedroom3_heating_valve
 
 
-
-      # vallox tab
-    - type: entities
-      entities:
-        - input_select.zone_mode
-
-
+  # vallox tab
   - title: Ventilation
     path: ventilation
     cards:

@@ -21,8 +21,9 @@
 # https://www.home-assistant.io/components/vacuum.xiaomi_miio/
 #
 
-vacuum:
- - platform: xiaomi_miio
-   name: imagiSuck
-   host: !secret xiaomi_vacuum_host
-   token: !secret xiaomi_vacuum_token
+# now in platform setup :( 
+# vacuum:
+#  - platform: xiaomi_miio
+#    name: imagiSuck
+#    host: !secret xiaomi_vacuum_host
+#    token: !secret xiaomi_vacuum_token

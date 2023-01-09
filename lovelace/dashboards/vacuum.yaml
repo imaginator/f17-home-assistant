@@ -1,22 +1,12 @@
 title: Vacuum
 views:
   - title: Home
-    icon: vacuu
+    icon: vacuum
     badges: []
     cards:
       - type: entities
         entities:
           - input_select.vacuum_room
-      - title: imagiSuck
-        type: custom:xiaomi-vacuum-map-card
-        map_source:
-          camera: camera.xiaomi_cloud_map_extractor
-        calibration_source:
-          camera: true
-        entity: vacuum.rockrobo_vacuum_v1
-        vacuum_platform: default
-        map_locked: false
-        two_finger_pan: false
       - title: imagiSuck
         type: entities
         entities:

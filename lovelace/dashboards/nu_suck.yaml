@@ -1,0 +1,204 @@
+button_card_templates:
+  vacuum_zone:
+    aspect_ratio: 1/1
+    color_type: card
+
+views:
+  - title: NuVacuum
+    icon: 'mdi:robot-vacuum'
+    path: nusuck
+    type: panel
+    badges: []
+    cards:
+      - cards:
+
+          - cards:
+              - color_type: card
+                entity: script.vacuum_workday_sequence
+                hold_action:
+                  action: call-service
+                  service: script.turn_on
+                  service_data:
+                    entity_id: script.stop_vacuum_workday_sequence
+                icon: 'mdi:robot-vacuum'
+                label: >
+                  [[[return
+                  (states['sensor.vacuum_cleaner_status_sensor'].state) +' (' +
+                  (states['sensor.vacuum_battery'].state) + ' %)';]]]
+                name: Lancer la routine de Rocky
+                show_label: true
+                size: 30%
+                state:
+                  - spin: true
+                    value: 'on'
+                styles:
+                  label:
+                    - color: gray
+                    - font-size: 70%
+                tap_action:
+                  action: toggle
+                type: 'custom:button-card'
+
+            type: horizontal-stack
+          - cards:
+              - entity: input_boolean.vacuum_can_clean_the_kitchen
+                hold_action:
+                  action: call-service
+                  service: script.turn_on
+                  service_data:
+                    entity_id: script.launch_vacuum_in_kitchen
+                icon: 'mdi:silverware-fork-knife'
+                name: Cuisine
+                tap_action:
+                  action: toggle
+                template: vacuum_zone
+                type: 'custom:button-card'
+              - entity: input_boolean.vacuum_can_clean_the_living_room_safe
+                hold_action:
+                  action: call-service
+                  service: script.turn_on
+                  service_data:
+                    entity_id: script.launch_vacuum_in_livingroom_safe
+                icon: 'mdi:sofa'
+                name: "Salon \U0001F6E1"
+                tap_action:
+                  action: toggle
+                template: vacuum_zone
+                type: 'custom:button-card'
+              - entity: input_boolean.vacuum_can_clean_the_living_room
+                hold_action:
+                  action: call-service
+                  service: script.turn_on
+                  service_data:
+                    entity_id: script.launch_vacuum_in_livingroom
+                icon: 'mdi:sofa'
+                name: Salon
+                tap_action:
+                  action: toggle
+                template: vacuum_zone
+                type: 'custom:button-card'
+              - entity: input_boolean.vacuum_can_clean_the_carpet
+                hold_action:
+                  action: call-service
+                  service: script.turn_on
+                  service_data:
+                    entity_id: script.launch_vacuum_on_the_carpet
+                icon: 'mdi:camera-metering-matrix'
+                name: Tapis
+                tap_action:
+                  action: toggle
+                template: vacuum_zone
+                type: 'custom:button-card'
+
+            type: horizontal-stack
+          - cards:
+              - entity: input_boolean.vacuum_can_clean_the_entrance
+                hold_action:
+                  action: call-service
+                  service: script.turn_on
+                  service_data:
+                    entity_id: script.vacuum_can_clean_the_entrance
+                icon: 'mdi:door'
+                name: Entrée
+                tap_action:
+                  action: toggle
+                template: vacuum_zone
+                type: 'custom:button-card'
+              - entity: input_boolean.vacuum_can_clean_the_coridor
+                hold_action:
+                  action: call-service
+                  service: script.turn_on
+                  service_data:
+                    entity_id: script.launch_vacuum_in_the_coridor
+                icon: 'mdi:treasure-chest'
+                name: Couloir
+                tap_action:
+                  action: toggle
+                template: vacuum_zone
+                type: 'custom:button-card'
+              - entity: input_boolean.vacuum_can_clean_the_office
+                hold_action:
+                  action: call-service
+                  service: script.turn_on
+                  service_data:
+                    entity_id: script.launch_vacuum_in_office
+                icon: 'mdi:laptop'
+                name: Bureau
+                tap_action:
+                  action: toggle
+                template: vacuum_zone
+                type: 'custom:button-card'
+              - entity: input_boolean.vacuum_can_clean_kids_bathroom
+                hold_action:
+                  action: call-service
+                  service: script.turn_on
+                  service_data:
+                    entity_id: script.launch_vacuum_in_kids_bathroom
+                icon: 'mdi:shower'
+                name: SdB Enfants
+                tap_action:
+                  action: toggle
+                template: vacuum_zone
+                type: 'custom:button-card'
+
+            type: horizontal-stack
+          - cards:
+              - entity: input_boolean.vacuum_can_clean_athenais_bedroom
+                hold_action:
+                  action: call-service
+                  service: script.turn_on
+                  service_data:
+                    entity_id: script.launch_vacuum_in_athenais_bedroom
+                icon: 'mdi:hotel'
+                name: Athénaïs
+                tap_action:
+                  action: toggle
+                template: vacuum_zone
+                type: 'custom:button-card'
+              - entity: input_boolean.vacuum_can_clean_noah_bedroom
+                hold_action:
+                  action: call-service
+                  service: script.turn_on
+                  service_data:
+                    entity_id: script.launch_vacuum_in_noah_bedroom
+                icon: 'mdi:hotel'
+                name: Noah
+                tap_action:
+                  action: toggle
+                template: vacuum_zone
+                type: 'custom:button-card'
+              - entity: input_boolean.vacuum_can_clean_soren_bedroom
+                hold_action:
+                  action: call-service
+                  service: script.turn_on
+                  service_data:
+                    entity_id: script.launch_vacuum_in_soren_bedroom
+                icon: 'mdi:hotel'
+                name: Sören
+                tap_action:
+                  action: toggle
+                template: vacuum_zone
+                type: 'custom:button-card'
+              - entity: input_boolean.vacuum_can_clean_parental_suite
+                hold_action:
+                  action: call-service
+                  service: script.turn_on
+                  service_data:
+                    entity_id: script.launch_vacuum_in_parental_suite
+                icon: 'mdi:human-male-female'
+                name: Parents
+                tap_action:
+                  action: toggle
+                template: vacuum_zone
+                type: 'custom:button-card'
+            type: horizontal-stack
+  
+        type: vertical-stack
+      - entities:
+          - entity: input_select.house_mode
+          - entity: input_datetime.vacuum_start_hour
+          - entity: script.vacuum_map_construct
+        show_header_toggle: false
+        title: Paramétrages
+        type: entities
+  

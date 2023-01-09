@@ -1,0 +1,39 @@
+---
+# boolean to know if vacuum can clean the the room
+#
+# If yes the room will be cleaned today.
+# As the entrance is cleaned every workday, set to no when done.
+#
+
+vacuum_can_clean_cat_toilet:
+  name: Can Clean Cat Toilet
+
+vacuum_can_clean_bedroom1:
+  name: can clean bedroom1
+
+vacuum_can_clean_bedroom2:
+  name: can clean bedroom2
+
+vacuum_can_clean_bedroom3:
+  name: can clean bedroom3
+
+vacuum_can_clean_study:
+  name: can clean study
+
+vacuum_can_clean_hallwaylarge:
+  name: can clean large hallway
+
+vacuum_can_clean_hallwaysmall:
+  name: can clean small hallway
+
+vacuum_can_clean_bathroommain:
+  name: can clean main bathroom
+
+vacuum_can_clean_bathroomguest:
+  name: can clean guest bathroom
+
+vacuum_can_clean_kitchen:
+  name: can clean kitchen
+
+vacuum_can_clean_dining:
+  name: can clean dining area

@@ -3,4 +3,34 @@ lovelace:
   mode: storage
 
   # Additional YAML-based Lovelace dashboards
-  dashboards: !include ../lovelace/dashboards.yaml
+  dashboards:
+    rooms-dashboard:
+      mode: yaml
+      title: Rooms
+      icon: mdi:door
+      show_in_sidebar: true
+      filename: lovelace/dashboards/rooms.yaml
+    heating-dashboard:
+      mode: yaml
+      title: HVAC
+      icon: mdi:heat-pump
+      show_in_sidebar: true
+      filename: lovelace/dashboards/hvac.yaml
+    music-dashboard:
+      mode: yaml
+      title: Music
+      icon: mdi:music
+      show_in_sidebar: true
+      filename: lovelace/dashboards/music.yaml
+    vacuum-dashboard:
+      mode: yaml
+      title: Vacuum
+      icon: mdi:robot-vacuum
+      show_in_sidebar: true
+      filename: lovelace/dashboards/vacuum.yaml
+    suck-dashboard:
+      mode: yaml
+      title: Vacuum2
+      icon: mdi:robot-vacuum
+      show_in_sidebar: true
+      filename: lovelace/dashboards/nu_suck.yaml
