@@ -13,10 +13,20 @@ sequence:
   - service: variable.set_variable
     data:
       variable: nb_cleaning_before_daily_routine
-      value: "{{ state_attr('vacuum.imagisuck', 'cleaning_count') }}"
+      value: "{{ state_attr('vacuum.rockrobo_vacuum_v1', 'cleaning_count') }}"
       attributes:
-        time: "{{ state_attr('vacuum.imagisuck', 'total_cleaning_time') }}"
-        area: "{{ state_attr('vacuum.imagisuck', 'total_cleaned_area') }}"
+        time: "{{ state_attr('vacuum.rockrobo_vacuum_v1', 'total_cleaning_time') }}"
+        area: "{{ state_attr('vacuum.rockrobo_vacuum_v1', 'total_cleaned_area') }}"
+
+
+  - service: script.launch_daily_vacuum_in_room
+    data:
+      room_script: script.launch_vacuum_in_
+      room_bool: input_boolean.vacuum_can_clean_the_kitchen
+      room_name: "Kitchen"
+      room_battery_needed: 13
+      repetition: 1
+
 
   # Start with kitchen cleaning.
   - service: script.launch_daily_vacuum_in_room
@@ -27,110 +37,14 @@ sequence:
       room_battery_needed: 13
       repetition: 1
 
-  # Then clean the living room avoiding potential obstacles
-  - service: script.launch_daily_vacuum_in_room
-    data:
-      room_script: script.launch_vacuum_in_livingroom_safe
-      room_bool: input_boolean.vacuum_can_clean_the_living_room_safe
-      room_name: "Salon (mode sécurisé)"
-      room_battery_needed: 20
-      repetition: 1
-
-  # Or clean the living room in normal mode. Family should have set the room.
-  - service: script.launch_daily_vacuum_in_room
-    data:
-      room_script: script.launch_vacuum_in_livingroom
-      room_bool: input_boolean.vacuum_can_clean_the_living_room
-      room_name: "Salon"
-      room_battery_needed: 35
-      repetition: 1
-
-  # Then clean the carpet
-  - service: script.launch_daily_vacuum_in_room
-    data:
-      room_script: script.launch_vacuum_on_the_carpet
-      room_bool: input_boolean.vacuum_can_clean_the_carpet
-      room_battery_needed: 8
-      room_name: "Tapis"
-
-  # Then clean the entrance.
-  - service: script.launch_daily_vacuum_in_room
-    data:
-      room_script: script.launch_vacuum_in_the_entrance
-      room_bool: input_boolean.vacuum_can_clean_the_entrance
-      room_name: "Entrée"
-      room_battery_needed: 8
-      repetition: 1
-
-  # Then clean the office.
-  - service: script.launch_daily_vacuum_in_room
-    data:
-      room_script: script.launch_vacuum_in_office
-      room_bool: input_boolean.vacuum_can_clean_the_office
-      room_name: "Bureau"
-      repetition: 1
-
-  # Then clean the coridor.
-  - service: script.launch_daily_vacuum_in_room
-    data:
-      room_script: script.launch_vacuum_in_the_coridor
-      room_bool: input_boolean.vacuum_can_clean_the_coridor
-      room_name: "Couloir"
-      room_battery_needed: 18
-      repetition: 1
-
-  # Then clean Athénaïs' bedroom.
-  - service: script.launch_daily_vacuum_in_room
-    data:
-      room_script: script.launch_vacuum_in_athenais_bedroom
-      room_bool: input_boolean.vacuum_can_clean_athenais_bedroom
-      room_name: "Chambre d'Athénaïs"
-      room_battery_needed: 10
-      repetition: 1
-
-  # Then clean Noah's bedroom.
-  - service: script.launch_daily_vacuum_in_room
-    data:
-      room_script: script.launch_vacuum_in_noah_bedroom
-      room_bool: input_boolean.vacuum_can_clean_noah_bedroom
-      room_name: "Chambre de Noah"
-      room_battery_needed: 10
-      repetition: 1
-
-  # Then clean Soren's bedroom.
-  - service: script.launch_daily_vacuum_in_room
-    data:
-      room_script: script.launch_vacuum_in_soren_bedroom
-      room_bool: input_boolean.vacuum_can_clean_soren_bedroom
-      room_name: "Chambre de Sören"
-      room_battery_needed: 10
-      repetition: 1
-
-  # Then kids bathroom.
-  - service: script.launch_daily_vacuum_in_room
-    data:
-      room_script: script.launch_vacuum_in_kids_bathroom
-      room_bool: input_boolean.vacuum_can_clean_kids_bathroom
-      room_name: "Salle de bain des enfants"
-      room_battery_needed: 6
-      repetition: 1
-
-  # Then clean parental suite.
-  - service: script.launch_daily_vacuum_in_room
-    data:
-      room_script: script.launch_vacuum_in_parental_suite
-      room_bool: input_boolean.vacuum_can_clean_parental_suite
-      room_name: "Suite parentale"
-      room_battery_needed: 26
-      repetition: 1
 
   # Notify when finished
   - service: notify.notify
     data:
       message: >
         Aspiration quotidienne terminée. imagisuck a fait
-        {{ state_attr('vacuum.imagisuck', 'cleaning_count') | int - states('variable.nb_cleaning_before_daily_routine')
-        | int }} nettoyages ({{state_attr('vacuum.imagisuck','total_cleaned_area')
+        {{ state_attr('vacuum.rockrobo_vacuum_v1', 'cleaning_count') | int - states('variable.nb_cleaning_before_daily_routine')
+        | int }} nettoyages ({{state_attr('vacuum.rockrobo_vacuum_v1','total_cleaned_area')
         | int - state_attr('variable.nb_cleaning_before_daily_routine','area')| int }} m²) en
-        {{state_attr('vacuum.imagisuck','total_cleaning_time')
+        {{state_attr('vacuum.rockrobo_vacuum_v1','total_cleaning_time')
         | int - state_attr('variable.nb_cleaning_before_daily_routine','time')| int }} minutes.

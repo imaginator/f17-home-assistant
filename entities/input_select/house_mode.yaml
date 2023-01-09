@@ -7,5 +7,5 @@ house_mode:
   name: House Mode
   options:
     - Normal
-    - Vactation
+    - Vacation
   icon: mdi:home-map-marker

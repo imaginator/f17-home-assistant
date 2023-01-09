@@ -13,23 +13,23 @@
 # https://www.home-assistant.io/components/script/
 # https://www.home-assistant.io/docs/scripts/
 #
-alias: "Lance le nettoyage quotidient dans une pièce"
-description: "Gère le pilotage du nettoyage d'une pièce donnée."
+alias: "Start cleaning a room"
+description: "Control room cleaning"
 fields:
   room_bool:
-    description: Le booléen lié à la pièce pour savoir si cela a été déjà fait
+    description: boolean for room to clean
     example: input_boolean.vacuum_can_clean_the_living_room
   room_script:
-    description: nom du script à lancer pour démarrer le nettoyage
+    description: name of the script to control cleaning
     example: script.launch_vacuum_in_livingroom
   room_name:
-    description: Nom de la pièce utilisé dans le journal
+    description: Name used in the log
     example: Salon
   room_battery_needed:
-    description: Éstimation de la quantité de batterie nécessaire pour faire le nettoyage
+    description: Estimation of battery to complete cleaning
     example: 35
   repetition:
-    description: Nombre de répétition
+    description: Number of repitions
     example: 1
 sequence:
   # Test if boolean is 'on' (not yet done today)
@@ -44,11 +44,11 @@ sequence:
   - service: variable.set_variable
     data:
       variable: nb_cleaning_before_room
-      value: "{{ state_attr('vacuum.imagisuck', 'cleaning_count') }}"
+      value: "{{ state_attr('vacuum.rockrobo_vacuum_v1', 'cleaning_count') }}"
       attributes:
-        time: "{{ state_attr('vacuum.imagisuck', 'total_cleaning_time') }}"
-        area: "{{ state_attr('vacuum.imagisuck', 'total_cleaned_area') }}"
-        battery: "{{ state_attr('vacuum.imagisuck', 'battery_level') }}"
+        time: "{{ state_attr('vacuum.rockrobo_vacuum_v1', 'total_cleaning_time') }}"
+        area: "{{ state_attr('vacuum.rockrobo_vacuum_v1', 'total_cleaned_area') }}"
+        battery: "{{ state_attr('vacuum.rockrobo_vacuum_v1', 'battery_level') }}"
 
   # Launch the cleaning
   - service: script.turn_on
@@ -62,13 +62,13 @@ sequence:
   # charging to 80%. Currently no way to catch that.
   - wait_for_trigger:
       - platform: state
-        entity_id: vacuum.imagisuck
+        entity_id: vacuum.rockrobo_vacuum_v1
         from: "docked"
 
   # Test if finished
   - wait_for_trigger:
       - platform: state
-        entity_id: vacuum.imagisuck
+        entity_id: vacuum.rockrobo_vacuum_v1
         to: "docked"
 
   # Change the value of the boolean to make it done
@@ -82,21 +82,21 @@ sequence:
       name: imagisuck
       message: >
         has just finished cleaning the {{ room_name }}
-        {{state_attr('vacuum.imagisuck','total_cleaned_area')| int - state_attr('variable.nb_cleaning_before_room','area')|
-        int }} m² in {{state_attr('vacuum.imagisuck','total_cleaning_time') | int -
+        {{state_attr('vacuum.rockrobo_vacuum_v1','total_cleaned_area')| int - state_attr('variable.nb_cleaning_before_room','area')|
+        int }} m² in {{state_attr('vacuum.rockrobo_vacuum_v1','total_cleaning_time') | int -
         state_attr('variable.nb_cleaning_before_room','time')| int }} minutes.
-        {{ state_attr('variable.nb_cleaning_before_room','battery') | int - state_attr('vacuum.imagisuck', 'battery_level')
+        {{ state_attr('variable.nb_cleaning_before_room','battery') | int - state_attr('vacuum.rockrobo_vacuum_v1', 'battery_level')
         | int }} % of battery used.
-      entity_id: vacuum.imagisuck
+      entity_id: vacuum.rockrobo_vacuum_v1
       domain: vacuum
 
   # For testing: notify with battey consumption when finished
   - service: notify.notify
     data:
       message: >
-        Aspiration de {{ room_name }} terminée. imagisuck a nettoyé
-        {{state_attr('vacuum.imagisuck','total_cleaned_area')| int - state_attr('variable.nb_cleaning_before_room','area')|
-        int }} m² en {{state_attr('vacuum.imagisuck','total_cleaning_time') | int -
+        Vacuuming {{ room_name }} complete. imagiSuck cleaned 
+        {{state_attr('vacuum.rockrobo_vacuum_v1','total_cleaned_area')| int - state_attr('variable.nb_cleaning_before_room','area')|
+        int }} m² in {{state_attr('vacuum.rockrobo_vacuum_v1','total_cleaning_time') | int -
         state_attr('variable.nb_cleaning_before_room','time')| int }} minutes.
-        {{ state_attr('variable.nb_cleaning_before_room','battery') | int - state_attr('vacuum.imagisuck', 'battery_level')
-        | int }} % de batterie ont été utilisés.
+        {{ state_attr('variable.nb_cleaning_before_room','battery') | int - state_attr('vacuum.rockrobo_vacuum_v1', 'battery_level')
+        | int }} % of battery utilisation.

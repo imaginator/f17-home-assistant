@@ -5,8 +5,8 @@
 # As the entrance is cleaned every workday, set to no when done.
 #
 
-vacuum_can_clean_cat_toilet:
-  name: Can Clean Cat Toilet
+vacuum_can_clean_catarea:
+  name: Can Clean Cat Toilet Area
 
 vacuum_can_clean_bedroom1:
   name: can clean bedroom1
