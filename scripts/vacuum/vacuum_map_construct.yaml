@@ -12,15 +12,15 @@
 # https://www.home-assistant.io/components/vacuum.xiaomi_miio/
 # https://www.home-assistant.io//getting-started/scripts/
 #
-alias: "Constuire la map de imagisuck"
-description: "Pilote imagisuck pour reconstruire la carte de la maison"
+alias: "build imagisuck's map"
+description: "Rebuild Apartment Map"
 mode: single
 sequence:
   # first put the fan_speed at minimum to avoid noise
   - service: vacuum.set_fan_speed
     data:
       entity_id: vacuum.rockrobo_vacuum_v1
-      fan_speed: quiet
+      fan_speed: Silent
 
   # launch a standard clean during 10 secondes to create the first part of the map
   - service: vacuum.start
@@ -36,138 +36,35 @@ sequence:
         entity_id: vacuum.rockrobo_vacuum_v1
         to: "idle"
   #
-  # send goto_target commands to pilot the robot thru the house
+  # send goto_target commands to pilot the robot through the house
   #
-  # Kitchen
+
+  # End of small hallway/startmain hallway
   - service: vacuum.send_command
     data:
       entity_id: vacuum.rockrobo_vacuum_v1
       command: app_goto_target
-      params: [27500, 25500]
-  - wait_for_trigger:
-      - platform: state
-        entity_id: vacuum.rockrobo_vacuum_v1
-        to: "idle"
-  - service: vacuum.send_command
-    data:
-      entity_id: vacuum.rockrobo_vacuum_v1
-      command: app_goto_target
-      params: [25500, 22300]
-  - wait_for_trigger:
-      - platform: state
-        entity_id: vacuum.rockrobo_vacuum_v1
-        to: "idle"
-  - service: vacuum.send_command
-    data:
-      entity_id: vacuum.rockrobo_vacuum_v1
-      command: app_goto_target
-      params: [21600, 21600]
-  - wait_for_trigger:
-      - platform: state
-        entity_id: vacuum.rockrobo_vacuum_v1
-        to: "idle"
-  - service: vacuum.send_command
-    data:
-      entity_id: vacuum.rockrobo_vacuum_v1
-      command: app_goto_target
-      params: [21600, 24000]
+      params: [24082, 31477]
   - wait_for_trigger:
       - platform: state
         entity_id: vacuum.rockrobo_vacuum_v1
         to: "idle"
 
-  # Living room
+# Near Fireplace
   - service: vacuum.send_command
     data:
       entity_id: vacuum.rockrobo_vacuum_v1
       command: app_goto_target
-      params: [26000, 31500]
+      params: [36900, 31477]
   - wait_for_trigger:
       - platform: state
         entity_id: vacuum.rockrobo_vacuum_v1
         to: "idle"
 
-  # Office
-  - service: vacuum.send_command
+# Go back to the dock
+  - service: vacuum.return_to_base
     data:
       entity_id: vacuum.rockrobo_vacuum_v1
-      command: app_goto_target
-      params: [25500, 34100]
-  - wait_for_trigger:
-      - platform: state
-        entity_id: vacuum.rockrobo_vacuum_v1
-        to: "idle"
-  - service: vacuum.send_command
-    data:
-      entity_id: vacuum.rockrobo_vacuum_v1
-      command: app_goto_target
-      params: [24700, 37100]
-  - wait_for_trigger:
-      - platform: state
-        entity_id: vacuum.rockrobo_vacuum_v1
-        to: "idle"
-
-  # Coridor
-  - service: vacuum.send_command
-    data:
-      entity_id: vacuum.rockrobo_vacuum_v1
-      command: app_goto_target
-      params: [25500, 37000]
-  - wait_for_trigger:
-      - platform: state
-        entity_id: vacuum.rockrobo_vacuum_v1
-        to: "idle"
-
-  # Kid bathroom
-  - service: vacuum.send_command
-    data:
-      entity_id: vacuum.rockrobo_vacuum_v1
-      command: app_goto_target
-      params: [20500, 34000]
-  - wait_for_trigger:
-      - platform: state
-        entity_id: vacuum.rockrobo_vacuum_v1
-        to: "idle"
-
-  # Athénaïs' bedroom
-  - service: vacuum.send_command
-    data:
-      entity_id: vacuum.rockrobo_vacuum_v1
-      command: app_goto_target
-      params: [18000, 35000]
-  - wait_for_trigger:
-      - platform: state
-        entity_id: vacuum.rockrobo_vacuum_v1
-        to: "idle"
-
-  # Noah's bedroom
-  - service: vacuum.send_command
-    data:
-      entity_id: vacuum.rockrobo_vacuum_v1
-      command: app_goto_target
-      params: [17000, 41000]
-  - wait_for_trigger:
-      - platform: state
-        entity_id: vacuum.rockrobo_vacuum_v1
-        to: "idle"
-
-  # Soren's bedroom
-  - service: vacuum.send_command
-    data:
-      entity_id: vacuum.rockrobo_vacuum_v1
-      command: app_goto_target
-      params: [20000, 41000]
-  - wait_for_trigger:
-      - platform: state
-        entity_id: vacuum.rockrobo_vacuum_v1
-        to: "idle"
-
-  # Parental suite
-  - service: vacuum.send_command
-    data:
-      entity_id: vacuum.rockrobo_vacuum_v1
-      command: app_goto_target
-      params: [24000, 40000]
   - wait_for_trigger:
       - platform: state
         entity_id: vacuum.rockrobo_vacuum_v1

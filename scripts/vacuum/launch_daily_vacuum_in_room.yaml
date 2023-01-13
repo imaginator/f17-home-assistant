@@ -44,11 +44,11 @@ sequence:
   - service: variable.set_variable
     data:
       variable: nb_cleaning_before_room
-      value: "{{ state_attr('vacuum.rockrobo_vacuum_v1', 'cleaning_count') }}"
+      value: "{{ states.sensor.rockrobo_vacuum_v1_total_clean_count.state }}"
       attributes:
-        time: "{{ state_attr('vacuum.rockrobo_vacuum_v1', 'total_cleaning_time') }}"
-        area: "{{ state_attr('vacuum.rockrobo_vacuum_v1', 'total_cleaned_area') }}"
-        battery: "{{ state_attr('vacuum.rockrobo_vacuum_v1', 'battery_level') }}"
+        time: "{{ states.sensor.rockrobo_vacuum_v1_total_duration.state }}"
+        area: "{{ states.sensor.rockrobo_vacuum_v1_total_clean_area.state }}"
+        battery: "{{ states.sensor.vacuum_battery.state }}"
 
   # Launch the cleaning
   - service: script.turn_on
@@ -75,28 +75,26 @@ sequence:
   - service: input_boolean.turn_off
     data:
       entity_id: "{{ room_bool }}"
-
   # Add a message in logbook
-  - service: logbook.log
-    data:
-      name: imagisuck
-      message: >
-        has just finished cleaning the {{ room_name }}
-        {{state_attr('vacuum.rockrobo_vacuum_v1','total_cleaned_area')| int - state_attr('variable.nb_cleaning_before_room','area')|
-        int }} m² in {{state_attr('vacuum.rockrobo_vacuum_v1','total_cleaning_time') | int -
-        state_attr('variable.nb_cleaning_before_room','time')| int }} minutes.
-        {{ state_attr('variable.nb_cleaning_before_room','battery') | int - state_attr('vacuum.rockrobo_vacuum_v1', 'battery_level')
-        | int }} % of battery used.
-      entity_id: vacuum.rockrobo_vacuum_v1
-      domain: vacuum
-
+  # - service: logbook.log
+  #   data:
+  #     name: imagisuck
+  #     message: >
+  #       has just finished cleaning the {{ room_name }}
+  #       {{state_attr('vacuum.rockrobo_vacuum_v1','total_cleaned_area')| int - state_attr('variable.nb_cleaning_before_room','area')|
+  #       int }} m² in {{state_attr('vacuum.rockrobo_vacuum_v1','total_cleaning_time') | int -
+  #       state_attr('variable.nb_cleaning_before_room','time')| int }} minutes.
+  #       {{ state_attr('variable.nb_cleaning_before_room','battery') | int - state_attr('vacuum.rockrobo_vacuum_v1', 'battery_level')
+  #       | int }} % of battery used.
+  #     entity_id: vacuum.rockrobo_vacuum_v1
+  #     domain: vacuum
   # For testing: notify with battey consumption when finished
-  - service: notify.notify
-    data:
-      message: >
-        Vacuuming {{ room_name }} complete. imagiSuck cleaned 
-        {{state_attr('vacuum.rockrobo_vacuum_v1','total_cleaned_area')| int - state_attr('variable.nb_cleaning_before_room','area')|
-        int }} m² in {{state_attr('vacuum.rockrobo_vacuum_v1','total_cleaning_time') | int -
-        state_attr('variable.nb_cleaning_before_room','time')| int }} minutes.
-        {{ state_attr('variable.nb_cleaning_before_room','battery') | int - state_attr('vacuum.rockrobo_vacuum_v1', 'battery_level')
-        | int }} % of battery utilisation.
+  # - service: notify.notify
+  #   data:
+  #     message: >
+  #       Vacuuming {{ room_name }} complete. imagiSuck cleaned
+  #       {{state_attr('vacuum.rockrobo_vacuum_v1','total_cleaned_area')| int - state_attr('variable.nb_cleaning_before_room','area')|
+  #       int }} m² in {{state_attr('vacuum.rockrobo_vacuum_v1','total_cleaning_time') | int -
+  #       state_attr('variable.nb_cleaning_before_room','time')| int }} minutes.
+  #       {{ state_attr('variable.nb_cleaning_before_room','battery') | int - state_attr('vacuum.rockrobo_vacuum_v1', 'battery_level')
+  #       | int }} % of battery utilisation.

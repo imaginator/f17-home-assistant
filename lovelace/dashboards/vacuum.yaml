@@ -6,9 +6,11 @@ views:
     cards:
       - type: entities
         entities:
+          - vacuum.rockrobo_vacuum_v1
+      - type: entities
+        entities:
           - input_select.vacuum_room
-      - title: imagiSuck
-        type: entities
+      - type: entities
         entities:
           - entity: sensor.rockrobo_vacuum_v1_current_clean_area
             name: Current clean area

@@ -1,0 +1,28 @@
+
+---
+#
+# https://www.home-assistant.io/components/vacuum/
+# https://www.home-assistant.io/components/vacuum.xiaomi_miio/
+#
+alias: Start Vacuuming the Kitchen
+sequence:
+  - service: vacuum.set_fan_speed
+    data:
+      entity_id: vacuum.rockrobo_vacuum_v1
+      fan_speed: Silent
+  - service: xiaomi_miio.vacuum_clean_zone
+    data:
+      entity_id: vacuum.rockrobo_vacuum_v1
+      repeats: "{{ repetition | default(1) }}"
+      zone:
+        - [32007,30936,34679,27321]
+  - service: logbook.log
+    data:
+      name: imagiSuck
+      message: starts cleaning the kitchen
+      entity_id: vacuum.rockrobo_vacuum_v1
+      domain: vacuum
+
+  - service: input_boolean.turn_on
+    data:
+      entity_id: input_boolean.vacuum_need_to_be_emptied
