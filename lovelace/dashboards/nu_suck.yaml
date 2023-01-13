@@ -202,6 +202,7 @@ views:
         type: vertical-stack
       - entities:
           - entity: input_select.house_mode
+          - entity: input_datetime.vacuum_bin_empty_time
           - entity: input_datetime.vacuum_start_hour
           - entity: script.vacuum_map_construct
         show_header_toggle: false

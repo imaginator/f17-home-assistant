@@ -13,7 +13,7 @@
   mode: restart
   trigger:
     - platform: time
-      at: "20:00:00"
+      at: "20:47:00"
     - platform: event
       event_type: timer.finished
       event_data:
@@ -23,14 +23,14 @@
       entity_id: input_boolean.vacuum_need_to_be_emptied
       state: "on"
   action:
-    - service: notify.notify
+    - service: notify.telegram
       data:
         data:
           inline_keyboard:
             - Oui:/resetimagisuck, Redemande:/redemandeimagisuck, Demain:/demainimagisuck
         message: >
           imagisuck a été utilisé aujourd'hui et le bac n'a pas été vidé depuis
-          {{ state_attr('vacuum.rockrobo_vacuum_v1', 'cleaning_count') | int - states('variable.nb_cleaning_last_dust_bin_emptied')
+          {{ states.sensor.rockrobo_vacuum_v1_total_clean_count.state | int - states('variable.nb_cleaning_last_dust_bin_emptied')
           | int }} nettoyages ({{state_attr('vacuum.rockrobo_vacuum_v1','total_cleaned_area')
           | int - state_attr('variable.nb_cleaning_last_dust_bin_emptied','area')| int }}
           m²). Il a besoin que l'on vide son bac. Est-ce déjà fait ?

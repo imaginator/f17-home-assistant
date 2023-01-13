@@ -1,17 +1,23 @@
 ---
-- alias: Empty the vacuum bin
-  description: ''
+# EN: Empty the vacuum cleaner bin
+#
+# EN: Launch ignore if the house is put in mode `holidays` with an input_select
+#
+- alias: "Wait for bin Emptying"
+  description: Start vacuum bin emptying
+  id: 552c11f1-e63e-4533-9a9e-abae05d8c0a2
   trigger:
-  - platform: time
-    at: '12:00:00'
-  condition: []
+    platform: time
+    at: input_datetime.vacuum_bin_empty_time
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: binary_sensor.workday_sensor
+        state: 'on'
+      - condition: state
+        entity_id: input_select.house_mode
+        state: 'Normal'
   action:
-    - service: vacuum.send_command
-      target:
-        entity_id: vacuum.rockrobo_vacuum_v1
-      data:
-        command: app_goto_target
-        params:
-        - - 32707
-          - 29464
-  mode: single
+    service: script.turn_on
+    entity_id: script.empty_vacuum_bin

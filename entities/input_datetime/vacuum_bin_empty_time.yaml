@@ -1,0 +1,7 @@
+---
+# Set the hour to launch the daily routine for the vacuum
+#
+vacuum_bin_empty_time:
+  name: When to wait for the bin being emptied
+  has_date: false
+  has_time: true

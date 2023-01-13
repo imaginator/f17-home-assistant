@@ -1,0 +1,14 @@
+---
+platform: group
+name: motion sensors
+entities:
+  - binary_sensor.lounge
+  - binary_sensor.kitchen
+  - binary_sensor.study
+  - binary_sensor.hallwaylarge
+  - binary_sensor.hallwaysmall
+  - binary_sensor.bathroommain
+  - binary_sensor.bathroomguest
+  - binary_sensor.bedroom1
+  - binary_sensor.bedroom2
+  - binary_sensor.bedroom3

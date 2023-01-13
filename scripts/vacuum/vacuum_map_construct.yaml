@@ -28,6 +28,7 @@ sequence:
       entity_id: vacuum.rockrobo_vacuum_v1
   - delay:
       seconds: 20
+
   - service: vacuum.stop
     data:
       entity_id: vacuum.rockrobo_vacuum_v1
