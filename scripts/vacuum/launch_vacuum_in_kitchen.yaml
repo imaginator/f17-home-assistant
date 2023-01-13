@@ -15,7 +15,7 @@ sequence:
       entity_id: vacuum.rockrobo_vacuum_v1
       repeats: "{{ repetition | default(1) }}"
       zone:
-        - [32007,30936,34679,27321]
+        - [31860,27510,35210,31560]
   - service: logbook.log
     data:
       name: imagiSuck
