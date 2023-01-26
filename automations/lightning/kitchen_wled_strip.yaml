@@ -1,0 +1,26 @@
+- id: 5771d9db-ff0e-4c8c-8725-e8723b685d94
+  alias: "lightning: turn on WLED light"
+  trigger:
+  - platform: sun
+    event: sunset
+    offset: 0
+  condition: []
+  action:
+  - type: turn_on
+    device_id: 47d2314dcd81c0ce164e208dd469b874
+    entity_id: light.wled_soundreactive
+    domain: light
+  mode: single
+
+- id: 07c7c0d5-dae9-4c4c-8986-c72e53552b78
+  alias: "lightning: turn off WLED light"
+  trigger:
+  - platform: time
+    at: '23:30:00'
+  condition: []
+  action:
+  - type: turn_off
+    device_id: 47d2314dcd81c0ce164e208dd469b874
+    entity_id: light.wled_soundreactive
+    domain: light 
+  mode: single

@@ -6,7 +6,7 @@
         ## Turn Off Bedroom when Unoccupied
         ##########################################################
 
-- alias: Occupancy - Turn Off Bedroom Lights when Unoccupied
+- alias: "occupancy: Turn Off Bedroom Lights when Unoccupied"
   id: 'occupancy_turn_off_bedroom_lights_when_unoccupied'
 
   trigger:
@@ -35,13 +35,13 @@
   action:
     - service: light.turn_off
       entity_id: 
-       - light.bedroom_lights
+      - light.bedroom_lights
 
         ##########################################################
         ## Turn Off Guest Bedroom when Unoccupied
         ##########################################################
 
-- alias: Occupancy - Turn Off Guest Bedroom Lights when Unoccupied
+- alias: "occupancy: Turn Off Guest Bedroom Lights when Unoccupied"
   id: 'occupancy_turn_off_guest_bedroom_lights_when_unoccupied'
 
   trigger:

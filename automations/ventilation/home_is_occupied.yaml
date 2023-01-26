@@ -1,5 +1,5 @@
-- id: 1221111212121222222121221s
-  alias: Switch Vallox to Home Mode
+- id: f2e54de3-dbbc-4f4f-aa7c-46291ee3880f
+  alias: "ventilation: switch vallox to home mode"
   description: based on away/home
   trigger:
     - platform: state

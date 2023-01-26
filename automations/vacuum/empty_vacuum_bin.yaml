@@ -1,11 +1,6 @@
----
-# EN: Empty the vacuum cleaner bin
-#
-# EN: Launch ignore if the house is put in mode `holidays` with an input_select
-#
-- alias: "Wait for bin Emptying"
+- id: 61a3bd9d-c212-45b8-bc17-608830097ab7
+  alias: "vacuum: empty the bin"
   description: Start vacuum bin emptying
-  id: 552c11f1-e63e-4533-9a9e-abae05d8c0a2
   trigger:
     platform: time
     at: input_datetime.vacuum_bin_empty_time

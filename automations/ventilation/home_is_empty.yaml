@@ -1,5 +1,5 @@
-- id: '1669823881405'
-  alias: Toggle Vallox Fan Speeds
+- id: 'c815b1c3-0938-4d4d-8600-74e44873b33d'
+  alias: "ventilation: switch vallox to away mode"
   description: based on away/home
   trigger:
   - platform: state

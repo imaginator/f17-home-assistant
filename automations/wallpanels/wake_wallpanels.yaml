@@ -1,6 +1,6 @@
 # wake the sleeping tablets
-- id: "wake wallpanel and set url"
-  alias: Turn on tablet screens and set URL
+- id: 4d4f9728-4c3d-4f3c-b931-d8c40da03aa9
+  alias: "wallpanels: room motion > wake screen"
   description: turn on wallpanel screen when motion detected
   trigger:
     - platform: state
@@ -21,7 +21,8 @@
     - service: mqtt.publish
       data:
         topic_template: "wallpanel/{{ trigger.to_state.object_id }}/command"
-        payload: '{"wake": true}'
+        #        payload: '{"wake": true, "wakeTime": 60}'
+        payload: '{"wake": false}'
     # - service: mqtt.publish
     #   data:
     #     topic_template: "wallpanel/{{ trigger.to_state.object_id }}/command"

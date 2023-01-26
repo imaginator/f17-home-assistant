@@ -1,0 +1,8 @@
+- id: 8c9eb09f-a478-4c8e-a9fc-4f1b25ceabdb
+  alias: "covers: reboot KLF on HA stop event"
+  description: Reboots the KLF200 in order to avoid SSL Handshake issue
+  trigger:
+    - platform: homeassistant
+      event: shutdown
+  action:
+    - service: velux.reboot_gateway

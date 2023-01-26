@@ -1,18 +1,17 @@
-- id: 'heating-on'
-  alias: heating morning switch on comfort mode
-  description: 'sleep > comfort'
+- id: 2817c782-0495-4a11-a430-2121ccb60bfa
+  alias: "heating: morning switch to comfort mode"
+  description: "switch sleep to comfort"
   trigger:
-    platform: time
-    at: 05:15:00
+    - platform: time
+      at: "07:00:00"
   action:
-  - service: climate.set_preset_mode
-    target:
-      entity_id:
-      - climate.study
-      - climate.lounge
-      - climate.bathroommain
-      - climate.bathroomguest
-      - climate.lounge
-      - climate.study
-    data:
-      preset_mode: comfort
+    - service: climate.set_preset_mode
+      data:
+        preset_mode: comfort
+      target:
+        entity_id:
+          - climage.kitchen
+          - climate.bathroomguest
+          - climate.bathroommain
+          - climate.lounge
+          - climate.study

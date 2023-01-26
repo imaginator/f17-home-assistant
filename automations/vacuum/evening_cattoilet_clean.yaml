@@ -1,0 +1,16 @@
+---
+
+- id: 'b8c8c948-45f6-4a76-8ff4-0ce452e9b15f'
+  alias: "vacuum: evening cat toilet area cleaning"
+  description: Clean up the cat area before bed
+  trigger:
+  - platform: time
+    at: '20:15:00'
+  condition: 
+      - condition: state
+        entity_id: input_select.house_mode
+        state: 'Normal'
+  action:
+  - service: script.launch_vacuum_in_catarea
+    data: {}
+  mode: single
