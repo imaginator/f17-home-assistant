@@ -12,6 +12,7 @@ __pycache__
 .cloud
 .storage
 deps
+backups
 
 # Specific file ignores
 core
