@@ -40,7 +40,7 @@ sequence:
   # send goto_target commands to pilot the robot through the house
   #
 
-  # End of small hallway/startmain hallway
+  # End of small hallway/start main hallway
   - service: vacuum.send_command
     data:
       entity_id: vacuum.rockrobo_vacuum_v1

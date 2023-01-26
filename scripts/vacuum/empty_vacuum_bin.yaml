@@ -9,6 +9,18 @@ sequence:
       entity_id: vacuum.rockrobo_vacuum_v1
       fan_speed: Silent
 
+  # go to the end of the small hallway/large hallway to avoid 
+  # the vacuum trying to go through the bathroom
+  - service: vacuum.send_command
+    data:
+      entity_id: vacuum.rockrobo_vacuum_v1
+      command: app_goto_target
+      params: [24082, 31477]
+  - wait_for_trigger:
+      - platform: state
+        entity_id: vacuum.rockrobo_vacuum_v1
+        to: "idle"
+
   # go to the kitchen
   - service: vacuum.send_command
     data:
@@ -21,7 +33,7 @@ sequence:
         to: "idle"
 
 # wait for 30 mins
-  - delay: '00:30:00'
+  - delay: '00:60:00'
 
 # Go back to the dock
   - service: vacuum.return_to_base
