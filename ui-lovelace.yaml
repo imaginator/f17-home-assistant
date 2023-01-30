@@ -1,0 +1,8 @@
+show_in_sidebar: false
+require_admin: true
+views:
+  - title: Overview Nothing
+    cards:
+    - type: entities
+      entities:
+        - input_select.zone_mode
