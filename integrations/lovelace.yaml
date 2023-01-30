@@ -1,3 +1,5 @@
+
+
 lovelace:
   # This is the default storage mode. My main Lovelace dashboard is UI managed.
   mode: yaml
@@ -5,9 +7,9 @@ lovelace:
   resources:
     - url: /local/community/button-card/button-card.js
       type: module
+    - url: /local/wallpanel.js?initial
+      type: module
 
-
-  # Additional YAML-based Lovelace dashboards
   dashboards:
     rooms-dashboard:
       mode: yaml

@@ -32,3 +32,6 @@ views:
             name: Sensor dirty left
           - entity: sensor.rockrobo_vacuum_v1_side_brush_left
             name: Side brush left
+
+      - type: button
+        entity: input_boolean.vacuum_can_clean_study
