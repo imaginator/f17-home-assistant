@@ -27,5 +27,5 @@ vacuum_dispatch:
             {% elif room|lower in ("dining", "the dining area") %}
               script.vacuum_dining
             {% elif room|lower in ("empty bin", "empty the dustbin", "empty the vacuum") %}
-              script.empty_vacuum
+              script.empty_vacuum_bin
             {% endif %}

@@ -13,16 +13,12 @@ sequence:
   - service: xiaomi_miio.vacuum_clean_zone
     data:
       entity_id: vacuum.rockrobo_vacuum_v1
-      repeats: "{{ repetition | default(1) }}"
+      repeats: 1
       zone:
-        - [24150, 24707, 25221, 26479]
+        - [25818, 24962, 27418, 26062]
   - service: logbook.log
     data:
       name: imagiSuck
-      message: starts cleaning the coridor
+      message: cleaning the cat toilet area
       entity_id: vacuum.rockrobo_vacuum_v1
       domain: vacuum
-
-  - service: input_boolean.turn_on
-    data:
-      entity_id: input_boolean.vacuum_need_to_be_emptied

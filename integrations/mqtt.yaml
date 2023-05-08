@@ -10,13 +10,43 @@ mqtt:
       payload_on: "online"
       payload_off: "offline"
 
+    - state_topic: "wallpanel/lounge/connection"
+      name: "wallpanel - connection (lounge)"
+      payload_on: "online"
+      payload_off: "offline"
+
     - state_topic: "wallpanel/hallwaylarge/connection"
       name: "wallpanel - connection (hallwaylarge)"
       payload_on: "online"
       payload_off: "offline"
 
+    - state_topic: "wallpanel/bathroommain/connection"
+      name: "wallpanel - connection (bathroommain)"
+      payload_on: "online"
+      payload_off: "offline"
+
+    - state_topic: "wallpanel/bathroomguest/connection"
+      name: "wallpanel - connection (bathroomguest)"
+      payload_on: "online"
+      payload_off: "offline"    
+
+    - state_topic: "wallpanel/bedroom1/connection"
+      name: "wallpanel - connection (bedroom1)"
+      payload_on: "online"
+      payload_off: "offline"
+
+    - state_topic: "wallpanel/bedroom2/connection"
+      name: "wallpanel - connection (bedroom2)"
+      payload_on: "online"
+      payload_off: "offline"
+
+    - state_topic: "wallpanel/bedroom3/connection"
+      name: "wallpanel - connection (bedroom3)"
+      payload_on: "online"
+      payload_off: "offline"
+
   sensor:
-      # hot water
+    # hot water
     - name: cold water
       unique_id: cold_water
       icon: mdi:water
@@ -27,7 +57,7 @@ mqtt:
       value_template: '{{ (value_json.COUNTER.C1) / states("input_number.water_counter_pulses_per_liter") | float / 1000  }}'
       availability_mode: latest
 
-      # hot water
+    # hot water
     - name: hot water
       unique_id: hot_water
       icon: mdi:water-thermometer
@@ -38,7 +68,7 @@ mqtt:
       value_template: '{{ (value_json.COUNTER.C2) / states("input_number.water_counter_pulses_per_liter") | float / 1000  }}'
       availability_mode: latest
 
-      # Fridge
+    # Fridge
     - name: fridge energy total
       state_topic: tele/tasmota_232CEA/SENSOR
       value_template: '{{ value_json["ENERGY"]["Total"] }}'
@@ -55,7 +85,7 @@ mqtt:
       device_class: power
       force_update: true
 
-      # hifi
+    # hifi
     - name: hifi energy total
       state_topic: "tele/tasmota_232A8E/SENSOR"
       value_template: '{{ value_json["ENERGY"]["Total"] }}'
@@ -72,7 +102,7 @@ mqtt:
       device_class: power
       force_update: true      
 
-     # switch01
+    # switch01
     - name: switch01 energy total
       state_topic: "tele/tasmota_37493A/SENSOR"
       value_template: '{{ value_json["ENERGY"]["Total"] }}'
@@ -89,7 +119,7 @@ mqtt:
       device_class: power
       force_update: true
 
-     # bunker
+    # bunker
     - name: bunker energy total
       state_topic: "tele/tasmota_232C8F/SENSOR"
       value_template: '{{ value_json["ENERGY"]["Total"] }}'
@@ -104,10 +134,26 @@ mqtt:
       unit_of_measurement: W
       state_class: measurement
       device_class: power
-      force_update: true      
+      force_update: true
+
+    # gruenbeck
+    - name: gruenbeck energy total
+      state_topic: "tele/tasmota_A4DDCA/SENSOR"
+      value_template: '{{ value_json["ENERGY"]["Total"] }}'
+      unit_of_measurement: kWh
+      state_class: total_increasing
+      device_class: energy
+      force_update: true
+
+    - name: gruenbeck power
+      state_topic: "tele/tasmota_A4DDCA/SENSOR"
+      value_template: '{{ value_json["ENERGY"]["Power"] }}'
+      unit_of_measurement: W
+      state_class: measurement
+      device_class: power
+      force_update: true
 
   switch:
-      # fridge
     - name: fridge
       state_topic: "stat/tasmota_232CEA/POWER"
       command_topic: "cmnd/tasmota_232CEA/POWER"
@@ -115,10 +161,16 @@ mqtt:
       payload_off: "OFF"
       retain: false
 
-      # hifi
     - name: hifi
       state_topic: "stat/tasmota_232A8E/POWER"
       command_topic: "cmnd/tasmota_232A8E/POWER"
+      payload_on: "ON"
+      payload_off: "OFF"
+      retain: false
+
+    - name: velux-power
+      state_topic: "stat/tasmota_A4D622/POWER"
+      command_topic: "cmnd/tasmota_A4D622/POWER"
       payload_on: "ON"
       payload_off: "OFF"
       retain: false

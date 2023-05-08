@@ -1,0 +1,3 @@
+heat_cool:
+  name: heat or cool
+  initial: true

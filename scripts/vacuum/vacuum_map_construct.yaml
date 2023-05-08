@@ -45,7 +45,7 @@ sequence:
     data:
       entity_id: vacuum.rockrobo_vacuum_v1
       command: app_goto_target
-      params: [24082, 31477]
+      params: [27350, 19200]
   - wait_for_trigger:
       - platform: state
         entity_id: vacuum.rockrobo_vacuum_v1
