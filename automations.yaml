@@ -1,0 +1,237 @@
+- id: '1682522273340'
+  alias: 'velux: restart controller'
+  description: What a shitty controller!
+  trigger:
+  - platform: time_pattern
+    minutes: /30
+  - platform: state
+    entity_id:
+    - cover.arbeit_inside
+    to: unknown
+    for:
+      hours: 0
+      minutes: 10
+      seconds: 0
+  condition:
+  - condition: state
+    entity_id: cover.arbeit_inside
+    state: unavailable
+    for:
+      hours: 0
+      minutes: 10
+      seconds: 0
+  action:
+  - type: turn_off
+    device_id: 6cdac090a18c759a208aeebf1e08e6c0
+    entity_id: switch.powerplug
+    domain: switch
+  - delay:
+      hours: 0
+      minutes: 0
+      seconds: 5
+      milliseconds: 0
+  - service: notify.mobile_app_pixel_6_pro
+    data:
+      message: Rebooted Velux Gateway / restarted HA.
+  - type: turn_on
+    device_id: 6cdac090a18c759a208aeebf1e08e6c0
+    entity_id: switch.powerplug
+    domain: switch
+  - service: homeassistant.restart
+    data: {}
+  mode: single
+- id: '1682952005836'
+  trigger:
+  - platform: state
+    entity_id: person.simon
+    to: not_home
+  condition:
+  - condition: and
+    conditions:
+    - condition: time
+      after: 09:00:00
+      before: '21:00:00'
+    - condition: template
+      value_template: "{{ (now()) - \n   state_attr('automation.vacuum_when_away',
+        'last_triggered') | default(as_datetime(0), true) \n   > timedelta(hours=1)\n}}"
+    - condition: state
+      entity_id: vacuum.rockrobo_vacuum_v1
+      attribute: status
+      state: docked
+  action:
+  - delay:
+      hours: 0
+      minutes: 0
+      seconds: 3
+      milliseconds: 0
+  - service: notify.mobile_app_pixel_6_pro
+    data:
+      title: imagiSuck
+      message: Started vacuuming since nobody is home
+  - service: vacuum.start
+    data: {}
+    target:
+      entity_id: vacuum.rockrobo_vacuum_v1
+- id: '1683110810042'
+  alias: 'irrigation: daily watering'
+  description: water the plants at sunset
+  trigger:
+  - platform: sun
+    event: sunset
+    offset: 0
+  condition: []
+  action:
+  - type: turn_on
+    device_id: 75ec401978beef6c045ca7f90edf5401
+    entity_id: switch.irrigation
+    domain: switch
+  - delay:
+      hours: 1
+      minutes: 0
+      seconds: 0
+      milliseconds: 0
+  - type: turn_off
+    device_id: 75ec401978beef6c045ca7f90edf5401
+    entity_id: switch.irrigation
+    domain: switch
+  mode: single
+- id: '1683359690442'
+  alias: KNX to Velux
+  description: up/down and start/stop GAs ending in 1 are for up/down. GAs ending
+    in 2 are for start/stop. Long press starts. Short press stops.
+  trigger:
+  - platform: event
+    event_type: knx_event
+    event_data:
+      destination: 4//7/11
+  - platform: event
+    event_type: knx_event
+    event_data:
+      destination: 4//7/12
+  - platform: event
+    event_type: knx_event
+    event_data:
+      destination: 4/7/21
+  - platform: event
+    event_type: knx_event
+    event_data:
+      destination: 6/7/11
+  - platform: event
+    event_type: knx_event
+    event_data:
+      destination: 6/7/21
+  - platform: event
+    event_type: knx_event
+    event_data:
+      destination: 7/7/11
+  - platform: event
+    event_type: knx_event
+    event_data:
+      destination: 7/7/21
+  - platform: event
+    event_type: knx_event
+    event_data:
+      destination: 12/7/11
+  - platform: event
+    event_type: knx_event
+    event_data:
+      destination: 12/7/21
+  - platform: event
+    event_type: knx_event
+    event_data:
+      destination: 13/7/11
+  - platform: event
+    event_type: knx_event
+    event_data:
+      destination: 13/7/21
+  condition: []
+  action:
+  - choose:
+    - conditions:
+      - condition: template
+        value_template: '{{ trigger.event.data.destination==''6/7/11'' and trigger.event.data.data
+          == 0 }}'
+      sequence:
+      - service: cover.open_cover
+        target:
+          entity_id: cover.arbeit_inside
+    - conditions:
+      - condition: template
+        value_template: '{{ trigger.event.data.destination==''6/7/11'' and trigger.event.data.data
+          == 1 }}'
+      sequence:
+      - service: cover.close_cover
+        target:
+          entity_id: cover.arbeit_inside
+    - conditions:
+      - condition: template
+        value_template: '{{ trigger.event.data.destination==''6/7/12'' and trigger.event.data.data
+          == 0 }}'
+      sequence:
+      - service: cover.stop_cover
+        target:
+          entity_id: cover.arbeit_inside
+    default: []
+  mode: restart
+- id: '1683477622969'
+  alias: motion activated cat toilet cleaning
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.cat_toilet
+    from: 'on'
+    to: 'off'
+  - platform: time
+    at: '21:30:00'
+  condition:
+  - condition: and
+    conditions:
+    - condition: or
+      conditions:
+      - condition: time
+        after: 07:00:00
+        before: '21:30:00'
+      - condition: time
+        weekday:
+        - sat
+        - sun
+        after: 09:00:00
+        before: 09:30:00
+    - condition: template
+      value_template: '{{ now() - state_attr(''script.launch_vacuum_in_catarea'',
+        ''last_triggered'') > timedelta(minutes=180) }}'
+  action:
+  - service: script.launch_vacuum_in_catarea
+    data: {}
+  mode: single
+- id: '1683485329027'
+  alias: 'vacuum: midday bin empty'
+  description: ''
+  trigger:
+  - platform: template
+    value_template: '{{ is_state_attr(''sun.sun'',''rising'',False) }}"'
+  condition:
+  - condition: template
+    value_template: '{{ now() - state_attr(''script.empty_vacuum_bin'', ''last_triggered'')
+      > timedelta(hours=36) }}'
+  action:
+  - service: script.empty_vacuum_bin
+    data: {}
+- id: '1683523355949'
+  alias: Wake-up clean cat toilet area
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - cover.bedroom_1
+    from: opening
+    to: open
+  condition:
+  - condition: time
+    after: 01:00:00
+    before: '11:00:00'
+  action:
+  - service: script.launch_vacuum_in_catarea
+    data: {}
+  mode: single
