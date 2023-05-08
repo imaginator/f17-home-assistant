@@ -1,0 +1,9 @@
+vacuum_whole_house_vacuum:
+  alias: 'vacuum: whole house vacuum'
+  sequence:
+  - service: vacuum.start
+    data: {}
+    target:
+      entity_id: vacuum.rockrobo_vacuum_v1
+  mode: single
+  icon: mdi:robot-vacuum

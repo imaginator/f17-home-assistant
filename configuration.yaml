@@ -10,12 +10,11 @@ homeassistant:
     - type: homeassistant
     - type: trusted_networks
       trusted_networks:
-      - 10.7.9.0/24
+        - 10.7.9.0/24
       trusted_users:
-        10.7.9.0/24: 
-        - 7dfaf87f809044188ef0fdbe177006c6
+        10.7.9.0/24:
+          - 7dfaf87f809044188ef0fdbe177006c6
       allow_bypass_login: true
 
   # Load packages
   packages: !include_dir_named integrations
-  

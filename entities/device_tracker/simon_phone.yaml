@@ -1,0 +1,5 @@
+platform: ping
+hosts:
+  simon_phone_ping: simon-phone.imagilan
+  count: 3
+  scan_interval: 300

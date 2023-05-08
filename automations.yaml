@@ -41,10 +41,14 @@
     data: {}
   mode: single
 - id: '1682952005836'
+  alias: 'vacuum: vacuum when away'
+  description: ''
   trigger:
   - platform: state
-    entity_id: person.simon
+    entity_id:
+    - person.simon
     to: not_home
+    from: home
   condition:
   - condition: and
     conditions:
@@ -52,26 +56,16 @@
       after: 09:00:00
       before: '21:00:00'
     - condition: template
-      value_template: "{{ (now()) - \n   state_attr('automation.vacuum_when_away',
-        'last_triggered') | default(as_datetime(0), true) \n   > timedelta(hours=1)\n}}"
+      value_template: '{{ now() - state_attr(''script.vacuum_whole_house_vacuum'',
+        ''last_triggered'') > timedelta(hours=42) }}'
     - condition: state
       entity_id: vacuum.rockrobo_vacuum_v1
       attribute: status
-      state: docked
+      state: Charging
   action:
-  - delay:
-      hours: 0
-      minutes: 0
-      seconds: 3
-      milliseconds: 0
-  - service: notify.mobile_app_pixel_6_pro
-    data:
-      title: imagiSuck
-      message: Started vacuuming since nobody is home
-  - service: vacuum.start
+  - service: script.vacuum_whole_house_vacuum
     data: {}
-    target:
-      entity_id: vacuum.rockrobo_vacuum_v1
+  mode: single
 - id: '1683110810042'
   alias: 'irrigation: daily watering'
   description: water the plants at sunset
@@ -87,7 +81,7 @@
     domain: switch
   - delay:
       hours: 1
-      minutes: 0
+      minutes: 30
       seconds: 0
       milliseconds: 0
   - type: turn_off
@@ -174,7 +168,7 @@
     default: []
   mode: restart
 - id: '1683477622969'
-  alias: motion activated cat toilet cleaning
+  alias: 'vacuum: motion activated cat toilet cleaning'
   description: ''
   trigger:
   - platform: state
@@ -235,3 +229,28 @@
   - service: script.launch_vacuum_in_catarea
     data: {}
   mode: single
+- id: '1683567854796'
+  alias: KLF power toggle on stop event
+  description: restarts the KLF200 in order to avoid SSL Handshake issue
+  trigger:
+  - platform: homeassistant
+    event: shutdown
+  action:
+  - type: turn_off
+    device_id: 6cdac090a18c759a208aeebf1e08e6c0
+    entity_id: switch.powerplug
+    domain: switch
+  - delay:
+      hours: 0
+      minutes: 0
+      seconds: 3
+      milliseconds: 0
+  - type: turn_on
+    device_id: 6cdac090a18c759a208aeebf1e08e6c0
+    entity_id: switch.powerplug
+    domain: switch
+  - delay:
+      hours: 0
+      minutes: 0
+      seconds: 3
+      milliseconds: 0
