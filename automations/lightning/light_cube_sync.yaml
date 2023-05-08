@@ -1,8 +1,0 @@
-- id: 'c96f881f-c489-4181-ae2f-567767bf4d23'
-  alias: "lightning: glass cube sync on/off"
-  description: ''
-  use_blueprint:
-    path: adchevrier/synchronize-the-on-off-state-of-2-entities.yaml
-    input:
-      entity_1: light.bedroom1_bed_left
-      entity_2: switch.glass_cube_switch_5

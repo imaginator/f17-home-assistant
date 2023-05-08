@@ -1,7 +1,0 @@
----
-# A custom component to have a variable.
-# Used to follow the history of the latest motion in the house.
-#
-# https://github.com/rogro82/hass-variables
-#
-variable: !include_dir_named ../entities/variable
