@@ -1,13 +1,13 @@
 wallpanel:
-    enabled: true
-    hide_toolbar: false
-    hide_sidebar: false
-    fullscreen: false
-    idle_time: 15
-    display_time: 3600
-    image_url: http://ha.imagilan/random_resized_image/${width}/%7B%22type%22%3A1%2C%22list%22%3A%5B%7B%22type%22%3A105%2C%22text%22%3A%22Susanne%20Pickel%22%2C%22negate%22%3Atrue%2C%22matchType%22%3A1%7D%2C%7B%22type%22%3A105%2C%22text%22%3A%22Kristin%20Karu%22%2C%22negate%22%3Atrue%2C%22matchType%22%3A1%7D%2C%7B%22type%22%3A17%2C%22landscape%22%3Atrue%7D%2C%7B%22type%22%3A14%2C%22value%22%3A5%7D%2C%7B%22type%22%3A104%2C%22value%22%3A%22intimate%22%2C%22negate%22%3Atrue%7D%2C%7B%22type%22%3A104%2C%22value%22%3A%22documentation%22%2C%22negate%22%3Atrue%7D%5D%7D?random=${timestamp}
-    #image_url: http://pigallery2.imagilan/api/gallery/random/%7B%7D?random=${timestamp}
-    cards: []
+  enabled: true
+  hide_toolbar: false
+  hide_sidebar: false
+  fullscreen: false
+  idle_time: 15
+  display_time: 3600
+  image_url: http://ha.imagilan/random_resized_image/${width}/%7B%22type%22%3A1%2C%22list%22%3A%5B%7B%22type%22%3A105%2C%22text%22%3A%22Susanne%20Pickel%22%2C%22negate%22%3Atrue%2C%22matchType%22%3A1%7D%2C%7B%22type%22%3A105%2C%22text%22%3A%22Kristin%20Karu%22%2C%22negate%22%3Atrue%2C%22matchType%22%3A1%7D%2C%7B%22type%22%3A17%2C%22landscape%22%3Atrue%7D%2C%7B%22type%22%3A14%2C%22value%22%3A5%7D%2C%7B%22type%22%3A104%2C%22value%22%3A%22intimate%22%2C%22negate%22%3Atrue%7D%2C%7B%22type%22%3A104%2C%22value%22%3A%22documentation%22%2C%22negate%22%3Atrue%7D%5D%7D?random=${timestamp}
+  #image_url: http://pigallery2.imagilan/api/gallery/random/%7B%7D?random=${timestamp}
+  cards: []
 
 views:
   - title: Overview
@@ -15,17 +15,17 @@ views:
     path: rooms
     badges: []
     cards:
-    - type: history-graph
-      entities:
-        - entity: binary_sensor.lounge
-        - entity: binary_sensor.study
-        - entity: binary_sensor.kitchen
-        - entity: binary_sensor.hallwaylarge
-        - entity: binary_sensor.bathroomguest
-        - entity: binary_sensor.bathroommain
-        - entity: binary_sensor.bedroom1
-        - entity: binary_sensor.bedroom2
-        - entity: binary_sensor.bedroom3
+      - type: history-graph
+        entities:
+          - entity: binary_sensor.lounge
+          - entity: binary_sensor.study
+          - entity: binary_sensor.kitchen
+          - entity: binary_sensor.hallwaylarge
+          - entity: binary_sensor.bathroomguest
+          - entity: binary_sensor.bathroommain
+          - entity: binary_sensor.bedroom1
+          - entity: binary_sensor.bedroom2
+          - entity: binary_sensor.bedroom3
 
   - title: Lounge
     type: sidebar
@@ -33,25 +33,24 @@ views:
     icon: mdi:sofa
     badges: []
     cards:
-    - type: light
-      entity: light.lounge_overhead
-      name: lounge ceiling
-    - type: entities
-      entities:
-        - cover.lounge_left_inside
-        - cover.lounge_middle_inside
-        - cover.lounge_right_inside
-        - cover.lounge_left_outside
-        - cover.lounge_middle_outside
-    - type: history-graph
-      entities:
-        - entity: binary_sensor.lounge
-      title: occupancy
-    - type: media-control
-      entity: media_player.lounge
-    - type: thermostat
-      entity: climate.lounge
-
+      - type: light
+        entity: light.lounge_overhead
+        name: lounge ceiling
+      - type: entities
+        entities:
+          - cover.lounge_left_inside
+          - cover.lounge_middle_inside
+          - cover.lounge_right_inside
+          - cover.lounge_left_outside
+          - cover.lounge_middle_outside
+      - type: history-graph
+        entities:
+          - entity: binary_sensor.lounge
+        title: occupancy
+      - type: media-control
+        entity: media_player.lounge
+      - type: thermostat
+        entity: climate.lounge
 
   - title: Study
     type: sidebar
@@ -59,18 +58,18 @@ views:
     icon: mdi:desk
     badges: []
     cards:
-    - type: history-graph
-      entities:
-        - entity: binary_sensor.study
-      title: occupancy
-    - type: media-control
-      entity: media_player.study
-    - type: thermostat
-      entity: climate.study
-    - type: entities
-      entities:
-        - cover.arbeit_inside
-        - cover.arbeit_outside
+      - type: history-graph
+        entities:
+          - entity: binary_sensor.study
+        title: occupancy
+      - type: media-control
+        entity: media_player.study
+      - type: thermostat
+        entity: climate.study
+      - type: entities
+        entities:
+          - cover.arbeit_inside
+          - cover.arbeit_outside
 
   - title: Kitchen
     path: kitchen
@@ -78,53 +77,52 @@ views:
     icon: mdi:faucet-variant
     badges: []
     cards:
-    - type: horizontal-stack
-      cards:
-        - show_name: true
-          show_icon: true
-          type: button
-          entity: light.kitchen_north_1
-          icon: mdi:countertop
-          name: island spotlight
-          show_state: false
-        - show_name: true
-          show_icon: true
-          type: button
-          entity: light.kitchen_north_2
-          name: island indirect
-          icon: mdi:countertop-outline
-        - show_name: true
-          show_icon: true
-          type: button
-          tap_action:
-            action: toggle
-          entity: light.lounge_overhead
-          name: table spot
-          icon: mdi:table-furniture
-        - show_name: true
-          show_icon: true
-          type: button
-          tap_action:
-            action: toggle
-          entity: light.kitchen_south_1
-          name: table indirect
-          icon: mdi:table-furniture
-          show_state: false
-        - type: light
-          entity: light.kitchen_sink_3
-          name: sink area
-          icon: mdi:faucet-variant
-        - type: light
-          entity: light.wled_soundreactive
-          name: light chain
-    - type: media-control
-      entity: media_player.kitchen
-    - type: thermostat
-      entity: climate.kitchen
-    - type: entities
-      entities:
-        - sensor.fridge_power
-
+      - type: horizontal-stack
+        cards:
+          - show_name: true
+            show_icon: true
+            type: button
+            entity: light.kitchen_north_1
+            icon: mdi:countertop
+            name: island spotlight
+            show_state: false
+          - show_name: true
+            show_icon: true
+            type: button
+            entity: light.kitchen_north_2
+            name: island indirect
+            icon: mdi:countertop-outline
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: toggle
+            entity: light.lounge_overhead
+            name: table spot
+            icon: mdi:table-furniture
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: toggle
+            entity: light.kitchen_south_1
+            name: table indirect
+            icon: mdi:table-furniture
+            show_state: false
+          - type: light
+            entity: light.kitchen_sink_3
+            name: sink area
+            icon: mdi:faucet-variant
+          - type: light
+            entity: light.wled_soundreactive
+            name: light chain
+      - type: media-control
+        entity: media_player.kitchen
+      - type: thermostat
+        entity: climate.kitchen
+      - type: entities
+        entities:
+          - sensor.fridge_power
 
   - title: Hallway
     path: hallway
@@ -148,6 +146,7 @@ views:
         entities:
           - binary_sensor.cat_toilet
         title: cat toilet use
+        hours_to_show: 6
 
   - title: Bedroom 1
     path: bedroom1

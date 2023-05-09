@@ -7,3 +7,42 @@ vacuum_whole_house_vacuum:
       entity_id: vacuum.rockrobo_vacuum_v1
   mode: single
   icon: mdi:robot-vacuum
+vacuum_empty_bin_reguarly:
+  alias: 'vacuum: empty bin'
+  description: Hang out with dirt that needs emptying
+  mode: single
+  sequence:
+  - service: vacuum.set_fan_speed
+    data:
+      entity_id: vacuum.rockrobo_vacuum_v1
+      fan_speed: Silent
+  - service: vacuum.send_command
+    data:
+      entity_id: vacuum.rockrobo_vacuum_v1
+      command: app_goto_target
+      params:
+      - 24082
+      - 31477
+  - wait_for_trigger:
+    - platform: state
+      entity_id: vacuum.rockrobo_vacuum_v1
+      to: idle
+  - service: vacuum.send_command
+    data:
+      entity_id: vacuum.rockrobo_vacuum_v1
+      command: app_goto_target
+      params:
+      - 33500
+      - 29550
+  - wait_for_trigger:
+    - platform: state
+      entity_id: vacuum.rockrobo_vacuum_v1
+      to: idle
+  - delay: 00:60:00
+  - service: vacuum.return_to_base
+    data:
+      entity_id: vacuum.rockrobo_vacuum_v1
+  - wait_for_trigger:
+    - platform: state
+      entity_id: vacuum.rockrobo_vacuum_v1
+      to: idle

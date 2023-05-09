@@ -204,7 +204,7 @@
   description: ''
   trigger:
   - platform: template
-    value_template: '{{ is_state_attr(''sun.sun'',''rising'',False) }}"'
+    value_template: '{{ is_state_attr(''sun.sun'',''rising'',False) }}'
   condition:
   - condition: template
     value_template: '{{ now() - state_attr(''script.empty_vacuum_bin'', ''last_triggered'')
