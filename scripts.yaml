@@ -1,15 +1,21 @@
 vacuum_whole_house_vacuum:
   alias: 'vacuum: whole house vacuum'
   sequence:
-  - service: vacuum.start
-    data: {}
+  - service: xiaomi_miio.vacuum_clean_zone
+    data:
+      zone:
+      - - 11749
+        - 13339
+        - 27949
+        - 33539
+      repeats: 1
     target:
       entity_id: vacuum.rockrobo_vacuum_v1
   mode: single
   icon: mdi:robot-vacuum
 vacuum_empty_bin_reguarly:
   alias: 'vacuum: empty bin'
-  description: Hang out with dirt that needs emptying
+  description: Loiter near the bin
   mode: single
   sequence:
   - service: vacuum.set_fan_speed
@@ -25,8 +31,15 @@ vacuum_empty_bin_reguarly:
       - 31477
   - wait_for_trigger:
     - platform: state
-      entity_id: vacuum.rockrobo_vacuum_v1
+      entity_id:
+      - vacuum.rockrobo_vacuum_v1
       to: idle
+    continue_on_timeout: true
+    timeout:
+      hours: 0
+      minutes: 1
+      seconds: 0
+      milliseconds: 0
   - service: vacuum.send_command
     data:
       entity_id: vacuum.rockrobo_vacuum_v1
@@ -38,6 +51,11 @@ vacuum_empty_bin_reguarly:
     - platform: state
       entity_id: vacuum.rockrobo_vacuum_v1
       to: idle
+    timeout:
+      hours: 0
+      minutes: 1
+      seconds: 0
+      milliseconds: 0
   - delay: 00:60:00
   - service: vacuum.return_to_base
     data:
@@ -46,3 +64,30 @@ vacuum_empty_bin_reguarly:
     - platform: state
       entity_id: vacuum.rockrobo_vacuum_v1
       to: idle
+    timeout:
+      hours: 0
+      minutes: 1
+      seconds: 0
+      milliseconds: 0
+  icon: mdi:robot-vacuum
+vacuum_zones:
+  alias: vacuum zones
+  sequence:
+  - service: vacuum.send_command
+    data_template:
+      command: xiaomi_miio.vacuum_clean_zone
+      entity_id: vacuum.imagisuck
+      zone: "{% set rooms = [ ['catarea', '[24150,24707,25221,26479]'],\n               ['bedroom1',
+        '[23950,25336,26264,23121]'] ] %}\n{% set ns = namespace(x = '') %} {% for
+        room in rooms if is_state('input_boolean.clean_' ~ room[0] ~ '_boolean', 'on')
+        %}\n  {% set ns.x = ns.x ~ room[1] ~ (',' if not loop.last else '') %}\n{%
+        endfor %} {{ ns.x }}\n"
+      repeats: 1
+'1683827440555':
+  alias: New Script
+  sequence:
+  - service: xiaomi_miio.vacuum_clean_zone
+    data:
+      zone: 1 2 3 4
+    target:
+      entity_id: vacuum.rockrobo_vacuum_v1

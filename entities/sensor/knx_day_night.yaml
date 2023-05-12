@@ -1,6 +1,11 @@
 platform: template
 sensors:
   knx_day_night:
-    value_template: "{{ 1 if state_attr('sun.sun', 'elevation') | float >= -1.0 else 0 }}"
+    value_template: >-
+          {% if is_state('sun.sun', 'above_horizon') %}
+            1
+          {% else %}
+            0
+          {% endif %}
     friendly_name: "Day/Night"
 

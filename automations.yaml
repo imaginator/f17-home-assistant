@@ -184,13 +184,19 @@
     - condition: or
       conditions:
       - condition: time
-        after: 07:00:00
+        after: 08:30:00
         before: '21:30:00'
+        weekday:
+        - mon
+        - tue
+        - wed
+        - thu
+        - fri
       - condition: time
         weekday:
         - sat
         - sun
-        after: 09:00:00
+        after: '10:00:00'
         before: 09:30:00
     - condition: template
       value_template: '{{ now() - state_attr(''script.launch_vacuum_in_catarea'',
@@ -210,7 +216,7 @@
     value_template: '{{ now() - state_attr(''script.empty_vacuum_bin'', ''last_triggered'')
       > timedelta(hours=36) }}'
   action:
-  - service: script.empty_vacuum_bin
+  - service: script.vacuum_empty_bin_reguarly
     data: {}
 - id: '1683523355949'
   alias: Wake-up clean cat toilet area
@@ -254,3 +260,38 @@
       minutes: 0
       seconds: 3
       milliseconds: 0
+- id: '1683636141578'
+  alias: 'covers: bedroom1 afternoon'
+  description: ''
+  trigger:
+  - platform: numeric_state
+    entity_id: sun.sun
+    attribute: azimuth
+    above: 217
+  condition:
+  - condition: numeric_state
+    entity_id: sun.sun
+    attribute: elevation
+    above: 42
+    value_template: ''
+  action:
+  - service: cover.close_cover
+    data: {}
+    target:
+      entity_id: cover.bedroom_1
+  mode: single
+- id: '1683646429833'
+  alias: 'cover: open study in afternoon'
+  description: ''
+  trigger:
+  - platform: numeric_state
+    entity_id: sun.sun
+    attribute: azimuth
+    above: 210
+  condition: []
+  action:
+  - service: cover.open_cover
+    data: {}
+    target:
+      entity_id: cover.arbeit_inside
+  mode: single

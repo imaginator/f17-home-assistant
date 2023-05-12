@@ -1,5 +1,5 @@
 platform: ping
 host: veluxgw.imagilan
 name: "velux ping"
-count: 3
-scan_interval: 300
+count: 10
+scan_interval: 600

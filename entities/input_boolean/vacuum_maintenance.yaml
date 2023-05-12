@@ -1,6 +1,0 @@
----
-# Input_boolean to follow if the vacuum needs to be emptied
-#
-vacuum_need_to_be_emptied:
-  name: ImagiSuck dustbin is full
-  icon: mdi:delete-circle-outline

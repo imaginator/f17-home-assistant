@@ -179,7 +179,21 @@ views:
     cards:
       - type: horizontal-stack
         cards:
-          - type: entities
-            entities:
-              - switch.irrigation
-            title: irrigation
+          - type: button
+            tap_action:
+              action: call-service
+              service: automation.trigger
+              target:
+                entity_id: automation.irrigation_daily_watering
+              data:
+                skip_condition: true
+            icon: mdi:water-circle
+            show_state: true
+            show_name: true
+            show_icon: true
+          - type: weather-forecast
+            show_current: true
+            show_forecast: false
+            entity: weather.home
+            secondary_info_attribute: wind_speed
+            name: Rooftop weather
