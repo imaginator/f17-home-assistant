@@ -191,6 +191,11 @@ views:
             show_state: true
             show_name: true
             show_icon: true
+            
+          - type: history-graph
+            entities:
+              - switch.irrigation
+
           - type: weather-forecast
             show_current: true
             show_forecast: false

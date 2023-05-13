@@ -12,7 +12,7 @@
 # https://www.home-assistant.io/components/vacuum.xiaomi_miio/
 # https://www.home-assistant.io//getting-started/scripts/
 #
-alias: "build imagisuck's map"
+alias: "vacuum: rebuild map"
 description: "Rebuild Apartment Map"
 mode: single
 sequence:
@@ -22,10 +22,12 @@ sequence:
       entity_id: vacuum.rockrobo_vacuum_v1
       fan_speed: Silent
 
-  # launch a standard clean during 10 secondes to create the first part of the map
+  # launch a standard clean during 20 secondes to create the first part of the map 
+  # it really seems to need at least 20 seconds before the new map takes hold.
   - service: vacuum.start
     data:
       entity_id: vacuum.rockrobo_vacuum_v1
+
   - delay:
       seconds: 20
 
@@ -36,6 +38,7 @@ sequence:
       - platform: state
         entity_id: vacuum.rockrobo_vacuum_v1
         to: "idle"
+
   #
   # send goto_target commands to pilot the robot through the house
   #
@@ -45,7 +48,7 @@ sequence:
     data:
       entity_id: vacuum.rockrobo_vacuum_v1
       command: app_goto_target
-      params: [27350, 19200]
+      params: [24500, 31950]
   - wait_for_trigger:
       - platform: state
         entity_id: vacuum.rockrobo_vacuum_v1
@@ -56,7 +59,7 @@ sequence:
     data:
       entity_id: vacuum.rockrobo_vacuum_v1
       command: app_goto_target
-      params: [36900, 31477]
+      params: [34750, 31950]
   - wait_for_trigger:
       - platform: state
         entity_id: vacuum.rockrobo_vacuum_v1
@@ -66,7 +69,3 @@ sequence:
   - service: vacuum.return_to_base
     data:
       entity_id: vacuum.rockrobo_vacuum_v1
-  - wait_for_trigger:
-      - platform: state
-        entity_id: vacuum.rockrobo_vacuum_v1
-        to: "idle"

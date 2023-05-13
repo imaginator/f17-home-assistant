@@ -1,0 +1,6 @@
+---
+# input_number allows to follow some numbers
+#
+# https://www.home-assistant.io/components/input_number/
+#
+group: !include_dir_merge_named ../entities/group

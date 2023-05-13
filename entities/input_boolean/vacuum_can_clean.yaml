@@ -6,7 +6,7 @@
 #
 
 vacuum_can_clean_catarea:
-  name: Cat Toilet Area
+  name: cat toilet
 
 vacuum_can_clean_bedroom1:
   name: bedroom1

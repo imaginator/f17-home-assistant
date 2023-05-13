@@ -6,32 +6,58 @@ views:
     cards:
       - type: entities
         entities:
-          - vacuum.rockrobo_vacuum_v1
-      - type: entities
-        entities:
-          - input_select.vacuum_room
-      - type: entities
-        entities:
-          - entity: sensor.rockrobo_vacuum_v1_current_clean_area
-            name: Current clean area
-          - entity: sensor.rockrobo_vacuum_v1_current_clean_duration
-            name: Current clean duration
-          - entity: sensor.rockrobo_vacuum_v1_filter_left
-            name: Filter left
+          - entity: sensor.vacuum_cleaner_status_sensor
+            name: imagiSuck
           - entity: sensor.rockrobo_vacuum_v1_last_clean_area
             name: Last clean area
-          - entity: sensor.rockrobo_vacuum_v1_last_clean_duration
-            name: Last clean duration
           - entity: sensor.rockrobo_vacuum_v1_last_clean_end
             name: Last clean end
-          - entity: sensor.rockrobo_vacuum_v1_last_clean_start
-            name: Last clean start
-          - entity: sensor.rockrobo_vacuum_v1_main_brush_left
-            name: Main brush left
-          - entity: sensor.rockrobo_vacuum_v1_sensor_dirty_left
-            name: Sensor dirty left
-          - entity: sensor.rockrobo_vacuum_v1_side_brush_left
-            name: Side brush left
 
-      - type: button
-        entity: input_boolean.vacuum_can_clean_study
+      - type: horizontal-stack
+        cards:
+          - type: entities
+            entities:
+              - input_boolean.vacuum_can_clean_bedroom1
+              - input_boolean.vacuum_can_clean_bedroom2
+              - input_boolean.vacuum_can_clean_bedroom3
+              - input_boolean.vacuum_can_clean_catarea
+              - input_boolean.vacuum_can_clean_dining
+              - input_boolean.vacuum_can_clean_bathroomguest
+              - input_boolean.vacuum_can_clean_kitchen
+              - input_boolean.vacuum_can_clean_hallwaylarge
+              - input_boolean.vacuum_can_clean_bathroommain
+              - input_boolean.vacuum_can_clean_hallwaysmall
+              - input_boolean.vacuum_can_clean_study
+          - type: vertical-stack
+            cards:
+              - show_name: true
+                show_icon: true
+                type: button
+                tap_action:
+                  action: call-service
+                  service: script.vacuum_whole_house_vacuum
+                  target: {}
+                show_state: true
+                name: vacuum whole house
+                icon: mdi:robot-vacuum
+              - show_name: true
+                show_icon: true
+                type: button
+                tap_action:
+                  action: call-service
+                  service: script.vacuum_map_construct
+                  target: {}
+                entity: light.lounge_overhead
+                name: rebuild map
+                icon: mdi:map
+                show_state: false
+              - show_name: true
+                show_icon: true
+                type: button
+                tap_action:
+                  action: call-service
+                  service: script.zones2
+                  target: {}
+                entity: script.zones2
+                icon: mdi:robot-vacuum
+                name: vacuum selected zones

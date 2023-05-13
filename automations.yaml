@@ -80,7 +80,7 @@
     entity_id: switch.irrigation
     domain: switch
   - delay:
-      hours: 1
+      hours: 2
       minutes: 30
       seconds: 0
       milliseconds: 0
@@ -168,8 +168,8 @@
     default: []
   mode: restart
 - id: '1683477622969'
-  alias: 'vacuum: motion activated cat toilet cleaning'
-  description: ''
+  alias: 'vacuum: cat toilet area'
+  description: When motion is detected check if recently cleaned.
   trigger:
   - platform: state
     entity_id:
@@ -181,26 +181,31 @@
   condition:
   - condition: and
     conditions:
-    - condition: or
-      conditions:
-      - condition: time
-        after: 08:30:00
-        before: '21:30:00'
-        weekday:
-        - mon
-        - tue
-        - wed
-        - thu
-        - fri
-      - condition: time
-        weekday:
-        - sat
-        - sun
-        after: '10:00:00'
-        before: 09:30:00
     - condition: template
       value_template: '{{ now() - state_attr(''script.launch_vacuum_in_catarea'',
-        ''last_triggered'') > timedelta(minutes=180) }}'
+        ''last_triggered'') > timedelta(minutes=180) }} conditions:
+
+        '
+    - condition: or
+      conditions:
+      - condition: and
+        conditions:
+        - condition: state
+          entity_id: binary_sensor.workday_sensor
+          attribute: workdays
+          state: 'on'
+        - condition: time
+          after: 08:00:00
+          before: '22:00:00'
+      - condition: and
+        conditions:
+        - condition: state
+          entity_id: binary_sensor.workday_sensor
+          attribute: workdays
+          state: 'off'
+        - condition: time
+          after: '10:00:00'
+          before: '22:00:00'
   action:
   - service: script.launch_vacuum_in_catarea
     data: {}
@@ -262,7 +267,8 @@
       milliseconds: 0
 - id: '1683636141578'
   alias: 'covers: bedroom1 afternoon'
-  description: ''
+  description: When we start getting higher solar elevations (summer), it makes sense
+    to close the blinds in the afternoon.
   trigger:
   - platform: numeric_state
     entity_id: sun.sun
@@ -273,7 +279,6 @@
     entity_id: sun.sun
     attribute: elevation
     above: 42
-    value_template: ''
   action:
   - service: cover.close_cover
     data: {}
