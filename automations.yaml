@@ -183,7 +183,7 @@
     conditions:
     - condition: template
       value_template: '{{ now() - state_attr(''script.launch_vacuum_in_catarea'',
-        ''last_triggered'') > timedelta(minutes=180) }} conditions:
+        ''last_triggered'') > timedelta(minutes=180) }}
 
         '
     - condition: or
@@ -192,7 +192,6 @@
         conditions:
         - condition: state
           entity_id: binary_sensor.workday_sensor
-          attribute: workdays
           state: 'on'
         - condition: time
           after: 08:00:00
@@ -201,7 +200,6 @@
         conditions:
         - condition: state
           entity_id: binary_sensor.workday_sensor
-          attribute: workdays
           state: 'off'
         - condition: time
           after: '10:00:00'
@@ -299,4 +297,33 @@
     data: {}
     target:
       entity_id: cover.arbeit_inside
+  mode: single
+- id: '1684087154936'
+  alias: lighting WLEDs
+  description: Turn on at Sunset, off later in the evening.
+  trigger:
+  - platform: sun
+    event: sunset
+    offset: 0
+  condition: []
+  action:
+  - type: turn_on
+    device_id: ac68fe2d44befc497f0fb0f3b018bd66
+    entity_id: light.wled_wedding
+    domain: light
+  - type: turn_on
+    device_id: 52ce9a37e7df9c8ab6473d2975d99cbc
+    entity_id: light.wled_soundreactive
+    domain: light
+  - wait_for_trigger:
+    - platform: time
+      at: '23:30:00'
+  - type: turn_off
+    device_id: ac68fe2d44befc497f0fb0f3b018bd66
+    entity_id: light.wled_wedding
+    domain: light
+  - type: turn_off
+    device_id: 52ce9a37e7df9c8ab6473d2975d99cbc
+    entity_id: light.wled_soundreactive
+    domain: light
   mode: single
