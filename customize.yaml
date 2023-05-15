@@ -26,7 +26,7 @@ input_boolean.vacuum_can_clean_bathroomguest:
   cleaning_zone: [26371,29510,28721,31110]
 
 input_boolean.vacuum_can_clean_kitchen:
-  cleaning_zone: [31691,26793,35591,31243]
+  cleaning_zone: [31761,27164,35761,32564]
 
 input_boolean.vacuum_can_clean_dining:
   cleaning_zone: [35308,27105,39158,32905]

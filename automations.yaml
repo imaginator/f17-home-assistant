@@ -205,8 +205,14 @@
           after: '10:00:00'
           before: '22:00:00'
   action:
-  - service: script.launch_vacuum_in_catarea
-    data: {}
+  - service: xiaomi_miio.vacuum_clean_zone
+    target:
+      entity_id: vacuum.rockrobo_vacuum_v1
+    data:
+      repeats: 1
+      zone:
+      - '{{ state_attr(''input_boolean.vacuum_can_clean_catarea'', ''cleaning_zone'')
+        }}'
   mode: single
 - id: '1683485329027'
   alias: 'vacuum: midday bin empty'
@@ -326,4 +332,19 @@
     device_id: 52ce9a37e7df9c8ab6473d2975d99cbc
     entity_id: light.wled_soundreactive
     domain: light
+  mode: single
+- id: '1684146932601'
+  alias: test
+  description: test
+  trigger: []
+  condition: []
+  action:
+  - service: xiaomi_miio.vacuum_clean_zone
+    target:
+      entity_id: vacuum.rockrobo_vacuum_v1
+    data:
+      repeats: 1
+      zone:
+      - '{{ state_attr(''input_boolean.vacuum_can_clean_catarea'', ''cleaning_zone'')
+        }}'
   mode: single
