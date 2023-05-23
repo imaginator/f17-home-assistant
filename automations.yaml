@@ -196,7 +196,7 @@
   - condition: and
     conditions:
     - condition: template
-      value_template: '{{ now() - state_attr(''script.launch_vacuum_in_catarea'',
+      value_template: '{{ now() - state_attr(''automation.clean_the_cat_toilet_after_use'',
         ''last_triggered'') > timedelta(minutes=180) }}
 
         '
