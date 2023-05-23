@@ -49,6 +49,10 @@
     - person.simon
     to: not_home
     from: home
+    for:
+      hours: 0
+      minutes: 10
+      seconds: 0
   condition:
   - condition: and
     conditions:
@@ -56,15 +60,22 @@
       after: 09:00:00
       before: '21:00:00'
     - condition: template
-      value_template: '{{ now() - state_attr(''script.vacuum_whole_house_vacuum'',
-        ''last_triggered'') > timedelta(hours=42) }}'
+      value_template: '{{ now() - state_attr(''automation.vacuum_when_away'', ''last_triggered'')
+        > timedelta(hours=42) }}'
     - condition: state
       entity_id: vacuum.rockrobo_vacuum_v1
       attribute: status
       state: Charging
   action:
-  - service: script.vacuum_whole_house_vacuum
-    data: {}
+  - service: xiaomi_miio.vacuum_clean_zone
+    target:
+      entity_id: vacuum.rockrobo_vacuum_v1
+    data:
+      repeats: 1
+      zone: '{{ expand(''group.vacuum_zones'') | map(attribute=''attributes.cleaning_zone'')
+        | list }}
+
+        '
   mode: single
 - id: '1683110810042'
   alias: 'irrigation: daily watering'
