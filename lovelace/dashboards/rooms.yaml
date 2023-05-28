@@ -26,6 +26,7 @@ views:
           - entity: binary_sensor.bedroom1
           - entity: binary_sensor.bedroom2
           - entity: binary_sensor.bedroom3
+          - entity: binary_sensor.cat_toilet
 
   - title: Lounge
     type: sidebar
