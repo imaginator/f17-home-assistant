@@ -1,0 +1,126 @@
+{
+  "version": 1,
+  "minor_version": 1,
+  "key": "lovelace.dashboard_vacuum",
+  "data": {
+    "config": {
+      "views": [
+        {
+          "title": "Home",
+          "icon": "vacuum",
+          "badges": [],
+          "cards": [
+            {
+              "type": "vertical-stack",
+              "cards": [
+                {
+                  "type": "entities",
+                  "entities": [
+                    {
+                      "entity": "sensor.vacuum_cleaner_status_sensor",
+                      "name": "imagiSuck"
+                    },
+                    {
+                      "entity": "sensor.rockrobo_vacuum_v1_last_clean_area",
+                      "name": "Last clean area"
+                    },
+                    {
+                      "entity": "sensor.rockrobo_vacuum_v1_last_clean_end",
+                      "name": "Last clean end"
+                    }
+                  ],
+                  "footer": {
+                    "type": "graph",
+                    "entity": "sensor.rockrobo_vacuum_v1_last_clean_area",
+                    "detail": 2
+                  }
+                },
+                {
+                  "type": "horizontal-stack",
+                  "cards": [
+                    {
+                      "show_name": true,
+                      "show_icon": true,
+                      "type": "button",
+                      "tap_action": {
+                        "action": "call-service",
+                        "service": "script.vacuum_whole_house_vacuum",
+                        "target": {}
+                      },
+                      "show_state": true,
+                      "name": "vacuum whole house",
+                      "icon": "mdi:robot-vacuum"
+                    },
+                    {
+                      "show_name": true,
+                      "show_icon": true,
+                      "type": "button",
+                      "tap_action": {
+                        "action": "call-service",
+                        "service": "script.vacuum_map_construct",
+                        "target": {}
+                      },
+                      "entity": "light.lounge_overhead",
+                      "name": "rebuild map",
+                      "icon": "mdi:map",
+                      "show_state": false
+                    },
+                    {
+                      "show_name": true,
+                      "show_icon": true,
+                      "type": "button",
+                      "entity": "vacuum.rockrobo_vacuum_v1",
+                      "icon": "mdi:home-circle",
+                      "tap_action": {
+                        "action": "call-service",
+                        "service": "vacuum.return_to_base",
+                        "target": {
+                          "entity_id": "vacuum.rockrobo_vacuum_v1"
+                        },
+                        "data": {}
+                      },
+                      "name": "return to dock"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "vertical-stack",
+              "cards": [
+                {
+                  "type": "entities",
+                  "entities": [
+                    "input_boolean.vacuum_can_clean_catarea",
+                    "input_boolean.vacuum_can_clean_bedroom1",
+                    "input_boolean.vacuum_can_clean_bedroom2",
+                    "input_boolean.vacuum_can_clean_bedroom3",
+                    "input_boolean.vacuum_can_clean_bathroomguest",
+                    "input_boolean.vacuum_can_clean_bathroommain",
+                    "input_boolean.vacuum_can_clean_hallwaysmall",
+                    "input_boolean.vacuum_can_clean_hallwaylarge",
+                    "input_boolean.vacuum_can_clean_kitchen",
+                    "input_boolean.vacuum_can_clean_dining",
+                    "input_boolean.vacuum_can_clean_study"
+                  ]
+                },
+                {
+                  "show_name": true,
+                  "type": "button",
+                  "tap_action": {
+                    "action": "call-service",
+                    "service": "script.zones2",
+                    "target": {}
+                  },
+                  "entity": "script.zones2",
+                  "name": "vacuum selected zones",
+                  "show_icon": false
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

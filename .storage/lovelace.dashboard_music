@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "minor_version": 1,
+  "key": "lovelace.dashboard_music",
+  "data": {
+    "config": {
+      "views": [
+        {
+          "theme": "Backend-selected",
+          "type": null,
+          "title": "Music",
+          "path": "simon-spotify",
+          "icon": "mdi:music",
+          "badges": [],
+          "cards": [
+            {
+              "type": "media-control",
+              "entity": "media_player.spotify_simon_tennant"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

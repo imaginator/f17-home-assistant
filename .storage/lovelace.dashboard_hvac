@@ -1,0 +1,153 @@
+{
+  "version": 1,
+  "minor_version": 1,
+  "key": "lovelace.dashboard_hvac",
+  "data": {
+    "config": {
+      "views": [
+        {
+          "title": "Heating",
+          "type": "sidebar",
+          "path": "heating",
+          "cards": [
+            {
+              "type": "entities",
+              "entities": [
+                "input_select.zone_mode"
+              ]
+            },
+            {
+              "type": "grid",
+              "square": false,
+              "columns": 2,
+              "cards": [
+                {
+                  "type": "thermostat",
+                  "entity": "climate.lounge"
+                },
+                {
+                  "type": "thermostat",
+                  "entity": "climate.kitchen"
+                },
+                {
+                  "type": "thermostat",
+                  "entity": "climate.study"
+                },
+                {
+                  "type": "thermostat",
+                  "entity": "climate.bathroomguest"
+                },
+                {
+                  "type": "thermostat",
+                  "entity": "climate.bathroommain"
+                },
+                {
+                  "type": "thermostat",
+                  "entity": "climate.bedroom1"
+                },
+                {
+                  "type": "thermostat",
+                  "entity": "climate.bedroom2"
+                },
+                {
+                  "type": "thermostat",
+                  "entity": "climate.bedroom3"
+                }
+              ]
+            },
+            {
+              "type": "history-graph",
+              "name": "Temperatures",
+              "entities": [
+                "sensor.lounge_temperature",
+                "sensor.kitchen_temperature",
+                "sensor.study_temperature",
+                "sensor.bathroomguest_temperature",
+                "sensor.bathroommain_temperature",
+                "sensor.bedroom1_temperature",
+                "sensor.bedroom2_temperature",
+                "sensor.bedroom3_temperature"
+              ]
+            },
+            {
+              "type": "history-graph",
+              "name": "Heating Valves",
+              "entities": [
+                "sensor.lounge_heating_valve",
+                "sensor.kitchen_heating_valve",
+                "sensor.study_heating_valve",
+                "sensor.bathroomguest_heating_valve",
+                "sensor.bathroommain_heating_valve",
+                "sensor.bedroom1_heating_valve",
+                "sensor.bedroom2_heating_valve",
+                "sensor.bedroom3_heating_valve"
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Ventilation",
+          "path": "ventilation",
+          "cards": [
+            {
+              "type": "entities",
+              "entities": [
+                "fan.vallox"
+              ],
+              "title": "Vallox"
+            },
+            {
+              "type": "entities",
+              "entities": [
+                {
+                  "entity": "sensor.vallox_cell_state",
+                  "name": "Cell state"
+                },
+                {
+                  "entity": "sensor.vallox_current_profile",
+                  "name": "Current profile"
+                },
+                {
+                  "entity": "sensor.vallox_exhaust_air",
+                  "name": "Exhaust air"
+                },
+                {
+                  "entity": "sensor.vallox_extract_air",
+                  "name": "Extract air"
+                },
+                {
+                  "entity": "sensor.vallox_fan_speed",
+                  "name": "Fan speed"
+                },
+                {
+                  "entity": "sensor.vallox_humidity",
+                  "name": "Humidity"
+                },
+                {
+                  "entity": "sensor.vallox_outdoor_air",
+                  "name": "Outdoor air"
+                },
+                {
+                  "entity": "binary_sensor.vallox_post_heater",
+                  "name": "Post heater"
+                },
+                {
+                  "entity": "sensor.vallox_remaining_time_for_filter",
+                  "name": "Remaining time for filter"
+                },
+                {
+                  "entity": "sensor.vallox_supply_air",
+                  "name": "Supply air"
+                },
+                {
+                  "entity": "sensor.vallox_supply_cell_air",
+                  "name": "Supply cell air"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
