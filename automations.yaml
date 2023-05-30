@@ -347,10 +347,82 @@
     entity_id: light.wled_soundreactive
     domain: light
   mode: single
-- id: '1684146932601'
-  alias: test
-  description: test
-  trigger: []
+- id: '1685089695000'
+  alias: 'cover: study blinds in the morning'
+  description: When we start getting higher solar elevations (summer), it makes sense
+    to close the blinds in the morning.
+  trigger:
+  - platform: numeric_state
+    entity_id: sun.sun
+    attribute: azimuth
+    above: 106
+  condition:
+  - condition: numeric_state
+    entity_id: sun.sun
+    attribute: elevation
+    above: 36
+  action:
+  - service: cover.set_cover_position
+    data:
+      position: 56
+    target:
+      entity_id: cover.arbeit_inside
+  mode: single
+- id: '1685170365728'
+  alias: 'cover: close hallway blinds based on elevation'
+  description: ''
+  trigger:
+  - platform: numeric_state
+    entity_id: sun.sun
+    attribute: elevation
+    above: 35
+  condition: []
+  action:
+  - service: cover.close_cover
+    data: {}
+    target:
+      entity_id:
+      - cover.hallway_2
+      - cover.hallway_3
+      - cover.hallway_5
+      - cover.hallway_6
+  mode: single
+- id: '1685452806557'
+  alias: 'cover: close kitchen blinds'
+  description: When we start getting higher solar elevations (summer), it makes sense
+    to close the blinds in the afternoon.
+  trigger:
+  - platform: numeric_state
+    entity_id: sun.sun
+    attribute: azimuth
+    above: 235
+  condition:
+  - condition: numeric_state
+    entity_id: sun.sun
+    attribute: elevation
+    above: 42
+  action:
+  - service: cover.close_cover
+    data: {}
+    target:
+      entity_id:
+      - cover.kitchen_left_2
+      - cover.kitchen_middle
+  - delay:
+      hours: 0
+      minutes: 0
+      seconds: 15
+      milliseconds: 0
+  - service: cover.set_cover_position
+    data:
+      position: 15
+    target:
+      entity_id: cover.kitchen_right
+  - service: cover.close_cover
+    data: {}
+    target:
+      entity_id: cover.kitchen_right
+  mode: single
   condition: []
   action:
   - service: xiaomi_miio.vacuum_clean_zone
