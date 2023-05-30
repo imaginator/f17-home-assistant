@@ -48,7 +48,7 @@
                         "target": {}
                       },
                       "show_state": true,
-                      "name": "vacuum whole house",
+                      "name": "vacuum all",
                       "icon": "mdi:robot-vacuum"
                     },
                     {

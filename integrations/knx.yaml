@@ -128,6 +128,12 @@ knx:
     - name: bedroom3
       state_address: 13/4/1
       device_class: motion
+    - name: wind alarm # from weather station
+      state_address: 1/2/107
+      device_class: problem
+    - name: rain alarm # from weather station
+      state_address: 1/2/108
+      device_class: moisture
 
   climate:
     - name: lounge
@@ -369,6 +375,14 @@ knx:
     - name: KNX bus volts
       state_address: 1/2/1
       type: electric_potential
+    - name: "roof temperature" # from weather station
+      state_address: 1/2/101
+      type: temperature 
+      state_class: measurement
+    - name: wind speed # from weather station
+      state_address: 1/2/102
+      type: wind_speed_ms
+      state_class: measurement
 
   cover:
     - name: kitchen left
@@ -404,8 +418,8 @@ knx:
       stop_address: 9/7/12
       position_state_address: 9/7/13 # read position
       position_address: 9/7/14 # set position
-      travelling_time_down: 33
-      travelling_time_up: 33
+      travelling_time_down: 16
+      travelling_time_up: 16
       device_class: blind
 
     - name: hallway 2
@@ -413,8 +427,8 @@ knx:
       stop_address: 9/7/22
       position_state_address: 9/7/23 # read position
       position_address: 9/7/24 # set position
-      travelling_time_down: 33
-      travelling_time_up: 33
+      travelling_time_down: 16
+      travelling_time_up: 16
       device_class: blind
 
     - name: hallway 3
@@ -422,8 +436,8 @@ knx:
       stop_address: 9/7/32
       position_state_address: 9/7/33 # read position
       position_address: 9/7/34 # set position
-      travelling_time_down: 33
-      travelling_time_up: 33
+      travelling_time_down: 16
+      travelling_time_up: 16
       device_class: blind
 
     - name: hallway 4
@@ -431,8 +445,8 @@ knx:
       stop_address: 9/7/42
       position_state_address: 9/7/43 # read position
       position_address: 9/7/44 # set position
-      travelling_time_down: 33
-      travelling_time_up: 33
+      travelling_time_down: 16
+      travelling_time_up: 16
       device_class: blind
 
     - name: hallway 5
@@ -440,8 +454,8 @@ knx:
       stop_address: 9/7/52
       position_state_address: 9/7/53 # read position
       position_address: 9/7/54 # set position
-      travelling_time_down: 33
-      travelling_time_up: 33
+      travelling_time_down: 16
+      travelling_time_up: 16
       device_class: blind
 
     - name: hallway 6
@@ -449,8 +463,8 @@ knx:
       stop_address: 9/7/62
       position_state_address: 9/7/63 # read position
       position_address: 9/7/64 # set position
-      travelling_time_down: 33
-      travelling_time_up: 33
+      travelling_time_down: 16
+      travelling_time_up: 16
       device_class: blind
 
     - name: hallway large window north
@@ -458,18 +472,18 @@ knx:
       stop_address: 9/7/92
       position_state_address: 9/7/93 # read position
       position_address: 9/7/94 # set position
-      travelling_time_down: 33
-      travelling_time_up: 33
-      device_class: blind
+      travelling_time_down: 35
+      travelling_time_up: 30
+      device_class: window
 
     - name: hallway large window south
       move_long_address: 9/7/81
       stop_address: 9/7/82
       position_state_address: 9/7/83 # read position
       position_address: 9/7/84 # set position
-      travelling_time_down: 33
-      travelling_time_up: 33
-      device_class: blind
+      travelling_time_down: 35
+      travelling_time_up: 30
+      device_class: window
 
     - name: bedroom 1
       move_long_address: 11/7/11

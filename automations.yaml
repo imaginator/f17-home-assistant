@@ -236,14 +236,14 @@
     value_template: '{{ is_state_attr(''sun.sun'',''rising'',False) }}'
   condition:
   - condition: template
-    value_template: '{{ now() - state_attr(''script.empty_vacuum_bin'', ''last_triggered'')
-      > timedelta(hours=36) }}'
+    value_template: '{{ now() - state_attr(''automation.vacuum_empty_the_bin'', ''last_triggered'')
+      | default(as_datetime(0), true)  > timedelta(hours=36) }}'
   action:
   - service: script.vacuum_empty_bin_reguarly
     data: {}
 - id: '1683523355949'
   alias: Wake-up clean cat toilet area
-  description: ''
+  description: When the blinds go up in the morning start cleaning the cat area.
   trigger:
   - platform: state
     entity_id:
@@ -255,8 +255,14 @@
     after: 01:00:00
     before: '11:00:00'
   action:
-  - service: script.launch_vacuum_in_catarea
-    data: {}
+  - service: xiaomi_miio.vacuum_clean_zone
+    target:
+      entity_id: vacuum.rockrobo_vacuum_v1
+    data:
+      repeats: 1
+      zone:
+      - '{{ state_attr(''input_boolean.vacuum_can_clean_catarea'', ''cleaning_zone'')
+        }}'
   mode: single
 - id: '1683567854796'
   alias: KLF power toggle on stop event
@@ -304,7 +310,7 @@
       entity_id: cover.bedroom_1
   mode: single
 - id: '1683646429833'
-  alias: 'cover: open study in afternoon'
+  alias: 'cover: study blinds open'
   description: ''
   trigger:
   - platform: numeric_state
@@ -319,7 +325,7 @@
       entity_id: cover.arbeit_inside
   mode: single
 - id: '1684087154936'
-  alias: lighting WLEDs
+  alias: 'lighting: WLEDs'
   description: Turn on at Sunset, off later in the evening.
   trigger:
   - platform: sun
@@ -348,7 +354,7 @@
     domain: light
   mode: single
 - id: '1685089695000'
-  alias: 'cover: study blinds in the morning'
+  alias: 'cover: study blinds close'
   description: When we start getting higher solar elevations (summer), it makes sense
     to close the blinds in the morning.
   trigger:
@@ -369,7 +375,7 @@
       entity_id: cover.arbeit_inside
   mode: single
 - id: '1685170365728'
-  alias: 'cover: close hallway blinds based on elevation'
+  alias: 'cover: hallway blinds close'
   description: ''
   trigger:
   - platform: numeric_state
@@ -388,7 +394,7 @@
       - cover.hallway_6
   mode: single
 - id: '1685452806557'
-  alias: 'cover: close kitchen blinds'
+  alias: 'cover: kitchen blinds close'
   description: When we start getting higher solar elevations (summer), it makes sense
     to close the blinds in the afternoon.
   trigger:
@@ -462,9 +468,79 @@
       - climate.study
   mode: single
 - id: '1685458038374'
+  alias: 'ventilation: switch vallox to home mode'
+  description: based on away/home
+  trigger:
+  - platform: state
+    entity_id:
+    - input_boolean.away_mode
+    to: 'on'
+  condition: []
+  action:
+  - type: turn_on
+    device_id: 876f56c448cd0842970e0f41e900af55
+    entity_id: fan.vallox
+    domain: fan
+  mode: single
+- id: '1685458052385'
+  alias: 'ventilation: switch vallox to away mode'
+  description: based on away/home
+  trigger:
+  - platform: state
+    entity_id:
+    - input_boolean.away_mode
+    to: 'on'
+  condition: []
+  action:
+  - type: turn_off
+    device_id: 876f56c448cd0842970e0f41e900af55
+    entity_id: fan.vallox
+    domain: fan
+  mode: single
+- id: '1685458262882'
+  alias: 'cover: hallway blinds open'
+  description: ''
+  trigger:
+  - platform: numeric_state
+    entity_id: sun.sun
+    attribute: elevation
+    below: 27
+    value_template: '27'
+  condition: []
+  action:
+  - service: cover.set_cover_position
     data:
-      repeats: 1
-      zone:
-      - '{{ state_attr(''input_boolean.vacuum_can_clean_catarea'', ''cleaning_zone'')
-        }}'
+      position: 100
+    target:
+      entity_id:
+      - cover.hallway_1
+      - cover.hallway_2
+      - cover.hallway_3
+      - cover.hallway_4
+      - cover.hallway_5
+      - cover.hallway_6
+  mode: single
+- id: '1685471129972'
+  alias: 'cover: kitchen blinds open'
+  description: 'Open the kitchen blinds when the sun drops below a certain elevation. '
+  trigger:
+  - platform: numeric_state
+    entity_id: sun.sun
+    attribute: azimuth
+    above: 270
+  condition:
+  - condition: numeric_state
+    entity_id: sun.sun
+    attribute: elevation
+    below: 15
+    value_template: ''
+  action:
+  - service: cover.set_cover_position
+    data:
+      position: 100
+    target:
+      entity_id:
+      - cover.kitchen_right
+      - cover.kitchen_left_2
+      - cover.kitchen_middle
   mode: single

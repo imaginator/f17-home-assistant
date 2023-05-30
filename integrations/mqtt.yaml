@@ -168,12 +168,12 @@ mqtt:
       payload_off: "OFF"
       retain: false
 
-    - name: velux-power
-      state_topic: "stat/tasmota_A4D622/POWER"
-      command_topic: "cmnd/tasmota_A4D622/POWER"
-      payload_on: "ON"
-      payload_off: "OFF"
-      retain: false
+    # - name: velux-power
+    #   state_topic: "stat/tasmota_A4D622/POWER"
+    #   command_topic: "cmnd/tasmota_A4D622/POWER"
+    #   payload_on: "ON"
+    #   payload_off: "OFF"
+    #   retain: false
 
     # too dngerous to leave enabled
     # - name: switch01

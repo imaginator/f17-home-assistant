@@ -14,15 +14,6 @@
         "url_path": "dashboard-vacuum"
       },
       {
-        "id": "dashboard_rooms",
-        "show_in_sidebar": true,
-        "icon": "mdi:floor-plan",
-        "title": "Rooms",
-        "require_admin": false,
-        "mode": "storage",
-        "url_path": "dashboard-rooms"
-      },
-      {
         "id": "dashboard_hvac",
         "show_in_sidebar": true,
         "icon": "mdi:heat-pump",
