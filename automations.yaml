@@ -46,7 +46,7 @@
   trigger:
   - platform: state
     entity_id:
-    - person.simon
+    - device_tracker.simon_phone_ping
     to: not_home
     from: home
     for:
@@ -290,7 +290,7 @@
       seconds: 3
       milliseconds: 0
 - id: '1683636141578'
-  alias: 'covers: bedroom1 afternoon'
+  alias: 'cover: bedroom1 close'
   description: When we start getting higher solar elevations (summer), it makes sense
     to close the blinds in the afternoon.
   trigger:
