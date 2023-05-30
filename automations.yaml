@@ -423,11 +423,45 @@
     target:
       entity_id: cover.kitchen_right
   mode: single
+- id: '1685457831023'
+  alias: 'heating: evening switch to sleep mode'
+  description: switch comfort to sleep in the evenings
+  trigger:
+  - platform: time
+    at: '21:00:00'
   condition: []
   action:
-  - service: xiaomi_miio.vacuum_clean_zone
+  - service: climate.set_preset_mode
+    data:
+      preset_mode: sleep
     target:
-      entity_id: vacuum.rockrobo_vacuum_v1
+      entity_id:
+      - climage.kitchen
+      - climate.bathroomguest
+      - climate.bathroommain
+      - climate.lounge
+      - climate.study
+  mode: single
+- id: '1685457856166'
+  alias: 'heating: morning switch to comfort mode'
+  description: switch sleep to comfort
+  trigger:
+  - platform: time
+    at: 07:00:00
+  condition: []
+  action:
+  - service: climate.set_preset_mode
+    data:
+      preset_mode: comfort
+    target:
+      entity_id:
+      - climage.kitchen
+      - climate.bathroomguest
+      - climate.bathroommain
+      - climate.lounge
+      - climate.study
+  mode: single
+- id: '1685458038374'
     data:
       repeats: 1
       zone:
