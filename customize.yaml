@@ -20,7 +20,7 @@ input_boolean.vacuum_can_clean_hallwaysmall:
   cleaning_zone: [23862,24770,25312,31370]
 
 input_boolean.vacuum_can_clean_bathroommain:
-  cleaning_zone: [25107,26057,25357,28807]
+  cleaning_zone: [25154,26230,28204,28780]
 
 input_boolean.vacuum_can_clean_bathroomguest:
   cleaning_zone: [26371,29510,28721,31110]

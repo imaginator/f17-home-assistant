@@ -1,14 +1,14 @@
 vacuum_zones:
   name: Vacuum Zones
   entities:
-    - input_boolean.vacuum_can_clean_catarea
     - input_boolean.vacuum_can_clean_bedroom1
+    - input_boolean.vacuum_can_clean_catarea
+    - input_boolean.vacuum_can_clean_hallwaysmall
+    - input_boolean.vacuum_can_clean_bathroommain
+    - input_boolean.vacuum_can_clean_hallwaylarge
+    - input_boolean.vacuum_can_clean_bathroomguest
     - input_boolean.vacuum_can_clean_bedroom2
     - input_boolean.vacuum_can_clean_bedroom3
     - input_boolean.vacuum_can_clean_study
-    - input_boolean.vacuum_can_clean_hallwaylarge
-    - input_boolean.vacuum_can_clean_hallwaysmall
-    - input_boolean.vacuum_can_clean_bathroommain
-    - input_boolean.vacuum_can_clean_bathroomguest
     - input_boolean.vacuum_can_clean_kitchen
     - input_boolean.vacuum_can_clean_dining

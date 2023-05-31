@@ -239,8 +239,21 @@
     value_template: '{{ now() - state_attr(''automation.vacuum_empty_the_bin'', ''last_triggered'')
       | default(as_datetime(0), true)  > timedelta(hours=36) }}'
   action:
-  - service: script.vacuum_empty_bin_reguarly
+  - service: xiaomi_miio.vacuum_goto
+    data:
+      x_coord: '32650'
+      y_coord: '29000'
+    target:
+      entity_id: vacuum.rockrobo_vacuum_v1
+  - delay:
+      hours: 1
+      minutes: 0
+      seconds: 0
+      milliseconds: 0
+  - service: vacuum.return_to_base
     data: {}
+    target:
+      entity_id: vacuum.rockrobo_vacuum_v1
 - id: '1683523355949'
   alias: Wake-up clean cat toilet area
   description: When the blinds go up in the morning start cleaning the cat area.
@@ -299,10 +312,15 @@
     attribute: azimuth
     above: 217
   condition:
-  - condition: numeric_state
-    entity_id: sun.sun
-    attribute: elevation
-    above: 42
+  - condition: and
+    conditions:
+    - condition: numeric_state
+      entity_id: sensor.bedroom1_temperature
+      above: 25
+    - condition: numeric_state
+      entity_id: sun.sun
+      attribute: elevation
+      above: 217
   action:
   - service: cover.close_cover
     data: {}

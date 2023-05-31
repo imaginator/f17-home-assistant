@@ -91,21 +91,56 @@
                 {
                   "type": "entities",
                   "entities": [
-                    "input_boolean.vacuum_can_clean_catarea",
-                    "input_boolean.vacuum_can_clean_bedroom1",
-                    "input_boolean.vacuum_can_clean_bedroom2",
-                    "input_boolean.vacuum_can_clean_bedroom3",
-                    "input_boolean.vacuum_can_clean_bathroomguest",
-                    "input_boolean.vacuum_can_clean_bathroommain",
-                    "input_boolean.vacuum_can_clean_hallwaysmall",
-                    "input_boolean.vacuum_can_clean_hallwaylarge",
-                    "input_boolean.vacuum_can_clean_kitchen",
-                    "input_boolean.vacuum_can_clean_dining",
-                    "input_boolean.vacuum_can_clean_study"
+                    {
+                      "entity": "input_boolean.vacuum_can_clean_bedroom1",
+                      "icon": "mdi:bed",
+                      "secondary_info": "none"
+                    },
+                    {
+                      "entity": "input_boolean.vacuum_can_clean_catarea",
+                      "icon": "mdi:cat"
+                    },
+                    {
+                      "entity": "input_boolean.vacuum_can_clean_bathroommain",
+                      "icon": "mdi:bathtub"
+                    },
+                    {
+                      "entity": "input_boolean.vacuum_can_clean_hallwaysmall",
+                      "icon": "mdi:door"
+                    },
+                    {
+                      "entity": "input_boolean.vacuum_can_clean_hallwaylarge",
+                      "icon": "mdi:door"
+                    },
+                    {
+                      "entity": "input_boolean.vacuum_can_clean_bathroomguest",
+                      "icon": "mdi:shower-head"
+                    },
+                    {
+                      "entity": "input_boolean.vacuum_can_clean_bedroom2",
+                      "icon": "mdi:bed"
+                    },
+                    {
+                      "entity": "input_boolean.vacuum_can_clean_bedroom3",
+                      "icon": "mdi:bed"
+                    },
+                    {
+                      "entity": "input_boolean.vacuum_can_clean_study",
+                      "icon": "mdi:desk"
+                    },
+                    {
+                      "entity": "input_boolean.vacuum_can_clean_kitchen",
+                      "icon": "mdi:faucet-variant"
+                    },
+                    {
+                      "entity": "input_boolean.vacuum_can_clean_dining",
+                      "icon": "mdi:table-furniture"
+                    }
                   ]
                 },
                 {
                   "show_name": true,
+                  "show_icon": false,
                   "type": "button",
                   "tap_action": {
                     "action": "call-service",
@@ -114,7 +149,7 @@
                   },
                   "entity": "script.zones2",
                   "name": "vacuum selected zones",
-                  "show_icon": false
+                  "show_state": false
                 }
               ]
             }

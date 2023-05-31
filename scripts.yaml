@@ -13,58 +13,10 @@ vacuum_whole_house_vacuum:
       entity_id: vacuum.rockrobo_vacuum_v1
   mode: single
   icon: mdi:robot-vacuum
-vacuum_empty_bin_reguarly:
-  alias: 'vacuum: empty bin'
-  description: Loiter near the bin
-  mode: single
-  sequence:
-  - service: vacuum.set_fan_speed
-    data:
-      entity_id: vacuum.rockrobo_vacuum_v1
-      fan_speed: Silent
-  - service: vacuum.send_command
-    data:
-      entity_id: vacuum.rockrobo_vacuum_v1
-      command: app_goto_target
-      params:
-      - 24082
-      - 31477
-  - wait_for_trigger:
-    - platform: state
-      entity_id:
-      - vacuum.rockrobo_vacuum_v1
-      to: idle
-    continue_on_timeout: true
-    timeout:
-      hours: 0
-      minutes: 1
-      seconds: 0
-      milliseconds: 0
-  - service: vacuum.send_command
-    data:
-      entity_id: vacuum.rockrobo_vacuum_v1
-      command: app_goto_target
-      params:
-      - 33500
-      - 29550
-  - wait_for_trigger:
-    - platform: state
-      entity_id: vacuum.rockrobo_vacuum_v1
-      to: idle
-    timeout:
-      hours: 0
-      minutes: 1
-      seconds: 0
-      milliseconds: 0
-  - delay: 00:60:00
-  - service: vacuum.return_to_base
-    data:
-      entity_id: vacuum.rockrobo_vacuum_v1
-  icon: mdi:robot-vacuum
 zones2:
   alias: vacuum zones
   sequence:
-  - service: xiaomi_miio.vacuum_remote_control_stop
+  - service: vacuum.stop
     data: {}
     target:
       entity_id: vacuum.rockrobo_vacuum_v1
