@@ -82,6 +82,22 @@
                 "sensor.bedroom2_heating_valve",
                 "sensor.bedroom3_heating_valve"
               ]
+            },
+            {
+              "type": "history-graph",
+              "entities": [
+                "sensor.bathroomguest_illuminance",
+                "sensor.bathroommain_illuminance",
+                "sensor.bedroom1_illuminance",
+                "sensor.bedroom2_illuminance",
+                "sensor.bedroom3_illuminance",
+                "sensor.hallwaylarge_illuminance",
+                "sensor.hallwaysmall_illuminance",
+                "sensor.kitchen_illuminance",
+                "sensor.lounge_illuminance",
+                "sensor.study_illuminance"
+              ],
+              "title": "brightness"
             }
           ]
         },

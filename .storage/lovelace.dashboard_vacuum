@@ -27,6 +27,9 @@
                     {
                       "entity": "sensor.rockrobo_vacuum_v1_last_clean_end",
                       "name": "Last clean end"
+                    },
+                    {
+                      "entity": "sensor.cat_toilet_daily_use"
                     }
                   ],
                   "footer": {

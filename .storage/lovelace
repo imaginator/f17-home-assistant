@@ -319,6 +319,31 @@
           ]
         },
         {
+          "title": "bathroom-main",
+          "path": "bathroom-main",
+          "icon": "mdi:bathtub",
+          "badges": [],
+          "cards": [
+            {
+              "type": "entities",
+              "entities": [
+                "cover.main_bathroom",
+                "cover.main_bathroom_window_opener"
+              ]
+            },
+            {
+              "type": "entity",
+              "entity": "sensor.bathroommain_temperature",
+              "state_color": false
+            },
+            {
+              "type": "entity",
+              "entity": "binary_sensor.bathroommain",
+              "name": "motion"
+            }
+          ]
+        },
+        {
           "title": "Terrace",
           "path": "terrace",
           "icon": "mdi:flower-outline",

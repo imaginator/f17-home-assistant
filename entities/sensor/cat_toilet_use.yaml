@@ -1,0 +1,7 @@
+platform: history_stats
+name: Cat toilet daily use
+entity_id: binary_sensor.cat_toilet
+state: "on"
+type: count
+start: "{{ now() - timedelta( hours = 24 ) }}"
+end: "{{ now() }}"

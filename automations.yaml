@@ -419,7 +419,7 @@
   - platform: numeric_state
     entity_id: sun.sun
     attribute: azimuth
-    above: 235
+    above: 228
   condition:
   - condition: numeric_state
     entity_id: sun.sun
