@@ -523,7 +523,6 @@
     entity_id: sun.sun
     attribute: elevation
     below: 27
-    value_template: '27'
   condition: []
   action:
   - service: cover.set_cover_position
@@ -551,7 +550,6 @@
     entity_id: sun.sun
     attribute: elevation
     below: 15
-    value_template: ''
   action:
   - service: cover.set_cover_position
     data:
