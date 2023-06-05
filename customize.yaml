@@ -1,5 +1,5 @@
 input_boolean.vacuum_can_clean_catarea:
-  cleaning_zone: [24000,24940,25388,26540]
+  cleaning_zone: [23988,25156,25288,26506]
 
 input_boolean.vacuum_can_clean_bedroom1:
   cleaning_zone: [23950,22336,26264,25121]
