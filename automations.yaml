@@ -237,7 +237,7 @@
   condition:
   - condition: template
     value_template: '{{ now() - state_attr(''automation.vacuum_empty_the_bin'', ''last_triggered'')
-      | default(as_datetime(0), true)  > timedelta(hours=36) }}'
+      | default(as_datetime(0), true)  > timedelta(hours=96) }}'
   action:
   - service: xiaomi_miio.vacuum_goto
     data:
@@ -399,7 +399,7 @@
   - platform: numeric_state
     entity_id: sun.sun
     attribute: elevation
-    above: 35
+    above: 18
   condition: []
   action:
   - service: cover.close_cover
@@ -522,7 +522,7 @@
   - platform: numeric_state
     entity_id: sun.sun
     attribute: elevation
-    below: 27
+    below: 26
   condition: []
   action:
   - service: cover.set_cover_position
@@ -545,11 +545,7 @@
     entity_id: sun.sun
     attribute: azimuth
     above: 270
-  condition:
-  - condition: numeric_state
-    entity_id: sun.sun
-    attribute: elevation
-    below: 15
+  condition: []
   action:
   - service: cover.set_cover_position
     data:
@@ -559,4 +555,40 @@
       - cover.kitchen_right
       - cover.kitchen_left_2
       - cover.kitchen_middle
+  mode: single
+- id: '1685704336404'
+  alias: Play music
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.bathroomguest
+    to: 'on'
+  condition:
+  - condition: not
+    conditions:
+    - condition: state
+      entity_id: media_player.bathroom_guest
+      state: playing
+  action:
+  - service: media_player.volume_set
+    data:
+      volume_level: 0.03
+    target:
+      entity_id: media_player.bathroom_guest
+  - service: media_player.play_media
+    target:
+      entity_id: media_player.bathroom_guest
+    data:
+      media_content_id: media-source://media_source/local/095-AAA.mp3
+      media_content_type: audio/mpeg
+    metadata:
+      title: 095-AAA.mp3
+      thumbnail:
+      media_class: music
+      children_media_class:
+      navigateIds:
+      - {}
+      - media_content_type: app
+        media_content_id: media-source://media_source
   mode: single
