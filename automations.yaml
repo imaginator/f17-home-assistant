@@ -2,12 +2,10 @@
   alias: 'velux: restart controller'
   description: What a shitty controller!
   trigger:
-  - platform: time_pattern
-    minutes: /30
   - platform: state
     entity_id:
     - cover.arbeit_inside
-    to: unknown
+    to: unavailable
     for:
       hours: 0
       minutes: 10
@@ -32,11 +30,16 @@
       milliseconds: 0
   - service: notify.mobile_app_pixel_6_pro
     data:
-      message: Rebooted Velux Gateway / restarted HA.
+      message: Restarted Velux controller.
   - type: turn_on
     device_id: 6cdac090a18c759a208aeebf1e08e6c0
     entity_id: switch.powerplug
     domain: switch
+  - delay:
+      hours: 0
+      minutes: 0
+      seconds: 5
+      milliseconds: 0
   - service: homeassistant.restart
     data: {}
   mode: single
@@ -197,7 +200,7 @@
     conditions:
     - condition: template
       value_template: '{{ now() - state_attr(''automation.clean_the_cat_toilet_after_use'',
-        ''last_triggered'') > timedelta(minutes=180) }}
+        ''last_triggered'') > timedelta(minutes=240) }}
 
         '
     - condition: or
@@ -278,7 +281,7 @@
         }}'
   mode: single
 - id: '1683567854796'
-  alias: KLF power toggle on stop event
+  alias: KLF power toggle on shutdown
   description: restarts the KLF200 in order to avoid SSL Handshake issue
   trigger:
   - platform: homeassistant
@@ -291,17 +294,12 @@
   - delay:
       hours: 0
       minutes: 0
-      seconds: 3
+      seconds: 2
       milliseconds: 0
   - type: turn_on
     device_id: 6cdac090a18c759a208aeebf1e08e6c0
     entity_id: switch.powerplug
     domain: switch
-  - delay:
-      hours: 0
-      minutes: 0
-      seconds: 3
-      milliseconds: 0
 - id: '1683636141578'
   alias: 'cover: bedroom1 close'
   description: When we start getting higher solar elevations (summer), it makes sense
@@ -316,11 +314,7 @@
     conditions:
     - condition: numeric_state
       entity_id: sensor.bedroom1_temperature
-      above: 25
-    - condition: numeric_state
-      entity_id: sun.sun
-      attribute: elevation
-      above: 217
+      above: 23
   action:
   - service: cover.close_cover
     data: {}
@@ -406,10 +400,25 @@
     data: {}
     target:
       entity_id:
+      - cover.hallway_large_window_north
+      - cover.hallway_large_window_south
+      - cover.main_bathroom_window_opener
+      - cover.rooftop_window_opener
+  - delay:
+      hours: 0
+      minutes: 1
+      seconds: 0
+      milliseconds: 0
+  - service: cover.close_cover
+    data: {}
+    target:
+      entity_id:
       - cover.hallway_2
       - cover.hallway_3
       - cover.hallway_5
       - cover.hallway_6
+      - cover.hallway_1
+      - cover.hallway_4
   mode: single
 - id: '1685452806557'
   alias: 'cover: kitchen blinds close'
@@ -446,6 +455,13 @@
     data: {}
     target:
       entity_id: cover.kitchen_right
+  - service: cover.open_cover
+    data: {}
+    target:
+      entity_id:
+      - cover.lounge_left_inside
+      - cover.lounge_middle_inside
+      - cover.lounge_right_inside
   mode: single
 - id: '1685457831023'
   alias: 'heating: evening switch to sleep mode'
@@ -536,6 +552,19 @@
       - cover.hallway_4
       - cover.hallway_5
       - cover.hallway_6
+  - delay:
+      hours: 0
+      minutes: 0
+      seconds: 30
+      milliseconds: 0
+  - service: cover.open_cover
+    data: {}
+    target:
+      entity_id:
+      - cover.hallway_large_window_north
+      - cover.hallway_large_window_south
+      - cover.main_bathroom_window_opener
+      - cover.rooftop_window_opener
   mode: single
 - id: '1685471129972'
   alias: 'cover: kitchen blinds open'
@@ -543,8 +572,8 @@
   trigger:
   - platform: numeric_state
     entity_id: sun.sun
-    attribute: azimuth
-    above: 270
+    attribute: elevation
+    below: 10
   condition: []
   action:
   - service: cover.set_cover_position
@@ -557,8 +586,8 @@
       - cover.kitchen_middle
   mode: single
 - id: '1685704336404'
-  alias: Play music
-  description: ''
+  alias: 'audio: bathroom-guest playback'
+  description: Play Apollo recordings when guests visit the porcelain throne
   trigger:
   - platform: state
     entity_id:
@@ -570,10 +599,18 @@
     - condition: state
       entity_id: media_player.bathroom_guest
       state: playing
+  - condition: time
+    after: 08:00:00
+    before: '22:00:00'
   action:
   - service: media_player.volume_set
     data:
-      volume_level: 0.03
+      volume_level: 0.2
+    target:
+      entity_id: media_player.bathroom_guest
+  - service: media_player.volume_set
+    data:
+      volume_level: 0.05
     target:
       entity_id: media_player.bathroom_guest
   - service: media_player.play_media
@@ -591,4 +628,86 @@
       - {}
       - media_content_type: app
         media_content_id: media-source://media_source
+  mode: single
+- id: '1687457579075'
+  alias: 'covers: lounge blinds open'
+  description: Open the Lounge blinds later on in the day
+  trigger:
+  - platform: numeric_state
+    entity_id: sun.sun
+    attribute: azimuth
+    above: 228
+  condition: []
+  action:
+  - service: cover.open_cover
+    data: {}
+    target:
+      entity_id:
+      - cover.lounge_left_inside
+      - cover.lounge_middle_inside
+      - cover.lounge_right_inside
+  - service: cover.open_cover
+    data: {}
+    target:
+      entity_id:
+      - cover.lounge_left_outside
+      - cover.lounge_middle_outside
+  mode: single
+- id: '1687457802972'
+  alias: 'covers: close lounge blinds'
+  description: When we start getting higher solar elevations (summer), it makes sense
+    to close the blinds in the morning.
+  trigger:
+  - platform: numeric_state
+    entity_id: sun.sun
+    attribute: azimuth
+    above: 106
+  condition:
+  - condition: numeric_state
+    entity_id: sun.sun
+    attribute: elevation
+    above: 36
+  action:
+  - service: cover.close_cover
+    data: {}
+    target:
+      entity_id:
+      - cover.lounge_left_outside
+      - cover.lounge_middle_outside
+  - delay:
+      hours: 0
+      minutes: 0
+      seconds: 30
+      milliseconds: 0
+  - service: cover.close_cover
+    data: {}
+    target:
+      entity_id:
+      - cover.lounge_left_inside
+      - cover.lounge_middle_inside
+      - cover.lounge_right_inside
+  mode: single
+- id: '1687541889174'
+  alias: 'wallpanels: room motion > wake screen'
+  description: turn on wallpanel screen when motion detected
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.bathroomguest
+    - binary_sensor.bathroommain
+    - binary_sensor.bedroom1
+    - binary_sensor.bedroom2
+    - binary_sensor.bedroom3
+    - binary_sensor.hallwaylarge
+    - binary_sensor.hallwaysmall
+    - binary_sensor.kitchen
+    - binary_sensor.lounge
+    - binary_sensor.study
+    to: 'on'
+  condition: []
+  action:
+  - service: mqtt.publish
+    data:
+      topic_template: wallpanel/{{ trigger.to_state.object_id }}/command
+      payload: '{"wake": false}'
   mode: single
