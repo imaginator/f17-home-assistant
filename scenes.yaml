@@ -31,3 +31,44 @@
       entity_only: true
     cover.bedroom_2_right_inside:
       entity_only: true
+- id: '1687282271621'
+  name: Open everything
+  entities:
+    cover.lounge_middle_inside:
+      current_position: 80
+      device_class: shutter
+      friendly_name: lounge middle inside
+      supported_features: 15
+      state: open
+    cover.lounge_left_inside:
+      current_position: 85
+      device_class: shutter
+      friendly_name: lounge left inside
+      supported_features: 15
+      state: open
+    cover.lounge_right_inside:
+      current_position: 0
+      device_class: shutter
+      friendly_name: lounge right inside
+      supported_features: 15
+      state: closed
+  metadata:
+    cover.lounge_middle_inside:
+      entity_only: true
+    cover.lounge_left_inside:
+      entity_only: true
+    cover.lounge_right_inside:
+      entity_only: true
+- id: '1687282377409'
+  name: test
+  entities:
+    cover.lounge_middle_outside:
+      current_position: 0
+      device_class: awning
+      friendly_name: lounge middle outside
+      supported_features: 15
+      state: closed
+  icon: mdi:window-shutter-open
+  metadata:
+    cover.lounge_middle_outside:
+      entity_only: true
