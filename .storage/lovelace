@@ -43,6 +43,12 @@
                 },
                 {
                   "entity": "binary_sensor.cat_toilet"
+                },
+                {
+                  "entity": "person.simon"
+                },
+                {
+                  "entity": "device_tracker.simon_phone_ping"
                 }
               ]
             }
@@ -119,6 +125,17 @@
                 "cover.arbeit_inside",
                 "cover.arbeit_outside"
               ]
+            },
+            {
+              "type": "media-control",
+              "entity": "media_player.study"
+            },
+            {
+              "type": "entities",
+              "entities": [
+                "switch.powerplug"
+              ],
+              "title": "plugswitch-velux"
             }
           ]
         },
@@ -229,7 +246,7 @@
           "badges": [],
           "cards": [
             {
-              "type": "horizontal-stack",
+              "type": "vertical-stack",
               "cards": [
                 {
                   "type": "entities",

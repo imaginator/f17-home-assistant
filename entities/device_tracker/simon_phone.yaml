@@ -1,5 +1,9 @@
 platform: ping
+consider_home: 600
 hosts:
-  simon_phone_ping: simon-phone.imagilan
+#  simon_phone_ping: simon-phone.imagilan
+  simon_phone_ping: 10.7.11.21
   count: 3
   scan_interval: 300
+  consider_home: 600
+
