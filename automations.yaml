@@ -10,37 +10,11 @@
       hours: 0
       minutes: 10
       seconds: 0
-  condition:
-  - condition: state
-    entity_id: cover.arbeit_inside
-    state: unavailable
-    for:
-      hours: 0
-      minutes: 10
-      seconds: 0
+  - platform: time
+    at: 03:00:00
+  condition: []
   action:
-  - type: turn_off
-    device_id: 6cdac090a18c759a208aeebf1e08e6c0
-    entity_id: switch.powerplug
-    domain: switch
-  - delay:
-      hours: 0
-      minutes: 0
-      seconds: 5
-      milliseconds: 0
-  - service: notify.mobile_app_pixel_6_pro
-    data:
-      message: Restarted Velux controller.
-  - type: turn_on
-    device_id: 6cdac090a18c759a208aeebf1e08e6c0
-    entity_id: switch.powerplug
-    domain: switch
-  - delay:
-      hours: 0
-      minutes: 0
-      seconds: 5
-      milliseconds: 0
-  - service: homeassistant.restart
+  - service: script.reset_velux
     data: {}
   mode: single
 - id: '1682952005836'
@@ -49,7 +23,7 @@
   trigger:
   - platform: state
     entity_id:
-    - device_tracker.simon_phone_ping
+    - person.simon
     to: not_home
     from: home
     for:
@@ -64,7 +38,7 @@
       before: '21:00:00'
     - condition: template
       value_template: '{{ now() - state_attr(''automation.vacuum_when_away'', ''last_triggered'')
-        > timedelta(hours=42) }}'
+        > timedelta(hours=16) }}'
     - condition: state
       entity_id: vacuum.rockrobo_vacuum_v1
       attribute: status
@@ -640,22 +614,24 @@
   - platform: numeric_state
     entity_id: sun.sun
     attribute: azimuth
-    above: 228
+    above: 210
   condition: []
   action:
-  - service: cover.open_cover
-    data: {}
+  - service: cover.set_cover_position
+    data:
+      position: 100
     target:
       entity_id:
       - cover.lounge_left_inside
       - cover.lounge_middle_inside
       - cover.lounge_right_inside
-  - service: cover.open_cover
-    data: {}
+  - service: cover.set_cover_position
+    data:
+      position: 100
     target:
       entity_id:
       - cover.lounge_left_outside
-      - cover.lounge_middle_outside
+      - cover.bedroom_2_right_outside
   mode: single
 - id: '1687457802972'
   alias: 'covers: close lounge blinds'
