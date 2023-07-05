@@ -279,6 +279,10 @@
       zone:
       - '{{ state_attr(''input_boolean.vacuum_can_clean_catarea'', ''cleaning_zone'')
         }}'
+  - service: switch.turn_on
+    data: {}
+    target:
+      entity_id: switch.tablet_bedroom1_screen
   mode: single
 - id: '1683567854796'
   alias: KLF power toggle on shutdown
