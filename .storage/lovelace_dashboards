@@ -24,7 +24,7 @@
       },
       {
         "id": "dashboard_music",
-        "show_in_sidebar": false,
+        "show_in_sidebar": true,
         "icon": "mdi:music",
         "title": "music",
         "require_admin": false,

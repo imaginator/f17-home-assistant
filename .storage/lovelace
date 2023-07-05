@@ -203,23 +203,11 @@
               ]
             },
             {
-              "type": "horizontal-stack",
-              "cards": [
-                {
-                  "type": "entity",
-                  "entity": "cover.kitchen_left_2",
-                  "state_color": true
-                },
-                {
-                  "type": "entity",
-                  "entity": "cover.kitchen_middle",
-                  "state_color": true
-                },
-                {
-                  "type": "entity",
-                  "entity": "cover.kitchen_right",
-                  "state_color": true
-                }
+              "type": "entities",
+              "entities": [
+                "cover.kitchen_left_2",
+                "cover.kitchen_middle",
+                "cover.kitchen_right"
               ]
             },
             {
@@ -298,7 +286,7 @@
         {
           "title": "Bedroom 1",
           "path": "bedroom1",
-          "icon": "mdi:bed-outline",
+          "icon": "mdi:bed-king",
           "type": "sidebar",
           "badges": [],
           "cards": [
@@ -331,6 +319,40 @@
               "type": "entities",
               "entities": [
                 "cover.bedroom_1"
+              ]
+            }
+          ]
+        },
+        {
+          "title": "bedroom2",
+          "path": "bedroom2",
+          "icon": "mdi:bed-empty",
+          "badges": [],
+          "cards": [
+            {
+              "type": "entities",
+              "entities": [
+                "cover.bedroom_2_left_inside",
+                "cover.bedroom_2_left_outside",
+                "cover.bedroom_2_right_inside",
+                "cover.bedroom_2_right_outside"
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Bedroom 3",
+          "path": "bedroom3",
+          "icon": "mdi:bed-empty",
+          "badges": [],
+          "cards": [
+            {
+              "type": "entities",
+              "entities": [
+                "cover.bedroom_3_left_inside",
+                "cover.bedroom_3_left_outside",
+                "cover.bedroom_3_right_inside",
+                "cover.bedroom_3_right_outside"
               ]
             }
           ]

@@ -48,3 +48,5 @@ secrets.yaml
 
 # Temporary ignores
 .HA_VERSION
+media/927-AAC.mp3
+media/095-AAA.mp3
