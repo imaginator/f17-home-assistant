@@ -38,7 +38,7 @@
       before: '21:00:00'
     - condition: template
       value_template: '{{ now() - state_attr(''automation.vacuum_when_away'', ''last_triggered'')
-        > timedelta(hours=16) }}'
+        > timedelta(hours=42) }}'
     - condition: state
       entity_id: vacuum.rockrobo_vacuum_v1
       attribute: status
