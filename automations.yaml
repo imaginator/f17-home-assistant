@@ -687,8 +687,32 @@
       - cover.lounge_middle_inside
       - cover.lounge_right_inside
   mode: single
-- id: '1687541889174'
-  alias: 'wallpanels: room motion > wake screen'
+- id: '1688334888223'
+  alias: turn off tablet screens
+  description: ''
+  trigger:
+  - platform: time
+    at: '22:00:00'
+  condition: []
+  action:
+  - service: switch.turn_off
+    data: {}
+    target:
+      entity_id:
+      - switch.tablet_hallway_screen
+      - switch.tablet_bedroom1_screen
+      - switch.tablet_bedroom2_screen
+      - switch.tablet_bedroom3_screen
+      - switch.tablet_lounge_screen
+      - switch.tablet_hallway_screen
+      - switch.tablet_kitchen_screen
+      - switch.tablet_bathroommain_screen
+      - switch.tablet_bathroomguest_screen
+      - switch.tablet_lounge_screen
+      - switch.tablet_study_screen
+  mode: single
+- id: '1688558564794'
+  alias: Turn on Tablet Screens (fully-kiosk)
   description: turn on wallpanel screen when motion detected
   trigger:
   - platform: state
@@ -704,10 +728,13 @@
     - binary_sensor.lounge
     - binary_sensor.study
     to: 'on'
-  condition: []
+  condition:
+  - condition: time
+    after: 06:00:00
+    before: '22:00:00'
   action:
-  - service: mqtt.publish
-    data:
-      topic_template: wallpanel/{{ trigger.to_state.object_id }}/command
-      payload: '{"wake": false}'
+  - service: switch.turn_on
+    data: {}
+    target:
+      entity_id: switch.tablet_{{ trigger.to_state.object_id }}_screen
   mode: single
