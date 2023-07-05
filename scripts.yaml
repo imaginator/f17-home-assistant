@@ -28,3 +28,28 @@ zones2:
       zone: "{{ expand('group.vacuum_zones') | selectattr('state', 'eq', 'on')\n |
         map(attribute='attributes.cleaning_zone') | list }}\n"
   mode: single
+reset_velux:
+  alias: Reset Velux Controller
+  sequence:
+  - type: turn_off
+    device_id: 6cdac090a18c759a208aeebf1e08e6c0
+    entity_id: switch.powerplug
+    domain: switch
+  - delay:
+      hours: 0
+      minutes: 0
+      seconds: 3
+      milliseconds: 0
+  - type: turn_on
+    device_id: 6cdac090a18c759a208aeebf1e08e6c0
+    entity_id: switch.powerplug
+    domain: switch
+  - delay:
+      hours: 0
+      minutes: 1
+      seconds: 0
+      milliseconds: 0
+  - service: velux.reboot_gateway
+    data: {}
+  mode: single
+  icon: mdi:window-open
