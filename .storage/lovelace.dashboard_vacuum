@@ -60,7 +60,7 @@
                       "type": "button",
                       "tap_action": {
                         "action": "call-service",
-                        "service": "script.vacuum_map_construct",
+                        "service": "script.vacuum_rebuild_map",
                         "target": {}
                       },
                       "entity": "light.lounge_overhead",

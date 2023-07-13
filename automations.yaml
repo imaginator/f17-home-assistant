@@ -41,8 +41,7 @@
         > timedelta(hours=42) }}'
     - condition: state
       entity_id: vacuum.rockrobo_vacuum_v1
-      attribute: status
-      state: Charging
+      state: docked
   action:
   - service: xiaomi_miio.vacuum_clean_zone
     target:
@@ -71,7 +70,7 @@
     entity_id: switch.irrigation
     domain: switch
   - delay:
-      hours: 2
+      hours: 3
       minutes: 30
       seconds: 0
       milliseconds: 0
@@ -631,7 +630,10 @@
     target:
       entity_id:
       - cover.lounge_left_outside
-      - cover.bedroom_2_right_outside
+      - cover.lounge_middle_outside
+      - cover.lounge_left_inside
+      - cover.lounge_middle_inside
+      - cover.lounge_right_inside
   mode: single
 - id: '1687457802972'
   alias: 'covers: close lounge blinds'
@@ -641,12 +643,12 @@
   - platform: numeric_state
     entity_id: sun.sun
     attribute: azimuth
-    above: 106
+    above: 95
   condition:
   - condition: numeric_state
     entity_id: sun.sun
     attribute: elevation
-    above: 36
+    above: 25
   action:
   - service: cover.close_cover
     data: {}
@@ -679,17 +681,9 @@
     data: {}
     target:
       entity_id:
-      - switch.tablet_hallway_screen
       - switch.tablet_bedroom1_screen
-      - switch.tablet_bedroom2_screen
       - switch.tablet_bedroom3_screen
-      - switch.tablet_lounge_screen
-      - switch.tablet_hallway_screen
-      - switch.tablet_kitchen_screen
-      - switch.tablet_bathroommain_screen
-      - switch.tablet_bathroomguest_screen
-      - switch.tablet_lounge_screen
-      - switch.tablet_study_screen
+      - switch.tablet_bedroom2_screen
   mode: single
 - id: '1688558564794'
   alias: Turn on Tablet Screens (fully-kiosk)
@@ -713,6 +707,24 @@
     after: 06:00:00
     before: '22:00:00'
   action:
+  - service: switch.turn_on
+    data: {}
+    target:
+      entity_id: switch.tablet_{{ trigger.to_state.object_id }}_screen
+  - delay:
+      hours: 0
+      minutes: 0
+      seconds: 5
+      milliseconds: 0
+  - service: switch.turn_on
+    data: {}
+    target:
+      entity_id: switch.tablet_{{ trigger.to_state.object_id }}_screen
+  - delay:
+      hours: 0
+      minutes: 0
+      seconds: 20
+      milliseconds: 0
   - service: switch.turn_on
     data: {}
     target:
