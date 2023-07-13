@@ -46,11 +46,9 @@
                 },
                 {
                   "entity": "person.simon"
-                },
-                {
-                  "entity": "device_tracker.simon_phone_ping"
                 }
-              ]
+              ],
+              "hours_to_show": 1
             }
           ]
         },
@@ -112,14 +110,6 @@
               "title": "occupancy"
             },
             {
-              "type": "media-control",
-              "entity": "media_player.study"
-            },
-            {
-              "type": "thermostat",
-              "entity": "climate.study"
-            },
-            {
               "type": "entities",
               "entities": [
                 "cover.arbeit_inside",
@@ -127,15 +117,12 @@
               ]
             },
             {
-              "type": "media-control",
-              "entity": "media_player.study"
+              "type": "thermostat",
+              "entity": "climate.study"
             },
             {
-              "type": "entities",
-              "entities": [
-                "switch.powerplug"
-              ],
-              "title": "plugswitch-velux"
+              "type": "media-control",
+              "entity": "media_player.study"
             }
           ]
         },
@@ -379,6 +366,25 @@
               "type": "entity",
               "entity": "binary_sensor.bathroommain",
               "name": "motion"
+            },
+            {
+              "type": "media-control",
+              "entity": "media_player.bathroom_main"
+            }
+          ]
+        },
+        {
+          "path": "bathroomguest",
+          "title": "guest bathroom ",
+          "icon": "mdi:shower-head",
+          "badges": [],
+          "cards": [
+            {
+              "type": "entities",
+              "entities": [
+                "binary_sensor.bathroomguest",
+                "sensor.bathroomguest_temperature"
+              ]
             }
           ]
         },
@@ -389,6 +395,15 @@
           "type": "sidebar",
           "badges": [],
           "cards": [
+            {
+              "type": "history-graph",
+              "entities": [
+                {
+                  "entity": "switch.irrigation"
+                }
+              ],
+              "title": "daily watering"
+            },
             {
               "type": "horizontal-stack",
               "cards": [
@@ -409,12 +424,6 @@
                   "icon": "mdi:water-circle",
                   "show_state": true,
                   "name": "trigger watering"
-                },
-                {
-                  "type": "history-graph",
-                  "entities": [
-                    "switch.irrigation"
-                  ]
                 },
                 {
                   "type": "weather-forecast",

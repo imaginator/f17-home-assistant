@@ -30,6 +30,15 @@
         "require_admin": false,
         "mode": "storage",
         "url_path": "dashboard-music"
+      },
+      {
+        "id": "dashboard_weather",
+        "show_in_sidebar": true,
+        "icon": "mdi:weather-sunny-alert",
+        "title": "weather",
+        "require_admin": false,
+        "mode": "storage",
+        "url_path": "dashboard-weather"
       }
     ]
   }
