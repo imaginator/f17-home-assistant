@@ -53,3 +53,58 @@ reset_velux:
     data: {}
   mode: single
   icon: mdi:window-open
+vacuum_rebuild_map:
+  alias: 'vacuum: rebuild map'
+  sequence:
+  - service: vacuum.set_fan_speed
+    data:
+      entity_id: vacuum.rockrobo_vacuum_v1
+      fan_speed: Silent
+  - service: vacuum.start
+    data:
+      entity_id: vacuum.rockrobo_vacuum_v1
+  - delay:
+      seconds: 20
+  - service: vacuum.stop
+    data:
+      entity_id: vacuum.rockrobo_vacuum_v1
+  - delay:
+      hours: 0
+      minutes: 0
+      seconds: 10
+      milliseconds: 0
+  - service: vacuum.stop
+    data:
+      entity_id: vacuum.rockrobo_vacuum_v1
+  - wait_for_trigger:
+    - platform: state
+      entity_id: vacuum.rockrobo_vacuum_v1
+      to: idle
+  - service: vacuum.send_command
+    data:
+      entity_id: vacuum.rockrobo_vacuum_v1
+      command: app_goto_target
+      params:
+      - 24500
+      - 31950
+  - wait_for_trigger:
+    - platform: state
+      entity_id: vacuum.rockrobo_vacuum_v1
+      to: idle
+  - service: vacuum.send_command
+    data:
+      entity_id: vacuum.rockrobo_vacuum_v1
+      command: app_goto_target
+      params:
+      - 34750
+      - 31950
+  - wait_for_trigger:
+    - platform: state
+      entity_id: vacuum.rockrobo_vacuum_v1
+      to: idle
+  - service: vacuum.return_to_base
+    data:
+      entity_id: vacuum.rockrobo_vacuum_v1
+  description: Rebuild Apartment Map
+  mode: restart
+  icon: mdi:robot-vacuum
