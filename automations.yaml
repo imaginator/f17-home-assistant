@@ -211,9 +211,15 @@
   - platform: template
     value_template: '{{ is_state_attr(''sun.sun'',''rising'',False) }}'
   condition:
-  - condition: template
-    value_template: '{{ now() - state_attr(''automation.vacuum_empty_the_bin'', ''last_triggered'')
-      | default(as_datetime(0), true)  > timedelta(hours=96) }}'
+  - condition: and
+    conditions:
+    - condition: state
+      entity_id: person.simon
+      state: home
+    - condition: template
+      value_template: '{{ now() - state_attr(''automation.vacuum_empty_the_bin'',
+        ''last_triggered'') | default(as_datetime(0), true)  > timedelta(hours=48)
+        }}'
   action:
   - service: xiaomi_miio.vacuum_goto
     data:
@@ -701,7 +707,8 @@
     - binary_sensor.kitchen
     - binary_sensor.lounge
     - binary_sensor.study
-    to: 'on'
+    to:
+    from:
   condition:
   - condition: time
     after: 06:00:00
@@ -729,4 +736,4 @@
     data: {}
     target:
       entity_id: switch.tablet_{{ trigger.to_state.object_id }}_screen
-  mode: single
+  mode: parallel
