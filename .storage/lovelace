@@ -49,6 +49,44 @@
                 }
               ],
               "hours_to_show": 1
+            },
+            {
+              "type": "history-graph",
+              "entities": [
+                {
+                  "entity": "binary_sensor.lounge"
+                },
+                {
+                  "entity": "binary_sensor.study"
+                },
+                {
+                  "entity": "binary_sensor.kitchen"
+                },
+                {
+                  "entity": "binary_sensor.hallwaylarge"
+                },
+                {
+                  "entity": "binary_sensor.bathroomguest"
+                },
+                {
+                  "entity": "binary_sensor.bathroommain"
+                },
+                {
+                  "entity": "binary_sensor.bedroom1"
+                },
+                {
+                  "entity": "binary_sensor.bedroom2"
+                },
+                {
+                  "entity": "binary_sensor.bedroom3"
+                },
+                {
+                  "entity": "binary_sensor.cat_toilet"
+                },
+                {
+                  "entity": "person.simon"
+                }
+              ]
             }
           ]
         },
