@@ -1,10 +1,10 @@
 /**
- * (C) 2020-2022 by Jan Schneider (oss@janschneider.net)
+ * (C) 2020-2023 by Jan Schneider (oss@janschneider.net)
  * Released under the GNU General Public License v3.0
  */
 
 
- class ScreenWakeLock {
+class ScreenWakeLock {
 	constructor() {
 		this.enabled = false;
 		this.error = null;
@@ -25,7 +25,7 @@
 		document.addEventListener("fullscreenchange", handleVisibilityChange);
 
 		if (!this.nativeWakeLockSupported) {
-			let videoData = 'data:video/mp4;base64,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';
+			let videoData = 'data:video/mp4;base64,AAAAIGZ0eXBpc29tAAACAGlzb21pc28yYXZjMW1wNDEAAAAIZnJlZQAAA1NtZGF0AAACrwYF//+r3EXpvebZSLeWLNgg2SPu73gyNjQgLSBjb3JlIDE2NCByMzA5NSBiYWVlNDAwIC0gSC4yNjQvTVBFRy00IEFWQyBjb2RlYyAtIENvcHlsZWZ0IDIwMDMtMjAyMiAtIGh0dHA6Ly93d3cudmlkZW9sYW4ub3JnL3gyNjQuaHRtbCAtIG9wdGlvbnM6IGNhYmFjPTEgcmVmPTMgZGVibG9jaz0xOi0zOi0zIGFuYWx5c2U9MHgzOjB4MTEzIG1lPWhleCBzdWJtZT03IHBzeT0xIHBzeV9yZD0yLjAwOjAuNzAgbWl4ZWRfcmVmPTEgbWVfcmFuZ2U9MTYgY2hyb21hX21lPTEgdHJlbGxpcz0xIDh4OGRjdD0xIGNxbT0wIGRlYWR6b25lPTIxLDExIGZhc3RfcHNraXA9MSBjaHJvbWFfcXBfb2Zmc2V0PS00IHRocmVhZHM9MSBsb29rYWhlYWRfdGhyZWFkcz0xIHNsaWNlZF90aHJlYWRzPTAgbnI9MCBkZWNpbWF0ZT0xIGludGVybGFjZWQ9MCBibHVyYXlfY29tcGF0PTAgY29uc3RyYWluZWRfaW50cmE9MCBiZnJhbWVzPTMgYl9weXJhbWlkPTIgYl9hZGFwdD0xIGJfYmlhcz0wIGRpcmVjdD0xIHdlaWdodGI9MSBvcGVuX2dvcD0wIHdlaWdodHA9MiBrZXlpbnQ9MjUwIGtleWludF9taW49MSBzY2VuZWN1dD00MCBpbnRyYV9yZWZyZXNoPTAgcmNfbG9va2FoZWFkPTQwIHJjPWNyZiBtYnRyZWU9MSBjcmY9MjMuMCBxY29tcD0wLjYwIHFwbWluPTAgcXBtYXg9NjkgcXBzdGVwPTQgaXBfcmF0aW89MS40MCBhcT0xOjEuMjAAgAAAABFliIQAF85//vfUt8yy7VNwgQAAAAlBmiRsQXzn/vAAAAAJQZ5CeIL5z4aBAAAACQGeYXRBfOeGgAAAAAkBnmNqQXznhoEAAAAPQZpoSahBaJlMCC+c//7xAAAAC0GehkURLBfOf4aBAAAACQGepXRBfOeGgQAAAAkBnqdqQXznhoAAAAAPQZqpSahBbJlMCC+c//7wAAADs21vb3YAAABsbXZoZAAAAAAAAAAAAAAAAAAAA+gAACcQAAEAAAEAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAALddHJhawAAAFx0a2hkAAAAAwAAAAAAAAAAAAAAAQAAAAAAACcQAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAQAAAAAAIAAAACAAAAAAAJGVkdHMAAAAcZWxzdAAAAAAAAAABAAAnEAAAgAAAAQAAAAACVW1kaWEAAAAgbWRoZAAAAAAAAAAAAAAAAAAAQAAAAoAAVcQAAAAAAC1oZGxyAAAAAAAAAAB2aWRlAAAAAAAAAAAAAAAAVmlkZW9IYW5kbGVyAAAAAgBtaW5mAAAAFHZtaGQAAAABAAAAAAAAAAAAAAAkZGluZgAAABxkcmVmAAAAAAAAAAEAAAAMdXJsIAAAAAEAAAHAc3RibAAAAMBzdHNkAAAAAAAAAAEAAACwYXZjMQAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAIAAgASAAAAEgAAAAAAAAAARVMYXZjNTkuMzcuMTAwIGxpYngyNjQAAAAAAAAAAAAAABj//wAAADZhdmNDAWQACv/hABlnZAAKrNlfllwEQAAAAwBAAAADAIPEiWWAAQAGaOvjxMhM/fj4AAAAABBwYXNwAAAAAQAAAAEAAAAUYnRydAAAAAAAAAKiAAACogAAABhzdHRzAAAAAAAAAAEAAAAKAABAAAAAABRzdHNzAAAAAAAAAAEAAAABAAAAYGN0dHMAAAAAAAAACgAAAAEAAIAAAAAAAQABQAAAAAABAACAAAAAAAEAAAAAAAAAAQAAQAAAAAABAAFAAAAAAAEAAIAAAAAAAQAAAAAAAAABAABAAAAAAAEAAIAAAAAAHHN0c2MAAAAAAAAAAQAAAAEAAAAKAAAAAQAAADxzdHN6AAAAAAAAAAAAAAAKAAACyAAAAA0AAAANAAAADQAAAA0AAAATAAAADwAAAA0AAAANAAAAEwAAABRzdGNvAAAAAAAAAAEAAAAwAAAAYnVkdGEAAABabWV0YQAAAAAAAAAhaGRscgAAAAAAAAAAbWRpcmFwcGwAAAAAAAAAAAAAAAAtaWxzdAAAACWpdG9vAAAAHWRhdGEAAAABAAAAAExhdmY1OS4yNy4xMDA=';
 			this._player = document.createElement("video");
 			this._player.setAttribute("id", "ScreenWakeLockVideo");
 			this._player.setAttribute("src", videoData);
@@ -108,12 +108,13 @@
 	}
 }
 
-const version = "4.6.1";
+const version = "4.16.0";
 const defaultConfig = {
 	enabled: false,
 	enabled_on_tabs: [],
 	debug: false,
 	hide_toolbar: false,
+	hide_toolbar_action_icons: false,
 	hide_sidebar: false,
 	fullscreen: false,
 	idle_time: 15,
@@ -125,15 +126,18 @@ const defaultConfig = {
 	control_reactivation_time: 1.0,
 	screensaver_stop_navigation_path: '',
 	screensaver_entity: '',
+	stop_screensaver_on_mouse_move: true,
+	stop_screensaver_on_location_change: true,
+	show_images: true,
 	image_url: "https://picsum.photos/${width}/${height}?random=${timestamp}",
 	image_fit: 'cover', // cover / contain / fill
 	image_list_update_interval: 3600,
 	image_order: 'sorted', // sorted / random
 	image_excludes: [],
 	show_progress_bar: false,
-	show_exif_info: false,
+	show_image_info: false,
 	fetch_address_data: false,
-	exif_info_template: '${DateTimeOriginal}',
+	image_info_template: '${DateTimeOriginal}',
 	info_animation_duration_x: 0,
 	info_animation_duration_y: 0,
 	info_animation_timing_function_x: 'ease',
@@ -141,11 +145,15 @@ const defaultConfig = {
 	info_move_pattern: 'random',
 	info_move_interval: 0,
 	info_move_fade_duration: 2.0,
+	image_animation_ken_burns: false,
+	image_animation_ken_burns_zoom: 1.3,
+	image_animation_ken_burns_delay: 0,
 	style: {},
 	badges: [],
 	cards: [
 		{type: 'weather-forecast', entity: 'weather.home', show_forecast: true}
 	],
+	card_interaction: false,
 	profile: '',
 	profile_entity: '',
 	profiles: {}
@@ -157,8 +165,9 @@ let activePanelTab = null;
 let fullscreen = false;
 let screenWakeLock = new ScreenWakeLock();
 let wallpanel = null;
+let skipDisableScreensaverOnLocationChanged = false;
 let classStyles = {
-	"wallpanel-screensaver-image-info-exif": {
+	"wallpanel-screensaver-image-info": {
 		"position": "absolute",
 		"bottom": "0.5em",
 		"right": "0.5em",
@@ -179,9 +188,10 @@ let classStyles = {
 		"background-color": "white"
 	}
 }
-let exifDataCache = {};
-let exifDataCacheKeys = [];
-const exifDataCacheMaxSize = 1000;
+let imageInfoCache = {};
+let imageInfoCacheKeys = [];
+const imageInfoCacheMaxSize = 1000;
+let configEntityStates = {};
 
 const elHass = document.querySelector("body > home-assistant");
 const elHaMain = elHass.shadowRoot.querySelector("home-assistant-main");
@@ -215,7 +225,26 @@ function mergeConfig(target, ...sources) {
 				if (!target[key]) Object.assign(target, { [key]: {} });
 				mergeConfig(target[key], source[key]);
 			} else {
-				Object.assign(target, { [key]: source[key] });
+				let val = source[key];
+				function replacer(match, entityId, offset, string) {
+					if (!(entityId in configEntityStates)) {
+						configEntityStates[entityId] = "";
+						const entity = elHass.__hass.states[entityId];
+						if (entity) {
+							configEntityStates[entityId] = entity.state;
+						}
+						else {
+							console.error(`Entity used in placeholder not found: ${entityId} (${match})`)
+						}
+					}
+					const state = configEntityStates[entityId];
+					if (config.debug) console.debug(`Replace ${match} with ${state}`);
+					return state;
+				}
+				if (typeof val === 'string' || val instanceof String) {
+					val = val.replace(/\$\{entity:\s*([^}]+\.[^}]+)\}/g, replacer);
+				}
+				Object.assign(target, { [key]: val });
 			}
 		}
 	}
@@ -259,18 +288,35 @@ function updateConfig() {
 		if (config.debug) console.debug(`Profile set from entity state: ${profile}`);
 	}
 
-	if (config.image_url) {
+	if (config.show_images) {
 		if (config.image_url.startsWith("/")) {
 			config.image_url = `media-source://media_source${config.image_url}`;
 		}
-		if (config.image_url.startsWith("media-source://media_source")) {
+		if (imageSourceType() == "media-source") {
 			config.image_url = config.image_url.replace(/\/+$/, '');
 		}
+		if (imageSourceType() == "unsplash-api" && config.image_list_update_interval > 90) {
+			// Unsplash API currently places a limit of 50 requests per hour
+			config.image_list_update_interval = 90;
+		}
 	}
+	else {
+		config.show_images = false;
+	}
+
+	if (config.card_interaction) {
+		config.stop_screensaver_on_mouse_move = false;
+	}
+	
+	if (params.get("edit") == "1") {
+		config.enabled = false;
+	}
+
 	if (!config.enabled) {
 		config.debug = false;
 		config.hide_toolbar = false;
 		config.hide_sidebar = false;
+		config.hide_toolbar_action_icons = false;
 		config.fullscreen = false;
 		config.idle_time = 0;
 	}
@@ -294,11 +340,18 @@ function isActive() {
 	if (config.enabled_on_tabs && config.enabled_on_tabs.length > 0 && activePanelTab && !config.enabled_on_tabs.includes(activePanelTab)) {
 		return false;
 	}
-	const params = new URLSearchParams(window.location.search);
-	if (params.get("edit") == "1") {
-		return false;
-	}
 	return true;
+}
+
+
+function imageSourceType() {
+	if ((!config.show_images) || (!config.image_url)) {
+		return "";
+	}
+	if (config.image_url.startsWith("media-entity://")) return "media-entity";
+	if (config.image_url.startsWith("media-source://media_source")) return "media-source";
+	if (config.image_url.startsWith("https://api.unsplash")) return "unsplash-api";
+	return "url";
 }
 
 
@@ -314,10 +367,15 @@ function getHaPanelLovelace() {
 
 function getHaPanelLovelaceConfig() {
 	let pl = getHaPanelLovelace();
+	let conf = {};
 	if (pl && pl.lovelace && pl.lovelace.config && pl.lovelace.config.wallpanel) {
-		return pl.lovelace.config.wallpanel;
+		for (let key in pl.lovelace.config.wallpanel) {
+			if (key in defaultConfig) {
+				conf[key] = pl.lovelace.config.wallpanel[key];
+			}
+		}
 	}
-	return {}
+	return conf;
 }
 
 
@@ -336,32 +394,96 @@ function getCurrentView() {
 
 function setSidebarHidden(hidden) {
 	try {
-		elHaMain.shadowRoot.querySelector("ha-sidebar").style.visibility = (hidden ? "hidden" : "visible");
+		const haMenuButton = elHaMain.shadowRoot
+			.querySelector("ha-panel-lovelace").shadowRoot
+			.querySelector("hui-root").shadowRoot
+			.querySelector("div.toolbar")
+			.querySelector("ha-menu-button");
+		const haIconButton = haMenuButton.shadowRoot
+			.querySelector("ha-icon-button");
+		const divDot = haMenuButton.shadowRoot
+			.querySelector("div.dot");
 		if (hidden) {
+			haIconButton.style.display = "none";
+			if (divDot) {
+				divDot.style.display = "none";
+			}
+		}
+		else {
+			haIconButton.style.removeProperty("display");
+			if (divDot) {
+				divDot.style.removeProperty("display");
+			}
+		}
+	}
+	catch (e) {
+		if (config.debug) console.debug(e);
+	}
+	
+	try {
+		let sidebar = elHaMain.shadowRoot.querySelector("ha-sidebar");
+		if (sidebar) {
+			sidebar.style.visibility = (hidden ? "hidden" : "visible");
+		}
+		
+		let drawer = elHaMain.shadowRoot.querySelector("ha-drawer");
+		if (drawer) {
+			drawer = drawer.shadowRoot.querySelector(".mdc-drawer");
+		}
+		if (hidden) {
+			
 			elHaMain.style.setProperty("--app-drawer-width", 0);
+			elHaMain.style.setProperty("--mdc-drawer-width", 0);
+			elHaMain.style.setProperty("--mdc-top-app-bar-width", "100%");
+			if (drawer) {
+				drawer.style.setProperty("display", "none");
+			}
 		}
 		else {
 			elHaMain.style.removeProperty("--app-drawer-width");
+			elHaMain.style.removeProperty("--mdc-drawer-width");
+			elHaMain.style.removeProperty("--mdc-top-app-bar-width");
+			if (drawer) {
+				drawer.style.removeProperty("display");
+			}
 		}
 		window.dispatchEvent(new Event('resize'));
 	}
 	catch (e) {
 		if (config.debug) console.debug(e);
 	}
+	
 }
-
 
 function setToolbarHidden(hidden) {
 	try {
-		let appToolbar = elHaMain.shadowRoot
-		.querySelector("ha-panel-lovelace").shadowRoot
-		.querySelector("hui-root").shadowRoot
-		.querySelector("app-toolbar");
+		let huiRoot = elHaMain.shadowRoot
+			.querySelector("ha-panel-lovelace").shadowRoot
+			.querySelector("hui-root").shadowRoot;
+		let view = huiRoot.querySelector("#view");
+		let appToolbar = huiRoot.querySelector("app-toolbar");
+		if (!appToolbar) {
+			// Changed with 2023.04
+			appToolbar = huiRoot.querySelector("div.toolbar");
+		}
 		if (hidden) {
 			appToolbar.style.setProperty("display", "none");
+			view.style.minHeight = "100vh";
+			view.style.marginTop = "0";
+			view.style.paddingTop = "0";
 		}
 		else {
 			appToolbar.style.removeProperty("display");
+			view.style.removeProperty("min-height");
+			view.style.removeProperty("margin-top");
+			view.style.removeProperty("padding-top");
+			let actionItems = appToolbar.querySelector("div.action-items");
+			if (config.hide_toolbar_action_icons) {
+				actionItems.style.setProperty("display", "none");
+			}
+			else {
+				actionItems.style.setProperty("display", "flex");
+			}
 		}
 		window.dispatchEvent(new Event('resize'));
 	}
@@ -504,13 +626,20 @@ class WallpanelView extends HuiView {
 		this.blockEventsUntil = 0;
 		this.screensaverStartedAt;
 		this.screensaverStoppedAt = new Date();
+		this.infoBoxContentCreatedDate;
 		this.idleSince = Date.now();
-		this.bodyOverflowOrig = null;
 		this.lastProfileSet = insertBrowserID(config.profile);
 		this.lastMove = null;
 		this.lastCorner = 0; // 0 - top left, 1 - bottom left, 2 - bottom right, 3 - top right
 		this.translateInterval = null;
-
+		this.lastClickTime = 0; 
+		this.clickCount = 0;
+		this.energyCollectionUpdateEnabled = false;
+		this.energyCollectionUpdateInterval = 60;
+		this.lastEnergyCollectionUpdate = 0;
+		this.screensaverStopNavigationPathTimeout = null;
+		this.currentImageUrl = config.image_url;
+		
 		this.__hass = elHass.__hass;
 		this.__cards = [];
 		this.__badges = [];
@@ -524,8 +653,19 @@ class WallpanelView extends HuiView {
 		if (config.debug) console.debug("Update hass");
 		this.__hass = hass;
 
-		this.updateProfile();
-
+		let changed = false;
+		for (const entityId in configEntityStates) {
+			const entity = this.__hass.states[entityId];
+			if (entity && entity.state != configEntityStates[entityId]) {
+				configEntityStates[entityId] = entity.state;
+				changed = true;
+			}
+		}
+		let profileUpdated = this.updateProfile();
+		if (!profileUpdated && changed) {
+			updateConfig();
+		}
+		
 		if (!isActive()) {
 			return;
 		}
@@ -584,8 +724,10 @@ class WallpanelView extends HuiView {
 				if (config.debug) console.debug(`Set profile to ${profile}`);
 				this.lastProfileSet = profile;
 				updateConfig();
+				return true;
 			}
 		}
+		return false;
 	}
 
 	timer() {
@@ -611,24 +753,28 @@ class WallpanelView extends HuiView {
 		this.messageBox.style.width = '100%';
 		this.messageBox.style.height = '10%';
 		this.messageBox.style.zIndex = 1001;
-		this.messageBox.style.visibility = 'hidden';
+		if (!this.screensaverStartedAt) {
+			this.messageBox.style.visibility = 'hidden';
+		}
 		//this.messageBox.style.margin = '5vh auto auto auto';
 		this.messageBox.style.padding = '5vh 0 0 0';
 		this.messageBox.style.fontSize = '5vh';
 		this.messageBox.style.textAlign = 'center';
 		this.messageBox.style.transition = 'visibility 200ms ease-in-out';
-
+		
 		this.debugBox.removeAttribute('style');
 		this.debugBox.style.position = 'fixed';
 		this.debugBox.style.pointerEvents = "none";
-		this.debugBox.style.top = '40%';
-		this.debugBox.style.left = 0;
+		this.debugBox.style.top = '0%';
+		this.debugBox.style.left = '0%';
 		this.debugBox.style.width = '100%';
-		this.debugBox.style.height = '60%';
+		this.debugBox.style.height = '100%';
 		this.debugBox.style.background = '#00000099';
 		this.debugBox.style.color = '#ffffff';
 		this.debugBox.style.zIndex = 1001;
-		this.debugBox.style.visibility = 'hidden';
+		if (!this.screensaverStartedAt) {
+			this.debugBox.style.visibility = 'hidden';
+		}
 		this.debugBox.style.fontFamily = 'monospace';
 		this.debugBox.style.fontSize = '12px';
 		this.debugBox.style.overflowWrap = 'break-word';
@@ -642,43 +788,57 @@ class WallpanelView extends HuiView {
 		this.screensaverContainer.style.height = '100vh';
 		this.screensaverContainer.style.background = '#000000';
 
-		this.imageOneContainer.removeAttribute('style');
+		if (!this.screensaverStartedAt) {
+			this.imageOneContainer.removeAttribute('style');
+			this.imageOneContainer.style.opacity = 1;
+		}
 		this.imageOneContainer.style.position = 'absolute';
+		this.imageOneContainer.style.pointerEvents = "none";
 		this.imageOneContainer.style.top = 0;
 		this.imageOneContainer.style.left = 0;
 		this.imageOneContainer.style.width = '100%';
 		this.imageOneContainer.style.height = '100%';
-		this.imageOneContainer.style.opacity = 1;
-
-		this.imageOne.removeAttribute('style');
+		
+		if (!this.screensaverStartedAt) {
+			this.imageOne.removeAttribute('style');
+		}
 		this.imageOne.style.position = 'relative';
+		this.imageOne.style.pointerEvents = "none";
 		this.imageOne.style.width = '100%';
 		this.imageOne.style.height = '100%';
 		this.imageOne.style.objectFit = 'contain';
 
 		this.imageOneInfoContainer.removeAttribute('style');
 		this.imageOneInfoContainer.style.position = 'absolute';
+		this.imageOneInfoContainer.style.pointerEvents = "none";
 		this.imageOneInfoContainer.style.top = 0;
 		this.imageOneInfoContainer.style.left = 0;
 		this.imageOneInfoContainer.style.width = '100%';
 		this.imageOneInfoContainer.style.height = '100%';
 
-		this.imageTwoContainer.removeAttribute('style');
+		if (!this.screensaverStartedAt) {
+			this.imageTwoContainer.removeAttribute('style');
+			this.imageTwoContainer.style.opacity = 0;
+		}
 		this.imageTwoContainer.style.position = 'absolute';
+		this.imageTwoContainer.style.pointerEvents = "none";
 		this.imageTwoContainer.style.top = 0;
 		this.imageTwoContainer.style.left = 0;
 		this.imageTwoContainer.style.width = '100%';
 		this.imageTwoContainer.style.height = '100%';
-		this.imageTwoContainer.style.opacity = 0;
-
-		this.imageTwo.removeAttribute('style');
+		
+		if (!this.screensaverStartedAt) {
+			this.imageTwo.removeAttribute('style');
+		}
 		this.imageTwo.style.position = 'relative';
+		this.imageTwo.style.pointerEvents = "none";
 		this.imageTwo.style.width = '100%';
 		this.imageTwo.style.height = '100%';
 		this.imageTwo.style.objectFit = 'contain';
-
+		
 		this.imageTwoInfoContainer.removeAttribute('style');
 		this.imageTwoInfoContainer.style.position = 'absolute';
+		this.imageTwoInfoContainer.style.pointerEvents = "none";
 		this.imageTwoInfoContainer.style.top = 0;
 		this.imageTwoInfoContainer.style.left = 0;
 		this.imageTwoInfoContainer.style.width = '100%';
@@ -686,6 +846,7 @@ class WallpanelView extends HuiView {
 
 		this.infoContainer.removeAttribute('style');
 		this.infoContainer.style.position = 'absolute';
+		this.infoContainer.style.pointerEvents = "none";
 		this.infoContainer.style.top = 0;
 		this.infoContainer.style.left = 0;
 		this.infoContainer.style.width = '100%';
@@ -695,24 +856,30 @@ class WallpanelView extends HuiView {
 
 		this.fixedInfoContainer.removeAttribute('style');
 		this.fixedInfoContainer.style.position = 'fixed';
+		this.fixedInfoContainer.style.pointerEvents = "none";
 		this.fixedInfoContainer.style.top = 0;
 		this.fixedInfoContainer.style.left = 0;
 		this.fixedInfoContainer.style.width = '100%';
 		this.fixedInfoContainer.style.height = '100%';
 
 		this.infoBox.removeAttribute('style');
+		this.infoBox.style.pointerEvents = "none";
 		this.infoBox.style.width = 'fit-content';
 		this.infoBox.style.height = 'fit-content';
 		this.infoBox.style.borderRadius = '10px';
 		this.infoBox.style.setProperty('--wp-card-width', '500px');
-		this.infoBox.style.setProperty('--wp-card-padding', '0px');
+		this.infoBox.style.setProperty('--wp-card-padding', '0');
 		this.infoBox.style.setProperty('--wp-card-margin', '5px');
 		this.infoBox.style.setProperty('--wp-card-backdrop-filter', 'none');
 
 		this.fixedInfoBox.style.cssText = this.infoBox.style.cssText;
+		this.fixedInfoBox.style.pointerEvents = "none";
 
 		this.screensaverOverlay.removeAttribute('style');
 		this.screensaverOverlay.style.position = 'absolute';
+		if (config.card_interaction) {
+			this.screensaverOverlay.style.pointerEvents = "none";
+		}
 		this.screensaverOverlay.style.top = 0;
 		this.screensaverOverlay.style.left = 0;
 		this.screensaverOverlay.style.width = '100%';
@@ -819,6 +986,15 @@ class WallpanelView extends HuiView {
 					width: 100%;
 				}
 			}
+			@keyframes kenBurnsEffect {
+				0% {
+					transform-origin: bottom left;
+					transform: scale(1.0);
+				}
+				100% {
+					transform: scale(${config.image_animation_ken_burns_zoom});
+				}
+			}
 			${classCss}
 		`
 	}
@@ -864,16 +1040,18 @@ class WallpanelView extends HuiView {
 			clearInterval(wp.translateInterval);
 		}
 		wp.translateInterval = setInterval(function() {
-			wp.infoBoxPosX.style.transform = `translate3d(${x}px, 0px, 0px)`;
-			wp.infoBoxPosY.style.transform = `translate3d(0px, ${y}px, 0px)`;
+			wp.infoBoxPosX.style.transform = `translate3d(${x}px, 0, 0)`;
+			wp.infoBoxPosY.style.transform = `translate3d(0, ${y}px, 0)`;
 		}, ms);
 	}
 
 	createInfoBoxContent() {
 		if (config.debug) console.debug("Creating info box content");
+		this.infoBoxContentCreatedDate = new Date();
 		this.infoBoxContent.innerHTML = '';
 		this.__badges = [];
 		this.__cards = [];
+		this.energyCollectionUpdateEnabled = false;
 
 		this.shadowRoot.querySelectorAll(".wp-card").forEach(card => {
 			card.parentElement.removeChild(card);
@@ -903,9 +1081,15 @@ class WallpanelView extends HuiView {
 					style = cardConfig.wp_style;
 					delete cardConfig.wp_style;
 				}
+				if (cardConfig.type && cardConfig.type.includes("energy")) {
+					cardConfig.collection_key = "energy_wallpanel";
+					this.energyCollectionUpdateEnabled = true;
+				}
 				const cardElement = this.createCardElement(cardConfig);
 				cardElement.hass = this.hass;
+				
 				this.__cards.push(cardElement);
+
 				let parent = this.infoBoxContent;
 				const div = document.createElement('div');
 				div.classList.add("wp-card");
@@ -924,6 +1108,9 @@ class WallpanelView extends HuiView {
 						div.style.setProperty(attr, style[attr]);
 					}
 				}
+				if (config.card_interaction) {
+					div.style.pointerEvents = "initial";
+				}
 				div.append(cardElement);
 				parent.appendChild(div);
 			});
@@ -938,8 +1125,7 @@ class WallpanelView extends HuiView {
 		const inner = document.createElement('div');
 		inner.className = 'wallpanel-progress-inner';
 		inner.id = 'wallpanel-progress-inner';
-		inner.style.animation =
-		    `horizontalProgress ${config.display_time}s linear`;
+		inner.style.animation = `horizontalProgress ${config.display_time}s linear`;
 		div.appendChild(inner);
 		wrapper.appendChild(div);
 	}
@@ -954,6 +1140,28 @@ class WallpanelView extends HuiView {
 		oldDiv.parentNode.replaceChild(newDiv, oldDiv);
 	}
 
+	restartKenBurnsEffect() {
+		if (!config.image_animation_ken_burns) {
+			return;
+		}
+		const activeImage = this.getActiveImageElement();
+		activeImage.style.animation = "none";
+		let delay = Math.floor(config.image_animation_ken_burns_delay * 1000);
+		if (delay < 50) {
+			delay = 50;
+		}
+		setTimeout(function() {
+			activeImage.style.animation = `kenBurnsEffect ${config.display_time + Math.ceil(config.crossfade_time * 2) + 1}s ease`;
+		}, delay);
+	}
+
+	getActiveImageElement() {
+		if (this.imageOneContainer.style.opacity == 1) {
+			return this.imageOne;
+		}
+		return this.imageTwo;
+	}
+	
 	connectedCallback() {
 		this.style.zIndex = 1000;
 		this.style.visibility = 'hidden';
@@ -971,7 +1179,7 @@ class WallpanelView extends HuiView {
 
 		this.imageOneContainer = document.createElement('div');
 		this.imageOneContainer.id = 'wallpanel-screensaver-image-one-container';
-
+		
 		this.imageOne = document.createElement('img');
 		this.imageOne.id = 'wallpanel-screensaver-image-one';
 		this.imageOne.setAttribute('data-loading', false);
@@ -979,11 +1187,11 @@ class WallpanelView extends HuiView {
 		this.imageOneInfoContainer = document.createElement('div');
 		this.imageOneInfoContainer.id = 'wallpanel-screensaver-image-one-info-container';
 
-		this.imageOneInfoExif = document.createElement('div');
-		this.imageOneInfoExif.className = 'wallpanel-screensaver-image-info-exif';
-		this.imageOneInfoExif.id = 'wallpanel-screensaver-image-one-info-exif';
+		this.imageOneInfo = document.createElement('div');
+		this.imageOneInfo.className = 'wallpanel-screensaver-image-info';
+		this.imageOneInfo.id = 'wallpanel-screensaver-image-one-info';
 
-		this.imageOneInfoContainer.appendChild(this.imageOneInfoExif);
+		this.imageOneInfoContainer.appendChild(this.imageOneInfo);
 		this.imageOneContainer.appendChild(this.imageOne);
 		this.imageOneContainer.appendChild(this.imageOneInfoContainer);
 		this.screensaverContainer.appendChild(this.imageOneContainer);
@@ -998,11 +1206,11 @@ class WallpanelView extends HuiView {
 		this.imageTwoInfoContainer = document.createElement('div');
 		this.imageTwoInfoContainer.id = 'wallpanel-screensaver-image-two-info-container';
 
-		this.imageTwoInfoExif = document.createElement('div');
-		this.imageTwoInfoExif.className = 'wallpanel-screensaver-image-info-exif';
-		this.imageTwoInfoExif.id = 'wallpanel-screensaver-image-two-info-exif';
+		this.imageTwoInfo = document.createElement('div');
+		this.imageTwoInfo.className = 'wallpanel-screensaver-image-info';
+		this.imageTwoInfo.id = 'wallpanel-screensaver-image-two-info';
 
-		this.imageTwoInfoContainer.appendChild(this.imageTwoInfoExif);
+		this.imageTwoInfoContainer.appendChild(this.imageTwoInfo);
 		this.imageTwoContainer.appendChild(this.imageTwo);
 		this.imageTwoContainer.appendChild(this.imageTwoInfoContainer);
 		this.screensaverContainer.appendChild(this.imageTwoContainer);
@@ -1063,17 +1271,21 @@ class WallpanelView extends HuiView {
 		this.setDefaultStyle();
 		this.updateStyle();
 
-		if (config.idle_time > 0 && config.image_url) {
-			if (config.image_url.startsWith("media-source://media_source")) {
-				this.updateImageList(this.preloadImages.bind(this));
+		if (config.show_images && config.idle_time > 0) {
+			if (imageSourceType() == "url" || imageSourceType() == "media-entity") {
+				this.preloadImages();
 			}
 			else {
-				this.preloadImages();
+				this.updateImageList(true);
 			}
 		}
 
 		let wp = this;
-		['click', 'touchstart', 'mousemove', 'wheel', 'keydown'].forEach(function(eventName) {
+		let eventNames = ['click', 'touchstart', 'wheel', 'keydown'];
+		if (config.stop_screensaver_on_mouse_move) {
+			eventNames.push('mousemove');
+		}
+		eventNames.forEach(function(eventName) {
 			let click = ['click', 'touchstart'].includes(eventName);
 			window.addEventListener(eventName, event => {
 				wp.handleInteractionEvent(event, click);
@@ -1084,53 +1296,88 @@ class WallpanelView extends HuiView {
 				wp.updateShadowStyle();
 			}
 		});
-
-		[this.imageOne, this.imageTwo].forEach(function(img) {
-			if (!img) return;
-			img.addEventListener('load', function() {
-				img.setAttribute('data-loading', false);
-				if (config.show_exif_info && img.imagePath && /.*\.jpe?g$/i.test(img.imagePath)) {
-					wp.fetchEXIFInfo(img);
-				}
-			});
-			img.addEventListener('error', function() {
-				img.setAttribute('data-loading', false);
-				console.error(`Failed to load image: ${img.src}`);
-				if (img.imagePath) {
-					const idx = wp.imageList.indexOf(img.imagePath);
-					if (idx > -1) {
-						if (config.debug) console.debug(`Removing image from list: ${img.imagePath}`);
-						wp.imageList.splice(idx, 1);
-					}
-					wp.updateImage(img);
-				}
-				else {
-					wp.displayMessage(`Failed to load image: ${img.src}`, 5000)
-				}
-			})
+		window.addEventListener("hass-more-info", event => {
+			if (wp.screensaverStartedAt) {
+				wp.moreInfoDialogToForeground();
+			}
 		});
+		
+		if (config.show_images) {
+			[this.imageOne, this.imageTwo].forEach(function(img) {
+				if (!img) return;
+				img.addEventListener('load', function() {
+					img.setAttribute('data-loading', false);
+					if (config.show_image_info && img.imagePath && /.*\.jpe?g$/i.test(img.imagePath)) {
+						wp.fetchEXIFInfo(img);
+					}
+				});
+				img.addEventListener('error', function() {
+					img.setAttribute('data-loading', false);
+					console.error(`Failed to load image: ${img.src}`);
+					if (img.imagePath) {
+						const idx = wp.imageList.indexOf(img.imagePath);
+						if (idx > -1) {
+							if (config.debug) console.debug(`Removing image from list: ${img.imagePath}`);
+							wp.imageList.splice(idx, 1);
+						}
+						wp.updateImage(img);
+					}
+					else {
+						wp.displayMessage(`Failed to load image: ${img.src}`, 5000)
+					}
+				})
+			});
+		}
+	}
+
+	getMoreInfoDialog() {
+		const moreInfoDialog = elHass.shadowRoot.querySelector("ha-more-info-dialog");
+		if (!moreInfoDialog) {
+			return;
+		}
+		const dialog = moreInfoDialog.shadowRoot.querySelector("ha-dialog");
+		if (dialog) {
+			return dialog;
+		}
+	}
+
+	moreInfoDialogToForeground() {
+		const wp = this;
+		function showDialog(attempt = 1) {
+			const dialog = wp.getMoreInfoDialog();
+			if (dialog) {
+				dialog.style.position = "absolute";
+				dialog.style.zIndex = wp.style.zIndex + 1;
+				return;
+			}
+			if (attempt < 10) {
+				setTimeout(showDialog, 50, attempt + 1);
+			}
+		}
+		showDialog();
 	}
 
 	fetchEXIFInfo(img) {
 		let wp = this;
-		if (exifDataCache[img.imagePath]) {
+		if (imageInfoCache[img.imageDataKey]) {
 			return;
 		}
-		if (exifDataCacheKeys.length >= exifDataCacheMaxSize) {
-			let oldest = exifDataCacheKeys.shift();
-			if (exifDataCache[oldest]) {
-				delete exifDataCache[oldest];
+		if (imageInfoCacheKeys.length >= imageInfoCacheMaxSize) {
+			let oldest = imageInfoCacheKeys.shift();
+			if (imageInfoCache[oldest]) {
+				delete imageInfoCache[oldest];
 			}
 		}
 
 		const tmpImg = document.createElement("img");
-		tmpImg.imagePath = img.imagePath;
 		tmpImg.src = img.src;
+		tmpImg.imagePath = img.imagePath;
+		tmpImg.imageDataKey = img.imageDataKey;
 		getImageData(tmpImg, function() {
 			if (config.debug) console.debug("EXIF data:", tmpImg.exifdata);
-			exifDataCacheKeys.push(tmpImg.imagePath);
-			exifDataCache[tmpImg.imagePath] = tmpImg.exifdata;
-			wp.setEXIFImageInfo(tmpImg.imagePath);
+			imageInfoCacheKeys.push(tmpImg.imageDataKey);
+			imageInfoCache[tmpImg.imageDataKey] = tmpImg.exifdata;
+			wp.setImageDataInfo(tmpImg);
 
 			let exifLong = tmpImg.exifdata["GPSLongitude"];
 			let exifLat = tmpImg.exifdata["GPSLatitude"];
@@ -1146,22 +1393,22 @@ class WallpanelView extends HuiView {
 						let info = JSON.parse(xhr.responseText);
 						if (config.debug) console.debug("nominatim data:", info);
 						if (info && info.address) {
-							exifDataCache[tmpImg.imagePath].address = info.address;
-							wp.setEXIFImageInfo(tmpImg.imagePath);
+							imageInfoCache[tmpImg.imageDataKey].address = info.address;
+							wp.setImageDataInfo(tmpImg);
 						}
 					}
 					else {
 						console.error("nominatim error:", this.status, xhr.status, xhr.responseText);
-						delete exifDataCache[tmpImg.imagePath];
+						delete imageInfoCache[tmpImg.imageDataKey];
 					}
 				}
 				xhr.onerror = function(event) {
 					console.error("nominatim error:", event);
-					delete exifDataCache[tmpImg.imagePath];
+					delete imageInfoCache[tmpImg.imageDataKey];
 				}
 				xhr.ontimeout = function(event) {
 					console.error("nominatim timeout:", event);
-					delete exifDataCache[tmpImg.imagePath];
+					delete imageInfoCache[tmpImg.imageDataKey];
 				}
 				xhr.open("GET", `https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`);
 				//xhr.setRequestHeader("User-Agent", `lovelace-wallpanel/${version}`);
@@ -1171,45 +1418,41 @@ class WallpanelView extends HuiView {
 		});
 	}
 
-	createImagePathExifObject(imagePath) {
-		const imageInfo = {url: imagePath};
-
-		const extractPathComponentToImageInfo = (key, stringToSplitOn) => {
-			const components = imagePath.split(stringToSplitOn);
-			if (components.length > 1 && components[1]) {
-				imageInfo[key] = components[1].substring(1);
-			}
+	setImageDataInfo(img) {
+		let imageInfo = imageInfoCache[img.imageDataKey];
+		let infoElement = null;
+		if (this.imageOne.imageDataKey == img.imageDataKey) {
+			infoElement = this.imageOneInfo;
 		}
-		extractPathComponentToImageInfo('path', 'media-source://media_source');
-		extractPathComponentToImageInfo('relativePath', config.image_url);
-
-		return imageInfo;
-	}
-
-	setEXIFImageInfo(imagePath) {
-		let imgExifData = exifDataCache[imagePath];
-		let exifElement = null;
-		if (this.imageOne.imagePath == imagePath) {
-			exifElement = this.imageOneInfoExif;
+		else if (this.imageTwo.imageDataKey == img.imageDataKey) {
+			infoElement = this.imageTwoInfo;
 		}
-		else if (this.imageTwo.imagePath == imagePath) {
-			exifElement = this.imageTwoInfoExif;
-		}
-		if (!exifElement) {
+		if (!infoElement) {
 			return;
 		}
 
-		if ((!config.show_exif_info) || (!exifDataCache[imagePath])) {
-			exifElement.innerHTML = "";
+		if ((!config.show_image_info) || (!imageInfo)) {
+			infoElement.innerHTML = "";
 			return;
 		}
 
-		let html = config.exif_info_template;
+		let html = config.image_info_template;
 		html = html.replace(/\${([^}]+)}/g, (match, tags, offset, string) => {
-			if (!imgExifData) {
+			if (!imageInfo) {
 				return "";
 			}
-			imgExifData["image"] = this.createImagePathExifObject(imagePath);;
+			if (img.imagePath) {
+				imageInfo.image = {
+					url: img.imagePath,
+					path: img.imagePath.replace("media-source://media_source/", ""),
+					relativePath: img.imagePath.replace(config.image_url, "").replace(/^\/+/, ""),
+					folderName: ""
+				};
+				const parts = img.imagePath.split("/");
+				if (parts.length >= 2) {
+					imageInfo.image.folderName = parts[parts.length - 2]; 
+				}
+			}
 			let prefix = "";
 			let suffix = "";
 			let options = null;
@@ -1242,7 +1485,7 @@ class WallpanelView extends HuiView {
 			for (let i=0; i<tagList.length; i++) {
 				tag = tagList[i];
 				let keys = tag.replace(/\s/g, '').split(".");
-				val = imgExifData;
+				val = imageInfo;
 				keys.forEach(key => {
 					if (val) {
 						val = val[key];
@@ -1260,36 +1503,51 @@ class WallpanelView extends HuiView {
 				if (!options) {
 					options = {year: "numeric", month: "2-digit", day: "2-digit"};
 				}
-				val = date.toLocaleDateString(undefined, options);
+				val = date.toLocaleDateString(elHass.__hass.locale.language, options);
 			}
 			return prefix + val + suffix;
 		});
-		exifElement.innerHTML = html;
+		infoElement.innerHTML = html;
 	}
 
 	reconfigure() {
-		this.updateImageList();
+		if (config.show_images && config.idle_time > 0 && this.currentImageUrl != config.image_url) {
+			this.currentImageUrl = config.image_url;
+			if (imageSourceType() == "url" || imageSourceType() == "media-entity") {
+				this.preloadImages();
+			}
+			else {
+				this.updateImageList(true);
+			}
+		}
 		this.setDefaultStyle();
 		this.updateStyle();
 		this.createInfoBoxContent();
 	}
 
-	updateImageList(callback) {
-		if (!config.image_url || !config.image_url.startsWith("media-source://media_source")) return;
-		if (this.updatingImageList) return;
-		this.lastImageListUpdate = Date.now();
+	updateImageList(preload = false) {
+		if (!config.image_url || this.updatingImageList) return;
+
+		if (imageSourceType() == "unsplash-api") {
+			this.updateImageListFromUnsplashAPI(preload);
+		}
+		else if (imageSourceType() == "media-source") {
+			this.updateImageListFromMediaSource(preload);
+		}
+	}
+
+	updateImageListFromMediaSource(preload) {
 		this.updatingImageList = true;
+		this.lastImageListUpdate = Date.now();
 		let mediaContentId = config.image_url;
 		let wp = this;
 		findImages(this.hass, mediaContentId).then(
 			result => {
 				this.imageList = result.sort();
-				if (config.debug) {
-					console.debug("Image list is now:", this.imageList);
-				}
+				if (config.debug) console.debug("Image list from media-source is now:", this.imageList);
 				this.updatingImageList = false;
-				if (callback) {
-					callback();
+				if (preload) {
+					wp.preloadImages();
 				}
 			},
 			error => {
@@ -1301,24 +1559,72 @@ class WallpanelView extends HuiView {
 		)
 	}
 
-	updateImageFromUrl(img) {
+	updateImageListFromUnsplashAPI(preload) {
+		this.updatingImageList = true;
+		this.lastImageListUpdate = Date.now();
+		let wp = this;
+		let urls = [];
+		let data = {};
+		const http = new XMLHttpRequest();
+		http.responseType = "json";
+		// count: The number of photos to return. (Default: 1; max: 30)
+		http.open("GET", `${config.image_url}&count=30`, true);
+		http.onload = function() {
+			if (http.status == 200 || http.status === 0) {
+				if (config.debug) console.debug(`Got unsplash API response`);
+				http.response.forEach(entry => {
+					if (config.debug) console.debug(entry);
+					const url = entry.urls.raw + "&w=${width}&h=${height}&auto=format";
+					urls.push(url);
+					data[url] = entry;
+				});
+			} else {
+				console.warn("Unsplash API error, get random images", http);
+				urls.push("https://source.unsplash.com/random/${width}x${height}?sig=${timestamp}");
+			}
+			wp.updatingImageList = false;
+			wp.imageList = urls;
+			imageInfoCache = data;
+			if (config.debug) console.debug("Image list from unsplash is now:", wp.imageList);
+			if (preload) {
+				wp.preloadImages();
+			}
+		};
+		if (config.debug) console.debug(`Unsplash API request: ${config.image_url}`);
+		http.send();
+	}
+
+	updateImageFromUrl(img, url) {
 		let width = this.screensaverContainer.clientWidth;
 		let height = this.screensaverContainer.clientHeight;
 		let timestamp_ms = Date.now();
 		let timestamp = Math.floor(timestamp_ms / 1000);
-		let imageUrl = config.image_url;
-		imageUrl = imageUrl.replace(/\${width}/g, width);
-		imageUrl = imageUrl.replace(/\${height}/g, height);
-		imageUrl = imageUrl.replace(/\${timestamp_ms}/g, timestamp_ms);
-		imageUrl = imageUrl.replace(/\${timestamp}/g, timestamp);
-		if (config.debug) console.debug(`Updating image '${img.id}' from '${imageUrl}'`);
-		img.src = imageUrl;
+		url = url.replace(/\${width}/g, width);
+		url = url.replace(/\${height}/g, height);
+		url = url.replace(/\${timestamp_ms}/g, timestamp_ms);
+		url = url.replace(/\${timestamp}/g, timestamp);
+		if (config.debug) console.debug(`Updating image '${img.id}' from '${url}'`);
+		if (imageSourceType() == "media-entity") {
+			this.updateImageUrlWithHttpFetch(img, url);
+		} else {
+			img.src = url;
+		}
 	}
 
-	updateImageFromMediaSource(img) {
-		if (this.imageList.length == 0) {
-			return;
-		}
+	updateImageUrlWithHttpFetch(img, url) {
+		var http = new XMLHttpRequest();
+		http.onload = function() {
+			if (this.status == 200 || this.status === 0) {
+				img.src = "data:image/jpeg;base64," + arrayBufferToBase64(http.response);
+			}
+			http = null;
+		};
+		http.open("GET", url, true);
+		http.responseType = "arraybuffer";
+		http.send(null);
+	}
+
+	updateImageIndex() {
 		if (config.image_order == "random") {
 			if (this.imageList.length > 1) {
 				let imageIndex = this.imageIndex;
@@ -1334,10 +1640,18 @@ class WallpanelView extends HuiView {
 		if (this.imageIndex >= this.imageList.length) {
 			this.imageIndex = 0;
 		}
+	}
+
+	updateImageFromMediaSource(img) {
+		if (this.imageList.length == 0) {
+			return;
+		}
+		this.updateImageIndex();
 		let imagePath = this.imageList[this.imageIndex];
 		if (!imagePath) {
 			return;
 		}
+		img.imageDataKey = imagePath;
 		img.imagePath = imagePath;
 		imagePath = imagePath.replace(/^media-source:\/\/media_source/, '/media');
 		this.hass.callWS({
@@ -1346,7 +1660,9 @@ class WallpanelView extends HuiView {
 			expires: 60
 		}).then(
 			result => {
-				img.src = `${document.location.origin}${result.path}`;
+				let src = `${document.location.origin}${result.path}`;
+				if (config.debug) console.debug(`Setting image src: ${src}`);
+				img.src = src;
 			},
 			error => {
 				console.error("auth/sign_path error:", error);
@@ -1354,29 +1670,88 @@ class WallpanelView extends HuiView {
 		);
 	}
 
+	updateImageFromUnsplashAPI(img) {
+		if (this.imageList.length == 0) {
+			return;
+		}
+		this.updateImageIndex();
+		img.imageDataKey = this.imageList[this.imageIndex];
+		this.updateImageFromUrl(img, this.imageList[this.imageIndex]);
+	}
+
+	updateImageFromMediaEntity(img) {
+		const imageEntity = config.image_url.replace(/^media-entity:\/\//, '')
+		const entity = this.hass.states[imageEntity];
+		if (!entity || !entity.attributes || !entity.attributes.entity_picture) {
+			return;
+		}
+		let entityPicture = entity.attributes.entity_picture;
+		let querySuffix = entityPicture.indexOf('?') > 0 ? '&' : '?';
+		querySuffix += "width=${width}&height=${height}";
+		this.updateImageFromUrl(img, entityPicture + querySuffix);
+	}
+
 	updateImage(img) {
-		if (!config.image_url) {
+		if (!config.show_images) {
 			return;
 		}
 		img.setAttribute('data-loading', true);
 		img.imagePath = null;
 
-		if (config.image_url.startsWith("media-source://media_source")) {
+		if (imageSourceType() == "media-source") {
 			this.updateImageFromMediaSource(img);
 		}
-		else {
-			this.updateImageFromUrl(img);
+		else if (imageSourceType() == "unsplash-api") {
+			this.updateImageFromUnsplashAPI(img);
 		}
+		else if (imageSourceType() == "media-entity") {
+			this.updateImageFromMediaEntity(img);
+		}
+		else {
+			this.updateImageFromUrl(img, config.image_url);
+		}
+	}
 
+	preloadImage(img) {
+		if ((this.updatingImageList) || (img.getAttribute('data-loading') == "true") || (this.screensaverStartedAt && img.parentNode.style.opacity == 1)) {
+			return;
+		}
+		this.updateImage(img);
+		const wp = this;
+		setTimeout(function() {
+			wp.setImageDataInfo(img);
+		}, 1000);
 	}
 
 	preloadImages() {
 		if (config.debug) console.debug("Preloading images");
-		this.updateImage(this.imageOne);
-		let wp = this;
-		setTimeout(function() {
-			wp.updateImage(wp.imageTwo);
-		}, 1000);
+		this.preloadImage(this.imageOne);
+
+		if (imageSourceType() !== "media-entity") {
+			const wp = this;
+			setTimeout(function() {
+				wp.preloadImage(wp.imageTwo);
+			}, 1000);
+		}
+	}
+
+	switchActiveEntityImage(crossfadeMillis = null) {
+		this.lastImageUpdate = Date.now();
+		let next = this.imageTwoContainer.children[0];
+		let current = this.imageOneContainer.children[0];
+		if (this.imageTwoContainer.style.opacity == 1) {
+			next = this.imageOneContainer.children[0];
+			current = this.imageTwoContainer.children[0];
+		}
+		const wp = this;
+		const onLoad = function(e) {
+			next.removeEventListener('load', onLoad);
+			if (next.complete && next.src !== current.src) {
+				wp.switchActiveImage(crossfadeMillis)
+			}
+		}
+		next.addEventListener('load', onLoad);
+		this.updateImage(next);
 	}
 
 	switchActiveImage(crossfadeMillis = null) {
@@ -1391,21 +1766,16 @@ class WallpanelView extends HuiView {
 
 		let curActive = this.imageOneContainer;
 		let newActive = this.imageTwoContainer;
-		let exifElement = this.imageTwoInfoExif;
+		let infoElement = this.imageTwoInfo;
 		if (this.imageTwoContainer.style.opacity == 1) {
 			curActive = this.imageTwoContainer;
 			newActive = this.imageOneContainer;
-			exifElement = this.imageOneInfoExif;
+			infoElement = this.imageOneInfo;
 		}
 		if (config.debug) console.debug(`Switching active image to '${newActive.id}'`);
 
 		let newImg = newActive.children[0];
-		if (newImg.imagePath) {
-			this.setEXIFImageInfo(newImg.imagePath);
-		}
-		else {
-			exifElement.innerHTML = "";
-		}
+		this.setImageDataInfo(newImg);
 
 		if (newActive.style.opacity != 1) {
 			newActive.style.opacity = 1;
@@ -1415,12 +1785,16 @@ class WallpanelView extends HuiView {
 		}
 
 		this.restartProgressBarAnimation();
+		this.restartKenBurnsEffect();
 
 		// Load next image after fade out
-		let wp = this;
-		setTimeout(function() {
-			wp.updateImage(curActive.children[0]);
-		}, crossfadeMillis);
+		// only if not media-entity, which will not yet have changed already
+		if (imageSourceType() !== "media-entity") {
+			let wp = this;
+			setTimeout(function() {
+				wp.updateImage(curActive.children[0]);
+			}, crossfadeMillis);
+		}
 	}
 
 	displayMessage(message, timeout=15000) {
@@ -1454,6 +1828,7 @@ class WallpanelView extends HuiView {
 	}
 
 	startScreensaver() {
+		updateConfig();
 		if (config.debug) console.debug("Start screensaver");
 		if (!isActive()) {
 			if (config.debug) console.debug("Wallpanel not active, not starting screensaver");
@@ -1463,6 +1838,7 @@ class WallpanelView extends HuiView {
 		this.updateStyle();
 		this.setupScreensaver();
 		this.restartProgressBarAnimation();
+		this.restartKenBurnsEffect();
 
 		if (config.keep_screen_on_time > 0) {
 			let wp = this;
@@ -1478,11 +1854,8 @@ class WallpanelView extends HuiView {
 		this.lastImageUpdate = Date.now();
 		this.screensaverStartedAt = Date.now();
 		this.screensaverStoppedAt = null;
-		if (document.body.style.overflow != 'hidden') {
-			this.bodyOverflowOrig = document.body.style.overflow;
-			document.body.style.overflow = 'hidden';
-		}
-
+		document.documentElement.style.overflow = 'hidden';
+		
 		this.createInfoBoxContent();
 
 		this.style.visibility = 'visible';
@@ -1491,10 +1864,15 @@ class WallpanelView extends HuiView {
 		this.setScreensaverEntityState();
 
 		if (config.screensaver_stop_navigation_path) {
-			setTimeout(() => {
+			this.screensaverStopNavigationPathTimeout = setTimeout(() => {
+				skipDisableScreensaverOnLocationChanged = true;
 				navigate(config.screensaver_stop_navigation_path);
-			}, (config.fade_in_time+1)*1000);
+				setTimeout(() => {
+					skipDisableScreensaverOnLocationChanged = false;
+				}, 250);
+			}, (config.fade_in_time + 1) * 1000);
 		}
+
 	}
 
 	stopScreensaver() {
@@ -1502,8 +1880,12 @@ class WallpanelView extends HuiView {
 
 		this.screensaverStartedAt = null;
 		this.screensaverStoppedAt = Date.now();
-		document.body.style.overflow = this.bodyOverflowOrig;
-
+		
+		document.documentElement.style.removeProperty("overflow");
+		
+		if (this.screensaverStopNavigationPathTimeout) {
+			clearTimeout(this.screensaverStopNavigationPathTimeout);
+		}
 		this.hideMessage();
 
 		this.style.transition = '';
@@ -1521,7 +1903,20 @@ class WallpanelView extends HuiView {
 	}
 
 	updateScreensaver() {
-		let now = Date.now();
+		let currentDate = new Date();
+		let now = currentDate.getTime();
+
+		if (this.energyCollectionUpdateEnabled && now - this.lastEnergyCollectionUpdate >= this.energyCollectionUpdateInterval * 1000) {
+			if (this.hass.connection._energy_wallpanel) {
+				this.hass.connection._energy_wallpanel.refresh();
+			}
+			this.lastEnergyCollectionUpdate = now;
+		}
+		if (this.infoBoxContentCreatedDate && this.infoBoxContentCreatedDate.getDate() != currentDate.getDate()) {
+			// Day changed since creation of info box content.
+			// Recreate to update energy cards / energy collection start / end date.
+			this.createInfoBoxContent();
+		}
 
 		if (config.info_move_interval > 0 && now - this.lastMove >= config.info_move_interval*1000) {
 			if (config.info_move_pattern === 'random') {
@@ -1539,9 +1934,13 @@ class WallpanelView extends HuiView {
 			if (config.debug) console.debug("Setting screen to black");
 			this.screensaverOverlay.style.background = '#000000';
 		}
-		else if (config.image_url) {
+		else if (config.show_images) {
 			if (now - this.lastImageUpdate >= config.display_time*1000) {
-				this.switchActiveImage();
+				if (imageSourceType() === "media-entity") {
+					this.switchActiveEntityImage();
+				} else {
+					this.switchActiveImage();
+				}
 			}
 			if (now - this.lastImageListUpdate >= config.image_list_update_interval*1000) {
 				this.updateImageList();
@@ -1558,8 +1957,18 @@ class WallpanelView extends HuiView {
 
 		if (config.debug) {
 			let html = '';
+			let conf = {};
+			for (const key in config) {
+				if (["profiles"].includes(key)) {
+					conf[key] = "...";
+				}
+				else {
+					conf[key] = config[key];
+				}
+			}
+			
 			html += `Version: ${version}<br/>`;
-			html += `Config: ${JSON.stringify(config)}<br/>`;
+			html += `Config: ${JSON.stringify(conf)}<br/>`;
 			html += `Fullscreen: ${fullscreen}<br/>`;
 			html += `Screensaver started at: ${wallpanel.screensaverStartedAt}<br/>`;
 			html += `Screen wake lock: enabled=${screenWakeLock.enabled} native=${screenWakeLock.nativeWakeLockSupported} lock=${screenWakeLock._lock} player=${screenWakeLock._player} error=${screenWakeLock.error}<br/>`;
@@ -1581,34 +1990,71 @@ class WallpanelView extends HuiView {
 		}
 	}
 
-	handleInteractionEvent(e, isClick) {
+	handleInteractionEvent(evt, isClick) {
 		let now = Date.now();
 		this.idleSince = now;
-		if (this.messageBoxTimeout) {
-			// Message on screen
-			this.blockEventsUntil = now + 1000;
-		}
-		if (isClick) {
-			this.hideMessage();
-			this.setupScreensaver();
-		}
-		if (this.screensaverStartedAt || this.blockEventsUntil > now) {
-			if (isClick) {
-				e.preventDefault();
+		
+		if (! this.screensaverStartedAt) {
+			if (this.blockEventsUntil > now) {
+				if (isClick) {
+					evt.preventDefault();
+				}
+				evt.stopImmediatePropagation();
 			}
-			e.stopImmediatePropagation();
-		}
-		if (! this.screensaverStartedAt || this.blockEventsUntil > now) {
+			if (isClick) {
+				this.setupScreensaver();
+			}
 			return;
 		}
-		if (e instanceof MouseEvent || e instanceof TouchEvent) {
-			let x = e.clientX;
-			let right = 0.0
-			if (!x && e.touches && e.touches[0]) {
-				x = e.touches[0].clientX;
+
+		// Screensaver is active
+		if (this.messageBoxTimeout) {
+			// Message on screen
+			if (isClick) {
+				this.blockEventsUntil = now + 1000;
+				this.hideMessage();
+				return;
 			}
+		}
+		
+		let x = evt.clientX;
+		let y = evt.clientY;
+		if (!x && evt.touches && evt.touches[0]) {
+			x = evt.touches[0].clientX;
+		}
+		if (!y && evt.touches && evt.touches[0]) {
+			y = evt.touches[0].clientY;
+		}
+
+		if (config.card_interaction) {
+			if (this.getMoreInfoDialog()) {
+				return;
+			}
+			const boxIds = ["wallpanel-screensaver-info-box-content", "wallpanel-screensaver-fixed-info-box-content"];
+			for (let i=0; i<boxIds.length; i++) {
+				const contentBox = this.shadowRoot.getElementById(boxIds[i]);
+				const pos = contentBox.getBoundingClientRect();
+				//console.log("pos: ", x, y, pos.left, pos.right, pos.top, pos.bottom);
+				if (x >= pos.left && x <= pos.right && y >= pos.top && y <= pos.bottom) {
+					if (config.debug) console.debug(`Event on ${boxIds[i]}`);
+					return;
+				}
+			}
+		}
+
+		if (isClick) {
+			evt.preventDefault();
+		}
+		evt.stopImmediatePropagation();
+		
+		if (evt instanceof MouseEvent || evt instanceof TouchEvent) {
+			let right = 0.0;
+			let bottom = 0.0;
 			if (x) {
 				right = (this.screensaverContainer.clientWidth - x) / this.screensaverContainer.clientWidth;
+			}
+			if (y) {
+				bottom = (this.screensaverContainer.clientHeight - y) / this.screensaverContainer.clientHeight;
 			}
 			if (right <= 0.15) {
 				if (
@@ -1620,19 +2066,27 @@ class WallpanelView extends HuiView {
 				}
 				return;
 			}
+			else if (right >= 0.40 && right <= 0.60 && bottom <= 0.10) {
+				let now = new Date();
+				if (isClick && now - this.lastClickTime < 500) {
+					this.clickCount += 1;
+					if (this.clickCount == 3) {
+						config.debug = ! config.debug;
+						this.debugBox.style.visibility = config.debug ? 'visible' : 'hidden';
+					}
+				}
+				else {
+					this.clickCount = 1;
+				}
+				this.lastClickTime = now;
+				return;
+			}
 		}
 		// Prevent interaction with the dashboards after screensaver was stopped
 		this.blockEventsUntil = now + config.control_reactivation_time * 1000;
 		this.stopScreensaver();
 	}
 }
-
-
-updateConfig();
-customElements.define("wallpanel-view", WallpanelView);
-wallpanel = document.createElement("wallpanel-view");
-document.body.appendChild(wallpanel);
-
 
 function activateWallpanel() {
 	setToolbarHidden(config.hide_toolbar);
@@ -1648,8 +2102,10 @@ function deactivateWallpanel() {
 	setSidebarHidden(false);
 }
 
-
-window.setInterval(() => {
+function locationChanged() {
+	if (config.stop_screensaver_on_location_change && !skipDisableScreensaverOnLocationChanged) {
+		wallpanel.stopScreensaver();
+	}
 	let pl = getHaPanelLovelace();
 	let changed = false;
 	if (!pl && activePanelUrl) {
@@ -1681,8 +2137,19 @@ window.setInterval(() => {
 			deactivateWallpanel();
 		}
 	}
-}, 1000);
+}
 
+setTimeout(function() {
+	updateConfig();
+	customElements.define("wallpanel-view", WallpanelView);
+	wallpanel = document.createElement("wallpanel-view");
+	elHaMain.shadowRoot.appendChild(wallpanel);
+	locationChanged();
+	window.addEventListener("location-changed", event => {
+		if (config.debug) console.debug("location-changed", event);
+		locationChanged();
+	});
+}, 25);
 
 
 /**
@@ -2013,6 +2480,15 @@ function imageHasData(img) {
 	return !!(img.exifdata);
 }
 
+function arrayBufferToBase64(buffer) {
+    var binary = '';
+    var bytes = new Uint8Array( buffer );
+    var len = bytes.byteLength;
+    for (var i = 0; i < len; i++) {
+        binary += String.fromCharCode( bytes[ i ] );
+    }
+    return btoa(binary);
+}
 
 function base64ToArrayBuffer(base64, contentType) {
 	contentType = contentType || base64.match(/^data\:([^\;]+)\;base64,/mi)[1] || ''; // e.g. 'data:image/jpeg;base64,...' => 'image/jpeg'
@@ -2192,11 +2668,33 @@ var IptcFieldMap = {
 	0x37 : 'dateCreated',
 	0x50 : 'byline',
 	0x55 : 'bylineTitle',
-	0x7A : 'captionWriter',
+	0x5A : 'city',
+	0x5C : 'sublocation',
+	0x5E : 'state',
+	0x64 : 'countryCode',
+	0x65 : 'countryName',
+	0x67 : 'OriginalTransmissionReference',
 	0x69 : 'headline',
+	0x6D : 'credit',
 	0x74 : 'copyright',
+	0x76 : 'contact',
+	0x78 : 'caption',
+	0x7A : 'captionWriter',
+	0x7D : 'rasterizedCaption',
+	0x82 : 'imageType',
+	0x83 : 'imageOrientation',
+	0x87 : 'languageID',
+	0x96 : 'audioType',
+	0x97 : 'audioSamplingRate',
+	0x98 : 'audioSamplingRes',
+	0x99 : 'audioDuration',
+	0x9A : 'audioOutcue',
+	0xC8 : 'previewFileFormat',
+	0xC9 : 'previewFileFormatVer',
+	0xCA : 'previewData',
 	0x0F : 'category'
 };
+
 function readIPTCData(file, startOffset, sectionLength){
 	var dataView = new DataView(file);
 	var data = {};
@@ -2411,11 +2909,63 @@ function readThumbnailImage(dataView, tiffStart, firstIFDOffset, bigEnd){
 }
 
 function getStringFromDB(buffer, start, length) {
+	// Manage UTF-8 string
+	//use of an Array of bytes convert in hexa (arOut[])
 	var outstr = "";
+	var arOut = [];
+	var j = 0;
 	for (var n = start; n < start+length; n++) {
-		outstr += String.fromCharCode(buffer.getUint8(n));
+		//outstr += String.fromCharCode(buffer.getUint8(n));
+		arOut[j] = '0x' + buffer.getUint8(n).toString(16);
+		j++;
 	}
+	//transform array to UTF-8 String with Utf8ArrayToStr function
+	outstr =  Utf8ArrayToStr(arOut);
 	return outstr;
+}
+
+// adopted from:
+//   http://www.onicos.com/staff/iz/amuse/javascript/expert/utf.txt
+
+/* utf.js - UTF-8 <=> UTF-16 convertion
+ *
+ * Copyright (C) 1999 Masanao Izumo <iz@onicos.co.jp>
+ * Version: 1.0
+ * LastModified: Dec 25 1999
+ * This library is free.  You can redistribute it and/or modify it.
+ */
+
+function Utf8ArrayToStr(array) {
+	var out, i, len, c;
+	var char2, char3;
+
+	out = "";
+	len = array.length;
+	i = 0;
+	while(i < len) {
+		c = array[i++];
+		switch(c >> 4) {
+			case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7:
+			// 0xxxxxxx
+			out += String.fromCharCode(c);
+			break;
+			case 12: case 13:
+			// 110x xxxx   10xx xxxx
+			char2 = array[i++];
+			out += String.fromCharCode(((c & 0x1F) << 6) | (char2 & 0x3F));
+			break;
+			case 14:
+			// 1110 xxxx  10xx xxxx  10xx xxxx
+			char2 = array[i++];
+			char3 = array[i++];
+			out += String.fromCharCode(((c & 0x0F) << 12) |
+							((char2 & 0x3F) << 6) |
+							((char3 & 0x3F) << 0));
+			break;
+		}
+	}
+
+	return out;
 }
 
 function readEXIFData(file, start) {
@@ -2698,6 +3248,20 @@ EXIF.getAllIptcTags = function(img) {
 	}
 	return tags;
 }
+
+//***************************************************************************
+// Written by Stanko Milosev
+// Published: 30 January 2015
+// http://www.milosev.com/425-reading-exif-meta-data-from-jpeg-image-files.html
+// gps conversion for google map use
+EXIF.ConvertDMSToDD = function (degrees, minutes, seconds, direction) {
+	var dd = degrees + minutes/60 + seconds/(60*60);
+	if (direction == "S" || direction == "W") {
+		dd = dd * -1;
+	} // Don't do anything for N or E
+	return dd;
+}
+//*******************************************************************************
 
 EXIF.pretty = function(img) {
 	if (!imageHasData(img)) return "";
