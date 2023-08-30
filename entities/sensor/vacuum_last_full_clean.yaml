@@ -1,0 +1,6 @@
+# from https://community.home-assistant.io/t/template-to-show-days-days-hours-passed-since-switch-on/140566/4
+platform: template
+sensors:
+  vacuum_time_since_last_clean:
+    friendly_name: "time since last full clean"
+    value_template: "{{ now() - state_attr('automation.vacuum_when_away','last_triggered') }}"

@@ -21,12 +21,16 @@
                       "name": "imagiSuck"
                     },
                     {
-                      "entity": "sensor.rockrobo_vacuum_v1_last_clean_area",
-                      "name": "Last clean area"
+                      "entity": "sensor.vacuum_time_since_last_clean",
+                      "secondary_info": "none"
                     },
                     {
                       "entity": "sensor.rockrobo_vacuum_v1_last_clean_end",
                       "name": "Last clean end"
+                    },
+                    {
+                      "entity": "sensor.rockrobo_vacuum_v1_last_clean_area",
+                      "name": "Last clean area"
                     },
                     {
                       "entity": "sensor.cat_toilet_daily_use"
