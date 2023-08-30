@@ -14,7 +14,26 @@
     at: 03:00:00
   condition: []
   action:
-  - service: script.reset_velux
+  - type: turn_off
+    device_id: 6cdac090a18c759a208aeebf1e08e6c0
+    entity_id: switch.powerplug
+    domain: switch
+  - delay:
+      hours: 0
+      minutes: 0
+      seconds: 10
+      milliseconds: 0
+  - type: turn_on
+    device_id: 6cdac090a18c759a208aeebf1e08e6c0
+    entity_id: switch.powerplug
+    domain: switch
+  - delay:
+      hours: 0
+      minutes: 1
+      seconds: 0
+      milliseconds: 0
+    alias: Give the device time to get back on the network
+  - service: velux.reboot_gateway
     data: {}
   mode: single
 - id: '1682952005836'
