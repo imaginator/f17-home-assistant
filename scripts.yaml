@@ -28,31 +28,6 @@ zones2:
       zone: "{{ expand('group.vacuum_zones') | selectattr('state', 'eq', 'on')\n |
         map(attribute='attributes.cleaning_zone') | list }}\n"
   mode: single
-reset_velux:
-  alias: Reset Velux Controller
-  sequence:
-  - type: turn_off
-    device_id: 6cdac090a18c759a208aeebf1e08e6c0
-    entity_id: switch.powerplug
-    domain: switch
-  - delay:
-      hours: 0
-      minutes: 0
-      seconds: 3
-      milliseconds: 0
-  - type: turn_on
-    device_id: 6cdac090a18c759a208aeebf1e08e6c0
-    entity_id: switch.powerplug
-    domain: switch
-  - delay:
-      hours: 0
-      minutes: 1
-      seconds: 0
-      milliseconds: 0
-  - service: velux.reboot_gateway
-    data: {}
-  mode: single
-  icon: mdi:window-open
 vacuum_rebuild_map:
   alias: 'vacuum: rebuild map'
   sequence:
@@ -63,23 +38,51 @@ vacuum_rebuild_map:
   - service: vacuum.start
     data:
       entity_id: vacuum.rockrobo_vacuum_v1
-  - delay:
-      seconds: 20
-  - service: vacuum.stop
-    data:
-      entity_id: vacuum.rockrobo_vacuum_v1
+    alias: Start vacuuming to delete the existing map
   - delay:
       hours: 0
       minutes: 0
       seconds: 10
       milliseconds: 0
+  - wait_for_trigger:
+    - platform: state
+      entity_id:
+      - vacuum.rockrobo_vacuum_v1
+      to: cleaning
+      for:
+        hours: 0
+        minutes: 0
+        seconds: 10
   - service: vacuum.stop
-    data:
+    data: {}
+    target:
+      entity_id: vacuum.rockrobo_vacuum_v1
+  - delay:
+      hours: 0
+      minutes: 0
+      seconds: 2
+      milliseconds: 0
+  - service: vacuum.stop
+    data: {}
+    target:
+      entity_id: vacuum.rockrobo_vacuum_v1
+  - delay:
+      hours: 0
+      minutes: 0
+      seconds: 2
+      milliseconds: 0
+  - service: vacuum.stop
+    data: {}
+    target:
       entity_id: vacuum.rockrobo_vacuum_v1
   - wait_for_trigger:
     - platform: state
-      entity_id: vacuum.rockrobo_vacuum_v1
+      entity_id:
+      - vacuum.rockrobo_vacuum_v1
       to: idle
+  - delay:
+      seconds: 20
+    alias: Vacuum needs some time to internally flip the map otherwise it goes backwards
   - service: vacuum.send_command
     data:
       entity_id: vacuum.rockrobo_vacuum_v1
