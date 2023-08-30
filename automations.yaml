@@ -57,11 +57,15 @@
       before: '21:00:00'
     - condition: template
       value_template: '{{ now() - state_attr(''automation.vacuum_when_away'', ''last_triggered'')
-        > timedelta(hours=42) }}'
+        > timedelta(hours=24) }}'
     - condition: state
       entity_id: vacuum.rockrobo_vacuum_v1
       state: docked
   action:
+  - service: notify.mobile_app_pixel_6_pro
+    data:
+      title: imagiSuck
+      message: vacuuming since you are away
   - service: xiaomi_miio.vacuum_clean_zone
     target:
       entity_id: vacuum.rockrobo_vacuum_v1
@@ -89,8 +93,8 @@
     entity_id: switch.irrigation
     domain: switch
   - delay:
-      hours: 3
-      minutes: 30
+      hours: 1
+      minutes: 0
       seconds: 0
       milliseconds: 0
   - type: turn_off
@@ -236,9 +240,8 @@
       entity_id: person.simon
       state: home
     - condition: template
-      value_template: '{{ now() - state_attr(''automation.vacuum_empty_the_bin'',
-        ''last_triggered'') | default(as_datetime(0), true)  > timedelta(hours=48)
-        }}'
+      value_template: '{{ now() - state_attr(''automation.new_automation'', ''last_triggered'')
+        | default(as_datetime(0), true)  > timedelta(hours=48) }}'
   action:
   - service: xiaomi_miio.vacuum_goto
     data:
@@ -317,6 +320,9 @@
     - condition: numeric_state
       entity_id: sensor.bedroom1_temperature
       above: 23
+    - condition: state
+      entity_id: binary_sensor.wind_alarm
+      state: 'off'
   action:
   - service: cover.close_cover
     data: {}
@@ -380,7 +386,7 @@
   - condition: numeric_state
     entity_id: sun.sun
     attribute: elevation
-    above: 36
+    above: 20
   action:
   - service: cover.set_cover_position
     data:
@@ -432,10 +438,15 @@
     attribute: azimuth
     above: 228
   condition:
-  - condition: numeric_state
-    entity_id: sun.sun
-    attribute: elevation
-    above: 42
+  - condition: and
+    conditions:
+    - condition: state
+      entity_id: binary_sensor.wind_alarm
+      state: 'off'
+    - condition: numeric_state
+      entity_id: weather.home
+      attribute: temperature
+      above: 15
   action:
   - service: cover.close_cover
     data: {}
@@ -668,12 +679,12 @@
   - platform: numeric_state
     entity_id: sun.sun
     attribute: azimuth
-    above: 95
+    above: 90
   condition:
   - condition: numeric_state
     entity_id: sun.sun
     attribute: elevation
-    above: 25
+    above: 10
   action:
   - service: cover.close_cover
     data: {}
@@ -755,4 +766,4 @@
     data: {}
     target:
       entity_id: switch.tablet_{{ trigger.to_state.object_id }}_screen
-  mode: parallel
+  mode: restart
