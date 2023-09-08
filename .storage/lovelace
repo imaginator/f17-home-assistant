@@ -28,83 +28,34 @@
           "title": "overview",
           "path": "rooms",
           "type": "sidebar",
+          "visible": [
+            {
+              "user": "7b42b00aeb6d41a8aa1ad78efcc51209"
+            },
+            {
+              "user": "5df90d578d5c42109ab1296b3e022c5e"
+            },
+            {
+              "user": "7dfaf87f809044188ef0fdbe177006c6"
+            }
+          ],
           "badges": [],
           "cards": [
             {
-              "type": "history-graph",
-              "entities": [
-                {
-                  "entity": "binary_sensor.lounge"
-                },
-                {
-                  "entity": "binary_sensor.study"
-                },
-                {
-                  "entity": "binary_sensor.kitchen"
-                },
-                {
-                  "entity": "binary_sensor.hallwaylarge"
-                },
-                {
-                  "entity": "binary_sensor.bathroomguest"
-                },
-                {
-                  "entity": "binary_sensor.bathroommain"
-                },
-                {
-                  "entity": "binary_sensor.bedroom1"
-                },
-                {
-                  "entity": "binary_sensor.bedroom2"
-                },
-                {
-                  "entity": "binary_sensor.bedroom3"
-                },
-                {
-                  "entity": "binary_sensor.cat_toilet"
-                },
-                {
-                  "entity": "person.simon"
-                }
-              ],
-              "hours_to_show": 1
+              "show_current": true,
+              "show_forecast": true,
+              "type": "weather-forecast",
+              "entity": "weather.forecast_f17",
+              "forecast_type": "legacy",
+              "secondary_info_attribute": "humidity",
+              "view_layout": {
+                "position": "main"
+              }
             },
             {
               "type": "history-graph",
               "entities": [
-                {
-                  "entity": "binary_sensor.lounge"
-                },
-                {
-                  "entity": "binary_sensor.study"
-                },
-                {
-                  "entity": "binary_sensor.kitchen"
-                },
-                {
-                  "entity": "binary_sensor.hallwaylarge"
-                },
-                {
-                  "entity": "binary_sensor.bathroomguest"
-                },
-                {
-                  "entity": "binary_sensor.bathroommain"
-                },
-                {
-                  "entity": "binary_sensor.bedroom1"
-                },
-                {
-                  "entity": "binary_sensor.bedroom2"
-                },
-                {
-                  "entity": "binary_sensor.bedroom3"
-                },
-                {
-                  "entity": "binary_sensor.cat_toilet"
-                },
-                {
-                  "entity": "person.simon"
-                }
+                "sun.sun"
               ]
             }
           ]
@@ -500,165 +451,6 @@
                   "entity": "switch.irrigation",
                   "show_state": true,
                   "icon": ""
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "title": "Vacuum",
-          "path": "vacuum",
-          "icon": "mdi:robot-vacuum",
-          "type": "sidebar",
-          "badges": [],
-          "cards": [
-            {
-              "type": "vertical-stack",
-              "cards": [
-                {
-                  "type": "entities",
-                  "entities": [
-                    {
-                      "entity": "sensor.vacuum_cleaner_status_sensor",
-                      "name": "imagiSuck"
-                    },
-                    {
-                      "entity": "sensor.vacuum_time_since_last_clean",
-                      "secondary_info": "none"
-                    },
-                    {
-                      "entity": "sensor.rockrobo_vacuum_v1_last_clean_end",
-                      "name": "Last clean end"
-                    },
-                    {
-                      "entity": "sensor.rockrobo_vacuum_v1_last_clean_area",
-                      "name": "Last clean area"
-                    },
-                    {
-                      "entity": "sensor.cat_toilet_daily_use"
-                    }
-                  ],
-                  "footer": {
-                    "type": "graph",
-                    "entity": "sensor.rockrobo_vacuum_v1_last_clean_area",
-                    "detail": 2
-                  }
-                },
-                {
-                  "type": "horizontal-stack",
-                  "cards": [
-                    {
-                      "show_name": true,
-                      "show_icon": true,
-                      "type": "button",
-                      "tap_action": {
-                        "action": "call-service",
-                        "service": "script.vacuum_whole_house_vacuum",
-                        "target": {}
-                      },
-                      "show_state": true,
-                      "name": "vacuum all",
-                      "icon": "mdi:robot-vacuum"
-                    },
-                    {
-                      "show_name": true,
-                      "show_icon": true,
-                      "type": "button",
-                      "tap_action": {
-                        "action": "call-service",
-                        "service": "script.vacuum_rebuild_map",
-                        "target": {}
-                      },
-                      "entity": "light.lounge_overhead",
-                      "name": "rebuild map",
-                      "icon": "mdi:map",
-                      "show_state": false
-                    },
-                    {
-                      "show_name": true,
-                      "show_icon": true,
-                      "type": "button",
-                      "entity": "vacuum.rockrobo_vacuum_v1",
-                      "icon": "mdi:home-circle",
-                      "tap_action": {
-                        "action": "call-service",
-                        "service": "vacuum.return_to_base",
-                        "target": {
-                          "entity_id": "vacuum.rockrobo_vacuum_v1"
-                        },
-                        "data": {}
-                      },
-                      "name": "return to dock"
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "vertical-stack",
-              "cards": [
-                {
-                  "type": "entities",
-                  "entities": [
-                    {
-                      "entity": "input_boolean.vacuum_can_clean_bedroom1",
-                      "icon": "mdi:bed",
-                      "secondary_info": "none"
-                    },
-                    {
-                      "entity": "input_boolean.vacuum_can_clean_catarea",
-                      "icon": "mdi:cat"
-                    },
-                    {
-                      "entity": "input_boolean.vacuum_can_clean_bathroommain",
-                      "icon": "mdi:bathtub"
-                    },
-                    {
-                      "entity": "input_boolean.vacuum_can_clean_hallwaysmall",
-                      "icon": "mdi:door"
-                    },
-                    {
-                      "entity": "input_boolean.vacuum_can_clean_hallwaylarge",
-                      "icon": "mdi:door"
-                    },
-                    {
-                      "entity": "input_boolean.vacuum_can_clean_bathroomguest",
-                      "icon": "mdi:shower-head"
-                    },
-                    {
-                      "entity": "input_boolean.vacuum_can_clean_bedroom2",
-                      "icon": "mdi:bed"
-                    },
-                    {
-                      "entity": "input_boolean.vacuum_can_clean_bedroom3",
-                      "icon": "mdi:bed"
-                    },
-                    {
-                      "entity": "input_boolean.vacuum_can_clean_study",
-                      "icon": "mdi:desk"
-                    },
-                    {
-                      "entity": "input_boolean.vacuum_can_clean_kitchen",
-                      "icon": "mdi:faucet-variant"
-                    },
-                    {
-                      "entity": "input_boolean.vacuum_can_clean_dining",
-                      "icon": "mdi:table-furniture"
-                    }
-                  ]
-                },
-                {
-                  "show_name": true,
-                  "show_icon": false,
-                  "type": "button",
-                  "tap_action": {
-                    "action": "call-service",
-                    "service": "script.zones2",
-                    "target": {}
-                  },
-                  "entity": "script.zones2",
-                  "name": "vacuum selected zones",
-                  "show_state": false
                 }
               ]
             }
