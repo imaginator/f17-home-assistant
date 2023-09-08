@@ -680,11 +680,7 @@
     entity_id: sun.sun
     attribute: azimuth
     above: 90
-  condition:
-  - condition: numeric_state
-    entity_id: sun.sun
-    attribute: elevation
-    above: 10
+  condition: []
   action:
   - service: cover.close_cover
     data: {}
