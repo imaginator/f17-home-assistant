@@ -1,113 +1,16 @@
-vacuum_whole_house_vacuum:
-  alias: 'vacuum: whole house vacuum'
-  sequence:
-  - service: xiaomi_miio.vacuum_clean_zone
-    data:
-      zone:
-      - - 11749
-        - 13339
-        - 27949
-        - 33539
-      repeats: 1
-    target:
-      entity_id: vacuum.rockrobo_vacuum_v1
-  mode: single
-  icon: mdi:robot-vacuum
-zones2:
-  alias: vacuum zones
+vacuum_rooms:
+  alias: vacuum rooms
   sequence:
   - service: vacuum.stop
     data: {}
     target:
       entity_id: vacuum.rockrobo_vacuum_v1
-  - service: xiaomi_miio.vacuum_clean_zone
-    target:
-      entity_id: vacuum.rockrobo_vacuum_v1
-    data:
-      repeats: 1
-      zone: "{{ expand('group.vacuum_zones') | selectattr('state', 'eq', 'on')\n |
-        map(attribute='attributes.cleaning_zone') | list }}\n"
-  mode: single
-vacuum_rebuild_map:
-  alias: 'vacuum: rebuild map'
-  sequence:
-  - service: vacuum.set_fan_speed
-    data:
-      entity_id: vacuum.rockrobo_vacuum_v1
-      fan_speed: Silent
-  - service: vacuum.start
-    data:
-      entity_id: vacuum.rockrobo_vacuum_v1
-    alias: Start vacuuming to delete the existing map
-  - delay:
-      hours: 0
-      minutes: 0
-      seconds: 10
-      milliseconds: 0
-  - wait_for_trigger:
-    - platform: state
-      entity_id:
-      - vacuum.rockrobo_vacuum_v1
-      to: cleaning
-      for:
-        hours: 0
-        minutes: 0
-        seconds: 10
-  - service: vacuum.stop
-    data: {}
-    target:
-      entity_id: vacuum.rockrobo_vacuum_v1
-  - delay:
-      hours: 0
-      minutes: 0
-      seconds: 2
-      milliseconds: 0
-  - service: vacuum.stop
-    data: {}
-    target:
-      entity_id: vacuum.rockrobo_vacuum_v1
-  - delay:
-      hours: 0
-      minutes: 0
-      seconds: 2
-      milliseconds: 0
-  - service: vacuum.stop
-    data: {}
-    target:
-      entity_id: vacuum.rockrobo_vacuum_v1
-  - wait_for_trigger:
-    - platform: state
-      entity_id:
-      - vacuum.rockrobo_vacuum_v1
-      to: idle
-  - delay:
-      seconds: 20
-    alias: Vacuum needs some time to internally flip the map otherwise it goes backwards
   - service: vacuum.send_command
     data:
-      entity_id: vacuum.rockrobo_vacuum_v1
-      command: app_goto_target
-      params:
-      - 24500
-      - 31950
-  - wait_for_trigger:
-    - platform: state
-      entity_id: vacuum.rockrobo_vacuum_v1
-      to: idle
-  - service: vacuum.send_command
-    data:
-      entity_id: vacuum.rockrobo_vacuum_v1
-      command: app_goto_target
-      params:
-      - 34750
-      - 31950
-  - wait_for_trigger:
-    - platform: state
-      entity_id: vacuum.rockrobo_vacuum_v1
-      to: idle
-  - service: vacuum.return_to_base
-    data:
-      entity_id: vacuum.rockrobo_vacuum_v1
-  description: Rebuild Apartment Map
-  mode: restart
+      command: app_segment_clean
+      params: "{{ expand('group.vacuum_zones') | selectattr('state', 'eq', 'on')\n
+        | map(attribute='attributes.room_number') | list }}\n"
+    target:
+      entity_id: vacuum.roborock_s7
+  mode: single
   icon: mdi:robot-vacuum

@@ -1,32 +1,32 @@
 input_boolean.vacuum_can_clean_catarea:
-  cleaning_zone: [23988,25156,25288,26506]
+  room_number: 25
 
 input_boolean.vacuum_can_clean_bedroom1:
-  cleaning_zone: [23950,22336,26264,25121]
+  room_number: 24
 
 input_boolean.vacuum_can_clean_bedroom2:
-  cleaning_zone: [23367,32168,27417,37688]
-
+  room_number: 21
+  
 input_boolean.vacuum_can_clean_bedroom3:
-  cleaning_zone: [27232,32192,31282,37292]
-
+  room_number: 16
+  
 input_boolean.vacuum_can_clean_study:
-  cleaning_zone: [30404,32350,34304,36800]
-
+  room_number: 20
+  
 input_boolean.vacuum_can_clean_hallwaylarge:
-  cleaning_zone: [23339,30576,32639,32726]
-
+  room_number: 19
+  
 input_boolean.vacuum_can_clean_hallwaysmall:
-  cleaning_zone: [23862,24770,25312,31370]
-
+  room_number: 18
+  
 input_boolean.vacuum_can_clean_bathroommain:
-  cleaning_zone: [25154,26230,28204,28780]
-
+  room_number: 23
+  
 input_boolean.vacuum_can_clean_bathroomguest:
-  cleaning_zone: [26371,29510,28721,31110]
-
+  room_number: 22
+  
 input_boolean.vacuum_can_clean_kitchen:
-  cleaning_zone: [31761,27164,35761,32564]
-
+  room_number: 17
+  
 input_boolean.vacuum_can_clean_dining:
-  cleaning_zone: [35308,27105,39158,32905]
+  room_number: 26
